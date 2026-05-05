@@ -1,0 +1,174 @@
+
+Rover.png
+size: 1542,774
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back hair
+  rotate: false
+  xy: 2, 130
+  size: 416, 642
+  orig: 416, 644
+  offset: 0, 1
+  index: -1
+belt
+  rotate: true
+  xy: 1251, 290
+  size: 205, 262
+  orig: 209, 262
+  offset: 3, 0
+  index: -1
+eyebrow
+  rotate: false
+  xy: 515, 2
+  size: 78, 18
+  orig: 81, 22
+  offset: 2, 2
+  index: -1
+face
+  rotate: true
+  xy: 1036, 39
+  size: 114, 104
+  orig: 117, 107
+  offset: 2, 1
+  index: -1
+front hair
+  rotate: false
+  xy: 838, 38
+  size: 139, 144
+  orig: 139, 144
+  offset: 0, 0
+  index: -1
+l_arm1
+  rotate: false
+  xy: 437, 12
+  size: 76, 170
+  orig: 78, 172
+  offset: 1, 1
+  index: -1
+l_arm2
+  rotate: false
+  xy: 1338, 4
+  size: 97, 185
+  orig: 101, 187
+  offset: 2, 1
+  index: -1
+l_boot
+  rotate: true
+  xy: 1289, 630
+  size: 142, 228
+  orig: 152, 229
+  offset: 2, 0
+  index: -1
+l_eye
+  rotate: false
+  xy: 630, 4
+  size: 24, 16
+  orig: 79, 26
+  offset: 55, 1
+  index: -1
+l_hand
+  rotate: false
+  xy: 979, 22
+  size: 55, 131
+  orig: 58, 134
+  offset: 2, 1
+  index: -1
+l_leg1
+  rotate: true
+  xy: 108, 12
+  size: 116, 327
+  orig: 132, 328
+  offset: 0, 1
+  index: -1
+l_leg2
+  rotate: true
+  xy: 1142, 50
+  size: 103, 194
+  orig: 105, 194
+  offset: 1, 0
+  index: -1
+mouth
+  rotate: true
+  xy: 420, 159
+  size: 23, 12
+  orig: 26, 14
+  offset: 2, 1
+  index: -1
+neck
+  rotate: true
+  xy: 1437, 120
+  size: 69, 89
+  orig: 70, 90
+  offset: 0, 0
+  index: -1
+r_arm1
+  rotate: false
+  xy: 2, 2
+  size: 104, 126
+  orig: 106, 128
+  offset: 1, 1
+  index: -1
+r_arm2
+  rotate: false
+  xy: 1338, 191
+  size: 202, 97
+  orig: 204, 99
+  offset: 1, 1
+  index: -1
+r_boot
+  rotate: true
+  xy: 979, 413
+  size: 98, 270
+  orig: 109, 274
+  offset: 0, 4
+  index: -1
+r_eye
+  rotate: false
+  xy: 595, 4
+  size: 33, 16
+  orig: 33, 19
+  offset: 0, 1
+  index: -1
+r_hand
+  rotate: false
+  xy: 1237, 202
+  size: 89, 86
+  orig: 92, 88
+  offset: 2, 1
+  index: -1
+r_leg1
+  rotate: true
+  xy: 515, 22
+  size: 160, 321
+  orig: 165, 328
+  offset: 5, 0
+  index: -1
+r_leg2
+  rotate: true
+  xy: 1289, 497
+  size: 131, 227
+  orig: 135, 233
+  offset: 2, 0
+  index: -1
+skill_light
+  rotate: false
+  xy: 979, 155
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+sword
+  rotate: true
+  xy: 420, 184
+  size: 588, 557
+  orig: 590, 562
+  offset: 1, 4
+  index: -1
+topwear
+  rotate: true
+  xy: 979, 513
+  size: 259, 308
+  orig: 260, 309
+  offset: 0, 0
+  index: -1

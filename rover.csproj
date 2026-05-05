@@ -1,0 +1,58 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>true</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+
+	<Sts2Dir>D:\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+	<Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+	<RootNamespace>Rover</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="addons\**" />
+    <Compile Remove="src\**" />
+    <EmbeddedResource Remove="addons\**" />
+    <EmbeddedResource Remove="src\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.5" />
+	<AdditionalFiles Include="rover\localization\zhs\ancients.json" />
+	<AdditionalFiles Include="rover\localization\zhs\characters.json" />
+	<AdditionalFiles Include="rover\localization\zhs\cards.json" />
+	<AdditionalFiles Include="rover\localization\zhs\powers.json" />
+	<AdditionalFiles Include="rover\localization\zhs\relics.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="character_icon_rover.png" />
+    <Content Include="rover\localization\zhs\cards.json" />
+    <Content Include="rover\localization\zhs\powers.json" />
+    <Content Include="rover\localization\zhs\relics.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="BaseLib">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\mods\BaseLib.0.2.5\BaseLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="sts2">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+	<Target Name="Copy Mod" AfterTargets="PostBuildEvent">
+		<Message Text="Copying mod to Slay the Spire 2 mods folder..." Importance="high" />
+		<MakeDir Directories="$(Sts2Dir)\mods\" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\" />
+		<Copy SourceFiles="$(MSBuildProjectName).json" DestinationFolder="$(Sts2Dir)/mods/$(MSBuildProjectName)/" />
+	</Target>
+</Project>

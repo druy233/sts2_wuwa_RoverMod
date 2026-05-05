@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://byy5y16wq285q"]
+
+[ext_resource type="Texture2D" uid="uid://kl4x1lxgni3t" path="res://animations/character_select/rover/rover_bg.png" id="1_kestj"]
+
+[node name="CharSelectBgRover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BgColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13725491, 0.13725491, 0.18431373, 1)
+
+[node name="Portrait" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = -1.0
+offset_right = 55.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kestj")
+expand_mode = 1
+stretch_mode = 5

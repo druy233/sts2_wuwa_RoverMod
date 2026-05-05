@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://fc5x7hciyofl"]
+
+[ext_resource type="Script" uid="uid://b64aobp5wi2hq" path="res://src/Core/Nodes/RestSite/NRestSiteCharacter.cs" id="1_h78ky"]
+[ext_resource type="Texture2D" uid="uid://0sunp784in0a" path="res://images/packed/rest_site/rest_site.png" id="1_yv7ij"]
+[ext_resource type="PackedScene" uid="uid://t4s1whf2aq14" path="res://scenes/ui/selection_reticle.tscn" id="2_mi2td"]
+
+[node name="IroncladRestSite" type="Node2D"]
+position = Vector2(-2, 42)
+scale = Vector2(0.760006, 0.760006)
+script = ExtResource("1_h78ky")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -201.3142
+offset_top = -511.83807
+offset_right = 387.6858
+offset_bottom = 568.1619
+texture = ExtResource("1_yv7ij")
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("2_mi2td")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -153.0
+offset_top = -350.0
+offset_right = 267.0
+offset_bottom = 320.0
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -155.0
+offset_top = -351.0
+offset_right = 266.0
+offset_bottom = 332.0
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 209.209
+offset_top = -317.103
+offset_right = 209.209
+offset_bottom = -317.103
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -73.6836
+offset_top = -324.997
+offset_right = -73.6836
+offset_bottom = -324.997

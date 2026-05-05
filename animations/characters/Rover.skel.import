@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bsr48mp16dgrq"
+path="res://.godot/imported/Rover.skel-35fa4bebb744fceabaa8b58e3ee6155f.spskel"
+
+[deps]
+
+source_file="res://animations/characters/Rover.skel"
+dest_files=["res://.godot/imported/Rover.skel-35fa4bebb744fceabaa8b58e3ee6155f.spskel"]
+
+[params]
+

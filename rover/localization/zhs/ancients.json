@@ -1,0 +1,38 @@
+{
+  "NEOW.talk.ROVER-ROVER.0-0.ancient": "[sine]……一个……不属于这里的存在……？\n……拥有着……不可思议的力量……[/sine]",
+  "NEOW.talk.ROVER-ROVER.1-0r.ancient": "[sine]……漂泊者……又回来了……\n……还在……寻找什么吗……[/sine]",
+  "NEOW.talk.ROVER-ROVER.2-0.ancient": "[sine]……你已经征服了这里……\n……请你快回去吧……[/sine]",
+
+  "NONUPEIPE.talk.ROVER-ROVER.0-0.ancient": "你闭着眼睛战斗？够大胆的！让我看看你的实力！",
+  "NONUPEIPE.talk.ROVER-ROVER.1-0r.ancient": "盲眼战士又来了！准备好再来一轮了吗？",
+  "NONUPEIPE.talk.ROVER-ROVER.2-0.ancient": "我见过你战斗了。那内在的火焰……既可怕又壮美。",
+
+  "DARV.talk.ROVER-ROVER.0-0.ancient": "哟！一位身无长物的旅者。你看起来不太像会买东西的人……",
+  "DARV.talk.ROVER-ROVER.1-0r.ancient": "安静的客人又来了！这次改主意想买点什么了吗？",
+  "DARV.talk.ROVER-ROVER.2-0.ancient": "说真的，你是我最有趣的常客之一。如此平静，如此专注。",
+
+  "VAKUU.talk.ROVER-ROVER.0-0.ancient": "我能感受到一股强大的力量，是超越世界之外的力量。",
+  "VAKUU.talk.ROVER-ROVER.1-0r.ancient": "漂泊者又回来了。你和塔顶的那个人谈过了吗？",
+  "VAKUU.talk.ROVER-ROVER.2-0.ancient": "别用那种表情看我，任何事物都有着相应的代价。",
+
+  "PAEL.talk.ROVER-ROVER.0-0.ancient": "哦？一个不依赖双眼的人。真是令人耳目一新。",
+  "PAEL.talk.ROVER-ROVER.1-0r.ancient": "沉思者！又来寻找智慧了？",
+  "PAEL.talk.ROVER-ROVER.2-0.ancient": "你身上带着一种我在旅人中很少见到的平和。",
+
+  "OROBAS.talk.ROVER-ROVER.0-0.ancient": "有趣……你同时承载着光明与怒火。",
+  "OROBAS.talk.ROVER-ROVER.1-0r.ancient": "盲眼的审判者回来了。你做出裁决了吗？",
+  "OROBAS.talk.ROVER-ROVER.2-0.ancient": "你的姿态……平静与愤怒完美平衡。令人瞩目。",
+
+  "TANX.talk.ROVER-ROVER.0-0.ancient": "异界人！你身上似乎有着不得了的力量，与我一战！",
+  "TANX.talk.ROVER-ROVER.1-0r.ancient": "漂泊者！再跟我打一次！你的冷静让我热血沸腾！",
+  "TANX.talk.ROVER-ROVER.2-0.ancient": "你！每次见面你的力量都在增长！不可思议！",
+
+  "TEZCATARA.talk.ROVER-ROVER.0-0.ancient": "一位来自彼方的观者……你的第三之眼洞察至深。",
+  "TEZCATARA.talk.ROVER-ROVER.1-0r.ancient": "观者再次踏上了这条路。",
+  "TEZCATARA.talk.ROVER-ROVER.2-0.ancient": "你已看到了很多，观者。这些改变了你吗？",
+
+  "THE_ARCHITECT.talk.ROVER-ROVER.0-0r.char": "我能感受到，你不属于这个世界。",
+  "THE_ARCHITECT.talk.ROVER-ROVER.0-0r.next": "你来这里，想要寻找什么？",
+  "THE_ARCHITECT.talk.ROVER-ROVER.0-1r.ancient": "我这里没有你要找的答案，从哪儿来回哪儿去吧!",
+  "THE_ARCHITECT.talk.ROVER-ROVER.0-attack": "......"
+}

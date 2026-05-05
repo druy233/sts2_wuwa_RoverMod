@@ -1,0 +1,10 @@
+﻿[*.cs]
+
+# CS8600: 将 null 字面量或可能为 null 的值转换为非 null 类型。
+dotnet_diagnostic.CS8600.severity = warning
+
+# IDE0028: 简化集合初始化
+dotnet_diagnostic.IDE0028.severity = suggestion
+
+# STS001: Symbol missing localization
+dotnet_diagnostic.STS001.severity = error
