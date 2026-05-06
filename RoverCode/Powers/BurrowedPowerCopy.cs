@@ -34,7 +34,7 @@ public class BurrowedPowerCopy : RoverPower
         if (target == Owner)
             return 1.5m;
         // 如果是持有者造成伤害
-        if (dealer == Owner)
+        if (dealer == Owner && cardSource != null)
             return 2m;
         return 1m;
     }

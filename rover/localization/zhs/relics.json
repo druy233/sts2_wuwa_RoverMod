@@ -87,7 +87,29 @@
   "ROVER_POWER_DESC_MAGI_KNIGHT": "战斗开始时，选择最多5张卡牌将其升级。",
   "ROVER_POWER_DESC_TEST_SUBJECT": "在你的第六回合开始时，获得[gold]天罚[/gold]。",
   "ROVER_POWER_DESC_DOORMAKER": "战斗开始时，选择10张卡牌消耗。",
-  "ROVER_POWER_DESC_QUEEN": "战斗开始时，对全体敌人施加99层[gold]易伤[/gold]、99层[gold]虚弱[/gold]、99层[gold]脆弱[/gold]。"
+  "ROVER_POWER_DESC_QUEEN": "战斗开始时，对全体敌人施加99层[gold]易伤[/gold]、99层[gold]虚弱[/gold]、99层[gold]脆弱[/gold]。",
 
 
+
+  "ROVER-TODO1.description": "",
+  "ROVER-TODO1.flavor": "",
+  "ROVER-TODO1.title": "Todo1",
+  "ROVER-TODO2.description": "",
+  "ROVER-TODO2.flavor": "",
+  "ROVER-TODO2.title": "Todo2",
+  "ROVER-TODO3.description": "",
+  "ROVER-TODO3.flavor": "",
+  "ROVER-TODO3.title": "Todo3",
+  "ROVER-STAROF_SOLARIS.description": "拾起时，获得[blue]{Gold}[/blue][gold]金币[/gold]",
+  "ROVER-STAROF_SOLARIS.flavor": "这个模型看起来酷似某种令人无比在意的稀有资源......能用它换一些星声么？",
+  "ROVER-STAROF_SOLARIS.title": "索拉里斯之星",
+  "ROVER-CRYSTAL_SOLVENT.description": "每回合开始时，充能[blue]3[/blue]。",
+  "ROVER-CRYSTAL_SOLVENT.flavor": "共鸣者随身必备的溶剂，可帮助自身稳定状态，提高结晶波片的数值水平。",
+  "ROVER-CRYSTAL_SOLVENT.title": "结晶溶剂",
+  "ROVER-TODO6.description": "",
+  "ROVER-TODO6.flavor": "",
+  "ROVER-TODO6.title": "Todo6",
+  "ROVER-TODO7.description": "",
+  "ROVER-TODO7.flavor": "",
+  "ROVER-TODO7.title": "Todo7"
 }

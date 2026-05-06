@@ -12,12 +12,12 @@ public class ResonatingLamella() : RoverCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<SpectroPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<SpectroPower>(),HoverTipFactory.Static(StaticHoverTip.Block)];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 5m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<ResonatingLamellaPower>(Owner.Creature, DynamicVars["RoverNum"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<ResonatingLamellaPower>(base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

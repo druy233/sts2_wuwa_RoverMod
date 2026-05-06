@@ -19,6 +19,7 @@ public class CycleOfEnergy() : RoverCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [base.EnergyHoverTip];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
 
     // 是否可以打出
@@ -27,7 +28,7 @@ public class CycleOfEnergy() : RoverCard(0,
         get
         {
             var relic = base.Owner.GetRelic<ObscuraLumis>();
-            if (relic != null && relic.EnergyCounter >= 6)
+            if (relic != null && relic.EnergyCounter >= 3)
                 return true;
             return false;
         }
@@ -38,7 +39,7 @@ public class CycleOfEnergy() : RoverCard(0,
         var relic = base.Owner.GetRelic<ObscuraLumis>();
         if (relic != null)
         {
-            await relic.AddToEnergyCounter(-6);
+            await relic.AddToEnergyCounter(-3);
             await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         }
     }

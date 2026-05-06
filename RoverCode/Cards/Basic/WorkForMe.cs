@@ -16,7 +16,7 @@ namespace Rover.Cards;
 public class WorkForMe() : RoverCard(3,
     CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(21m, ValueProp.Move)];// 21 点伤害
     public override List<CardKeyword> CanonicalKeywords => [
         CardKeyword.Retain, // 保留
         CardKeyword.Exhaust // 消耗
@@ -48,6 +48,6 @@ public class WorkForMe() : RoverCard(3,
     }
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(0m);
     }
 }

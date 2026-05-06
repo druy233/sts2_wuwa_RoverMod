@@ -19,7 +19,7 @@ public class ShortRest() : RoverCard(0,
     TargetType.Self)
 {
     public override bool GainsBlock => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 1m),new BlockVar(4m, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 1m),new BlockVar(6m, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var relic = base.Owner.GetRelic<ObscuraLumis>();
@@ -33,6 +33,5 @@ public class ShortRest() : RoverCard(0,
     protected override void OnUpgrade()
     {
         base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
-        base.DynamicVars.Block.UpgradeValueBy(1m);
     }
 }

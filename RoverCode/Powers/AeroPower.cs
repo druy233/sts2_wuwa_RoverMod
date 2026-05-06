@@ -8,11 +8,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rover.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rover.Powers;
 
@@ -38,8 +33,8 @@ public class AeroPower : RoverPower
     {
         if (dealer == base.Owner)
         {
-            var roll = Rng.Chaotic.NextFloat();
-            if (roll < 0.2f)
+            var roll = base.CombatState.RunState.Rng.CombatTargets.NextFloat();
+            if (roll < 0.3f)
             {
                 await CreatureCmd.Heal(base.Owner, 1m);
             }

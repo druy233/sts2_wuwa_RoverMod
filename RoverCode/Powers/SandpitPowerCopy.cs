@@ -63,7 +63,8 @@ public class SandpitPowerCopy : RoverPower
         var enemies = combatState.HittableEnemies;
         if (enemies.Count == 0) return;
 
-        var target = enemies[Rng.Chaotic.NextInt(0, enemies.Count)];
+        if (base.Owner.CombatState == null) return;
+        var target = enemies[base.Owner.CombatState.RunState.Rng.CombatTargets.NextInt(0, enemies.Count)];
 
         await CreatureCmd.Kill(target, force: true);
 

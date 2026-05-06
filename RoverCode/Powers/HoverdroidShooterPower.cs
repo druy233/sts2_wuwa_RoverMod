@@ -19,21 +19,16 @@ public class HoverdroidShooterPower : RoverPower
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Card.Type != CardType.Attack) return;
+        if (cardPlay.Card.Owner.Creature != base.Owner) return;
         if (cardPlay.Card.TargetType == TargetType.AllEnemies)
         {
-            var enemies = base.CombatState?.Enemies.Where(e => e.IsAlive);
-            if (enemies != null)
-            {
-                foreach (var enemy in enemies)
-                {
-                    await CreatureCmd.Damage(choiceContext, enemy, base.Amount, ValueProp.Unpowered, base.Owner, null);
-                }
-            }
-            return;
+            Flash();
+            await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.Amount, ValueProp.Unpowered, base.Owner, null);
         }
 
         if (cardPlay.Target != null && cardPlay.Target.IsAlive)
         {
+            Flash();
             await CreatureCmd.Damage(choiceContext, cardPlay.Target, base.Amount, ValueProp.Unpowered, base.Owner, null);
         }
     }

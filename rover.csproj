@@ -24,10 +24,12 @@
 	<AdditionalFiles Include="rover\localization\zhs\cards.json" />
 	<AdditionalFiles Include="rover\localization\zhs\powers.json" />
 	<AdditionalFiles Include="rover\localization\zhs\relics.json" />
+	<AdditionalFiles Include="rover\localization\zhs\potions.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="character_icon_rover.png" />
     <Content Include="rover\localization\zhs\cards.json" />
+    <Content Include="rover\localization\zhs\potions.json" />
     <Content Include="rover\localization\zhs\powers.json" />
     <Content Include="rover\localization\zhs\relics.json" />
   </ItemGroup>
@@ -39,7 +41,7 @@
       <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BaseLib">
-      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\mods\BaseLib.0.2.5\BaseLib.dll</HintPath>
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\mods\BaseLib.3.0.8\BaseLib.dll</HintPath>
     </Reference>
     <Reference Include="GodotSharp">
       <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>

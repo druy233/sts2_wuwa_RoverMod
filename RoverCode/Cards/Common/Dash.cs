@@ -16,7 +16,7 @@ public class Dash() : RoverCard(1,
     TargetType.Self)
 {
     public override bool GainsBlock => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars =>[new BlockVar(4m, ValueProp.Move), new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>[new BlockVar(6m, ValueProp.Move), new CardsVar(2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -26,6 +26,6 @@ public class Dash() : RoverCard(1,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(2m);
+        base.DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

@@ -11,7 +11,7 @@ using Rover.Powers;
 
 namespace Rover.Cards;
 
-public class PowerChange() : RoverCard(2,
+public class PowerChange() : RoverCard(1,
     CardType.Skill, CardRarity.Basic,
     TargetType.Self)
 {

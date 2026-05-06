@@ -23,7 +23,7 @@ public class MechMode() : RoverCard(3,
         await StanceHelper.ExitStance(base.Owner);
         await PowerCmd.Apply<MechModePower>(base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
         await PowerCmd.Apply<NoBlockPower>(base.Owner.Creature, 99m , base.Owner.Creature, this);
-        await PowerCmd.Apply<CannotChangeStancePower>(base.Owner.Creature, 1m , base.Owner.Creature, this);
+        await PowerCmd.Apply<CantChangeStancePower>(base.Owner.Creature, 1m , base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

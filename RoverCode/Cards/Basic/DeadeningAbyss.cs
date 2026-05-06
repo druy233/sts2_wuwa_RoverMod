@@ -23,8 +23,11 @@ public class DeadeningAbyss() : RoverCard(-1,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (base.CombatState == null) return;
         RoverAudioHelper.PlayOneShot("res://debug_audio/deadening_abyss.wav");
-        await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
+        await Cmd.Wait(0.8f);
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(base.CombatState).Execute(choiceContext);
     }
     protected override void OnUpgrade()
     {

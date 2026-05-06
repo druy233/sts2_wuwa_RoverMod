@@ -30,7 +30,7 @@ namespace Rover.Relics;
 
 public class ObscuraLumis : RoverRelic
 {
-    public const int unlockBurst = 18;// 解锁共鸣解放所需的最大能量数
+    public static int unlockBurst = 18;// 解锁共鸣解放所需的最大能量数
 
     private int _turnCounter; // 回合计数器
 
@@ -77,6 +77,7 @@ public class ObscuraLumis : RoverRelic
     }
     public async Task SetEnergyCounter(int value)
     {
+        if (value < 0) return;
         this._energytCounter = value;
         Flash();
         InvokeDisplayAmountChanged();
@@ -89,6 +90,11 @@ public class ObscuraLumis : RoverRelic
         }
     }
     public int TurnGetValue => this._turnGetValue;
+    public static int UnlockBurst
+    {
+        get => unlockBurst;
+        set => unlockBurst = value;
+    }
 
 
     public override bool ShowCounter => true;// 显示计数器
@@ -293,7 +299,7 @@ public class ObscuraLumis : RoverRelic
             Log.Info($"当前眩晕概率为：{_stunChance}%");
 
             // 投掷 1~100 随机数
-            int roll = Rng.Chaotic.NextInt(1, 101);
+            int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(1, 101);
             if (roll <= _stunChance)
             {
                 await CreatureCmd.Stun(dealer);
@@ -329,7 +335,7 @@ public class ObscuraLumis : RoverRelic
         _turnCounter++;// 回合计数器
         _turnGetValue = 0;
 
-        float roll = Rng.Chaotic.NextFloat();// 随机一个数
+        float roll = base.Owner.RunState.Rng.CombatTargets.NextFloat();// 随机一个数
         var enemies = player.Creature.CombatState.HittableEnemies;// 获取可供攻击的敌人
 
         if (StoredMonsterId.Entry.Equals("EYE_WITH_TEETH") || StoredMonsterId.Entry.Equals("NOISEBOT"))
@@ -339,7 +345,7 @@ public class ObscuraLumis : RoverRelic
                 if (enemies.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = Rng.Chaotic.NextInt(0, enemies.Count);
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count); 
                 var target = enemies[index];
                 await CreatureCmd.Stun(target);
             }
@@ -352,7 +358,7 @@ public class ObscuraLumis : RoverRelic
                 if (enemies.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = Rng.Chaotic.NextInt(0, enemies.Count);
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
                 var target = enemies[index];
                 await CreatureCmd.Stun(target);
             }
@@ -371,7 +377,7 @@ public class ObscuraLumis : RoverRelic
         if (StoredMonsterId.Entry.Equals("PHROG_PARASITE"))
         {
             Flash();
-            int index = Rng.Chaotic.NextInt(0, enemies.Count);
+            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
             var target = enemies[index];
             await CreatureCmd.Damage(choiceContext, target, 9m, ValueProp.Unpowered, player.Creature);
         }
@@ -379,7 +385,7 @@ public class ObscuraLumis : RoverRelic
         if (StoredMonsterId.Entry.Equals("WRIGGLER"))
         {
             Flash();
-            int index = Rng.Chaotic.NextInt(0, enemies.Count);
+            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
             var target = enemies[index];
             await CreatureCmd.Damage(choiceContext, target, 3m, ValueProp.Unpowered, player.Creature);
         }
@@ -397,7 +403,7 @@ public class ObscuraLumis : RoverRelic
                 if (enemies.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = Rng.Chaotic.NextInt(0, enemies.Count);
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
                 var target = enemies[index];
                 await CreatureCmd.Stun(target);
             }
@@ -445,7 +451,7 @@ public class ObscuraLumis : RoverRelic
                 foreach (var enemy in combatState.HittableEnemies)
                 {
                     // 随机选择 0、1、2 对应三种减益
-                    int roll = Rng.Chaotic.NextInt(0, 4); // 0，1，2，3
+                    int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 4); // 0，1，2，3
                     PowerModel? debuff = null;
                     decimal amount;
 
@@ -543,7 +549,7 @@ public class ObscuraLumis : RoverRelic
         {
             Flash();
             // 随机选择 0、1、2 对应三种增益
-            int roll = Rng.Chaotic.NextInt(0, 3); // 0,1,2
+            int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 3); // 0,1,2
             PowerModel? debuff = null;
             decimal amount;
 
@@ -585,7 +591,7 @@ public class ObscuraLumis : RoverRelic
             {
                 Flash();
                 var enemies = combatState.HittableEnemies;
-                int index = Rng.Chaotic.NextInt(0, enemies.Count);
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
                 var target = enemies[index];
                 await PowerCmd.Apply<StrengthPower>(target, -2m, base.Owner.Creature, null);
                 await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
@@ -595,7 +601,7 @@ public class ObscuraLumis : RoverRelic
             {
                 Flash();
                 var enemies = combatState.HittableEnemies;
-                int index = Rng.Chaotic.NextInt(0, enemies.Count);
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
                 var target = enemies[index];
                 await PowerCmd.Apply<DexterityPower>(target, -2m, base.Owner.Creature, null);
                 await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);

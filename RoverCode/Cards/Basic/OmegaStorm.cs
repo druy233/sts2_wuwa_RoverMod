@@ -19,17 +19,20 @@ public class OmegaStorm() : RoverCard(-1,
 {
     public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Move),new HealVar(4m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Move),new HealVar(6m)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (base.CombatState == null) return;
         RoverAudioHelper.PlayOneShot("res://debug_audio/omega_storm.wav");
-        await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
+        await Cmd.Wait(1f);
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(base.CombatState).Execute(choiceContext);
         await CreatureCmd.Heal(base.Owner.Creature, base.DynamicVars.Heal.BaseValue);
     }
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(10m);
-        DynamicVars.Heal.UpgradeValueBy(2m);
+        DynamicVars.Heal.UpgradeValueBy(3m);
     }
 }

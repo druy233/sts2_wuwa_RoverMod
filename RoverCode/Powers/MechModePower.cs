@@ -24,7 +24,7 @@ public class MechModePower : RoverPower
         {
             return 0.3m;
         }
-        if (dealer == base.Owner && target != base.Owner && amount > 0)
+        if (dealer == base.Owner && target != base.Owner && amount > 0 && cardSource != null)
         {
             return 3m;
         }
@@ -55,6 +55,6 @@ public class MechModePower : RoverPower
     public override async Task AfterRemoved(Creature oldOwner)
     {
         await PowerCmd.Remove<NoBlockPower>(oldOwner);
-        await PowerCmd.Remove<CannotChangeStancePower>(oldOwner);
+        await PowerCmd.Remove<CantChangeStancePower>(oldOwner);
     }
 }

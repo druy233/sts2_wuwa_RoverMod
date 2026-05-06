@@ -19,7 +19,9 @@ public class SoulResonance() : RoverCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        base.EnergyHoverTip,
+        HoverTipFactory.FromPower<StrengthPower>()];
     protected override bool IsPlayable
     {
         get

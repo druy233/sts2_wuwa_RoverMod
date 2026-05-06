@@ -1,5 +1,7 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -56,7 +58,7 @@ public static class StanceHelper
     // 通用属性切换逻辑
     private static async Task ChangeStance<T>(Player owner, CardModel? source) where T : PowerModel
     {
-        if (owner.Creature.HasPower<CannotChangeStancePower>())
+        if (owner.Creature.HasPower<CantChangeStancePower>())
             return;
 
         Type targetStance = typeof(T);
@@ -89,7 +91,7 @@ public static class StanceHelper
     // 属性改变后的回调
     private static async Task OnStanceChanged(Player owner, Type? oldStance, Type? newStance)
     {
-        // SwordCombo的方法
+        // SwordCombo(剑刃连击)的方法
         var piles = new[] { PileType.Draw, PileType.Discard, PileType.Exhaust };
         var list = piles.SelectMany(p => p.GetPile(owner).Cards)
             .OfType<SwordCombo>()
@@ -100,23 +102,57 @@ public static class StanceHelper
             await CardPileCmd.Add(item, PileType.Hand);
         }
 
-        // EchoesOfWanderlust的方法
+        // EchoesOfWanderlust(长路归鸣)的方法
         if (owner.Creature.HasPower<EchoesOfWanderlustPower>())
         {
             await PlayerCmd.GainEnergy(owner.Creature.GetPowerAmount<EchoesOfWanderlustPower>(), owner);
         }
 
-        // BoundlessWinds的方法
+        // BoundlessWinds(无垠之风)的方法
         if (owner.Creature.HasPower<BoundlessWindsPower>())
         {
             await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), owner.Creature.GetPowerAmount<BoundlessWindsPower>(), owner);
         }
 
-        // CycleOfWind的方法
+        // CycleOfWind(风息流转)的方法
         if (owner.Creature.HasPower<CycleOfWindPower>())
         {
             await CreatureCmd.GainBlock(owner.Creature, owner.Creature.GetPowerAmount<CycleOfWindPower>(), ValueProp.Unpowered, null);
         }
+
+        // AftertunePower(余音)的方法
+        if (owner.Creature.HasPower<AftertunePower>())
+        {
+            var combatState = owner.Creature.CombatState;
+            if (combatState != null)
+            {
+                var enemies = combatState.HittableEnemies;
+                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), enemies, owner.Creature.GetPowerAmount<AftertunePower>(), ValueProp.Unpowered, owner.Creature); 
+            }
+        }
+
+        // Lifetaker(破命)的方法
+        if (newStance == typeof(HavocPower) && oldStance != typeof(HavocPower))
+        {
+            var lifetakerCards = piles.SelectMany(p => p.GetPile(owner).Cards)
+                .OfType<Lifetaker>()
+                .ToList();
+
+            foreach (var card in lifetakerCards)
+            {
+                await CardPileCmd.Add(card, PileType.Hand);
+            }
+        }
+    }
+
+    // 获取上一次打出的牌的类型（如果有的话）
+    public static CardType? GetPreviousPlayedCardType(CardModel currentCard)
+    {
+        if (currentCard.CombatState == null)
+        {
+            return null;
+        }
+        return CombatManager.Instance.History.CardPlaysStarted.LastOrDefault((CardPlayStartedEntry entry) => entry.CardPlay.Card.Owner == currentCard.Owner && entry.CardPlay.Card != currentCard)?.CardPlay.Card.Type;
     }
 
 }

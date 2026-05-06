@@ -15,13 +15,32 @@ namespace Rover.Powers;
 
 public class OdysseyOfBeginningsPower : RoverPower
 {
+    private int _lastRoll = -1;
+
+    private int _secondLastRoll = -1;
+
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player != null && player == base.Owner.Player)
         {
-            int roll = Rng.Chaotic.NextInt(0, 3);
+            if (base.Owner.CombatState == null) return;
+            int roll;
+            if (_lastRoll == _secondLastRoll && _lastRoll != -1)
+            {
+                var options = new List<int> { 0, 1, 2 };
+                options.Remove(_lastRoll);
+                roll = options[base.Owner.CombatState.RunState.Rng.CombatTargets.NextInt(0, options.Count)];
+            }
+            else
+            {
+                roll = base.Owner.CombatState.RunState.Rng.CombatTargets.NextInt(0, 3);
+            }
+
+            _secondLastRoll = _lastRoll;
+            _lastRoll = roll;
+
             switch (roll)
             {
                 case 0:

@@ -91,7 +91,6 @@ public class Rover : PlaceholderCharacterModel
 		ModelDb.Card<RoverStrike>(),
 		ModelDb.Card<RoverStrike>(),
 		ModelDb.Card<RoverStrike>(),
-		ModelDb.Card<RoverStrike>(),
 		ModelDb.Card<RoverDefend>(),
 		ModelDb.Card<RoverDefend>(),
 		ModelDb.Card<RoverDefend>(),

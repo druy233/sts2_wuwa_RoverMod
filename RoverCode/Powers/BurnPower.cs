@@ -23,7 +23,7 @@ public class BurnPower : RoverPower
         if (side == CombatSide.Player)
         {
             // 生成 0~100 随机数，决定倍率
-            int roll = Rng.Chaotic.NextInt(0, 101);
+            int roll = base.CombatState.RunState.Rng.CombatTargets.NextInt(0, 101);
             if (roll <= 20) _currentRoundMultiplier = 0.5m;
             else if (roll <= 40) _currentRoundMultiplier = 0.6m;
             else if (roll <= 60) _currentRoundMultiplier = 0.7m;

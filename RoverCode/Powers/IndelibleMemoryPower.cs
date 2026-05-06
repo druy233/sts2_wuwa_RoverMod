@@ -26,7 +26,7 @@ public class IndelibleMemoryPower : RoverPower
         var eligible = hand.Where(c => !c.Keywords.Contains(CardKeyword.Retain)).ToList();
         if (eligible.Count == 0) return;
 
-        var card = eligible[Rng.Chaotic.NextInt(0, eligible.Count)];
+        var card = eligible[base.CombatState.RunState.Rng.CombatTargets.NextInt(0, eligible.Count)];
         CardCmd.ApplyKeyword(card, CardKeyword.Retain);
     }
 }

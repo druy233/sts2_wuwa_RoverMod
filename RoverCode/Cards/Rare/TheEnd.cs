@@ -22,7 +22,7 @@ public class TheEnd() : RoverCard(6,
     TargetType.AllEnemies)
 {
     private int _timesPlayedThisCombat;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40m, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(60m, ValueProp.Move)];
     private int TimesPlayedThisCombat
     {
         get

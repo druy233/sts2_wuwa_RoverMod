@@ -32,6 +32,7 @@ public class Havoc() : RoverCard(-1,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (base.CombatState == null) return;
         await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
         await StanceHelper.EnterHavoc(base.Owner, this);
         await PowerCmd.Apply<VulnerablePower>(base.CombatState.HittableEnemies, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);

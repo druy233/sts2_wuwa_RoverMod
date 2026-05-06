@@ -72,21 +72,6 @@ public class ResonanceLiberation() : RoverCard(0,
         }
     }
 
-    public override async Task AfterCardChangedPiles(CardModel card, PileType pileType, AbstractModel? source)
-    {
-        // 只处理自身
-        if (card != this) return;
-        // 进入手牌时不处理（防止循环）
-        if (pileType == PileType.Hand) return;
-        // 获取手牌（战斗中才存在）
-        var hand = CardPile.Get(PileType.Hand, base.Owner);
-        // 手牌数量已达到上限（10张），无法再加入
-        if (hand != null && hand.Cards.Count >= CardPile.maxCardsInHand) return;
-        // 消耗牌堆在上面处理
-        if (pileType == PileType.Exhaust) return;
-        await CardPileCmd.Add(this, PileType.Hand, CardPilePosition.Top);
-    }
-
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(base.Owner.Creature.CombatState, "base.Owner.Creature.CombatState");
@@ -125,6 +110,13 @@ public class ResonanceLiberation() : RoverCard(0,
         {
             await relic.SetEnergyCounter(0);
         }
+        await Cmd.Wait(0.25f);
+    }
+
+    protected override PileType GetResultPileType()
+    {
+        PileType resultPileType = base.GetResultPileType();
+        return PileType.Hand;
     }
 
     protected override void OnUpgrade()

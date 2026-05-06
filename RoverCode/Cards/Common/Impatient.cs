@@ -16,7 +16,7 @@ public class Impatient() : RoverCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(6m), new DynamicVar("RoverNum" , 2m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(3m), new DynamicVar("RoverNum" , 2m)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
