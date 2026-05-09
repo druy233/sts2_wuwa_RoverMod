@@ -30,7 +30,7 @@ public class ScabbingAttack() : RoverCard(1,
         ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
                 .Targeting(cardPlay.Target).Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(base.CombatState.HittableEnemies, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

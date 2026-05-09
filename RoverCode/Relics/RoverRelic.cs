@@ -27,8 +27,8 @@ public abstract class RoverRelic : CustomRelicModel
     {
         get
         {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".RelicImagePath();
+            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicOutlineImagePath();
+            return ResourceLoader.Exists(path) ? path : "relic.png".RelicOutlineImagePath();
         }
     }
     protected override string BigIconPath

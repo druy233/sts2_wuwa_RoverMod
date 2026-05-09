@@ -9,9 +9,11 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rover.Cards;
 using Rover.Powers;
+using Rover.Relics;
 
 namespace Rover.Tools;
 
@@ -64,7 +66,10 @@ public static class StanceHelper
         Type targetStance = typeof(T);
         Type? currentStance = GetCurrentStance(owner.Creature);
         if (currentStance == targetStance)
+        {
+            await OnStanceChanged(owner, currentStance, currentStance);
             return;
+        }
 
         await RemoveAllStances(owner.Creature);
         await PowerCmd.Apply<T>(owner.Creature, 1m, owner.Creature, source);
@@ -91,15 +96,19 @@ public static class StanceHelper
     // 属性改变后的回调
     private static async Task OnStanceChanged(Player owner, Type? oldStance, Type? newStance)
     {
-        // SwordCombo(剑刃连击)的方法
         var piles = new[] { PileType.Draw, PileType.Discard, PileType.Exhaust };
-        var list = piles.SelectMany(p => p.GetPile(owner).Cards)
-            .OfType<SwordCombo>()
-            .ToList();
 
-        foreach (CardModel item in list)
+        // SwordCombo(剑刃连击)的方法
+        if (oldStance != newStance)
         {
-            await CardPileCmd.Add(item, PileType.Hand);
+            var list = piles.SelectMany(p => p.GetPile(owner).Cards)
+                .OfType<SwordCombo>()
+                .ToList();
+
+            foreach (CardModel item in list)
+            {
+                await CardPileCmd.Add(item, PileType.Hand);
+            }
         }
 
         // EchoesOfWanderlust(长路归鸣)的方法
@@ -121,7 +130,7 @@ public static class StanceHelper
         }
 
         // AftertunePower(余音)的方法
-        if (owner.Creature.HasPower<AftertunePower>())
+        if (owner.Creature.HasPower<AftertunePower>() && oldStance != newStance)
         {
             var combatState = owner.Creature.CombatState;
             if (combatState != null)
@@ -132,7 +141,7 @@ public static class StanceHelper
         }
 
         // Lifetaker(破命)的方法
-        if (newStance == typeof(HavocPower) && oldStance != typeof(HavocPower))
+        if (owner.Creature.HasPower<HavocPower>())
         {
             var lifetakerCards = piles.SelectMany(p => p.GetPile(owner).Cards)
                 .OfType<Lifetaker>()
@@ -143,16 +152,24 @@ public static class StanceHelper
                 await CardPileCmd.Add(card, PileType.Hand);
             }
         }
-    }
 
-    // 获取上一次打出的牌的类型（如果有的话）
-    public static CardType? GetPreviousPlayedCardType(CardModel currentCard)
-    {
-        if (currentCard.CombatState == null)
+        // 遗物Lunite（月相）的方法
+        if (owner.Relics.Any((RelicModel relic) => relic.Id.Entry.Equals("ROVER-LUNITE")))
         {
-            return null;
+            await PlayerCmd.GainEnergy(1m, owner);
+            await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), 2, owner);
         }
-        return CombatManager.Instance.History.CardPlaysStarted.LastOrDefault((CardPlayStartedEntry entry) => entry.CardPlay.Card.Owner == currentCard.Owner && entry.CardPlay.Card != currentCard)?.CardPlay.Card.Type;
-    }
 
+        // 遗物Afterlife（来生）的方法
+        if (owner.Relics.Any((RelicModel relic) => relic.Id.Entry.Equals("ROVER-AFTERLIFE")))
+        {
+            await PowerCmd.Apply<StrengthPower>(owner.Creature, 1m, owner.Creature, null);
+        }
+
+        // 遗物SacredSalt（潮汐圣盐）的方法
+        if (owner.Relics.Any((RelicModel relic) => relic.Id.Entry.Equals("ROVER-SACRED_SALT")))
+        {
+            await CreatureCmd.GainBlock(owner.Creature, 3m, ValueProp.Unpowered, null);
+        }
+    }
 }

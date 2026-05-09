@@ -21,21 +21,26 @@ public class Waveshock() : RoverCard(1,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9m, ValueProp.Move)
+        new DynamicVar("RoverNum", 1m),
+        new DamageVar(8m, ValueProp.Move)
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-        CardModel cardModel = (await CardSelectCmd.FromHandForDiscard(choiceContext, base.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this)).FirstOrDefault();
-        if (cardModel != null)
+
+        var prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, (int)base.DynamicVars["RoverNum"].BaseValue);
+        var selectedCards = await CardSelectCmd.FromHand(choiceContext, base.Owner, prefs, null, this);
+
+        foreach (var card in selectedCards)
         {
-            await CardCmd.Discard(choiceContext, cardModel);
+            await CardCmd.Exhaust(choiceContext, card, causedByEthereal: false);
         }
     }
 
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(2m);
+        base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
     }
 }

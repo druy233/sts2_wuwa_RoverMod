@@ -34,7 +34,7 @@ public class AeroPower : RoverPower
         if (dealer == base.Owner)
         {
             var roll = base.CombatState.RunState.Rng.CombatTargets.NextFloat();
-            if (roll < 0.3f)
+            if (roll < 0.7f)
             {
                 await CreatureCmd.Heal(base.Owner, 1m);
             }

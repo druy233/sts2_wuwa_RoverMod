@@ -22,7 +22,7 @@ public class SurgingResonancePower : RoverPower
     {
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
-        if (cardPlay.Card.GetType() == typeof(RoverStrike) && StanceHelper.IsInStance<HavocPower>(base.Owner))
+        if (cardPlay.Card.Type == CardType.Attack && StanceHelper.IsInStance<HavocPower>(base.Owner))
         {
             await CreatureCmd.Heal(base.Owner, base.Amount);
         }

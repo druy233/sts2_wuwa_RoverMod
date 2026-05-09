@@ -22,6 +22,6 @@ public class ResonatingLamella() : RoverCard(1,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["RoverNum"].UpgradeValueBy(2m);
+        base.DynamicVars["RoverNum"].UpgradeValueBy(3m);
     }
 }

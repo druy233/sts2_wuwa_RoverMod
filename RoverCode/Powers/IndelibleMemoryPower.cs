@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -16,9 +17,12 @@ public class IndelibleMemoryPower : RoverPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (player != Owner.Player) return;
+        if (side != CombatSide.Player) return;
+
+        var player = Owner.Player;
+        if (player == null) return;
 
         var hand = player.PlayerCombatState?.Hand?.Cards?.ToList();
         if (hand == null || hand.Count == 0) return;
@@ -26,7 +30,10 @@ public class IndelibleMemoryPower : RoverPower
         var eligible = hand.Where(c => !c.Keywords.Contains(CardKeyword.Retain)).ToList();
         if (eligible.Count == 0) return;
 
-        var card = eligible[base.CombatState.RunState.Rng.CombatTargets.NextInt(0, eligible.Count)];
+        var rng = base.CombatState?.RunState?.Rng?.CombatTargets;
+        if (rng == null) return;
+
+        var card = eligible[rng.NextInt(0, eligible.Count)];
         CardCmd.ApplyKeyword(card, CardKeyword.Retain);
     }
 }

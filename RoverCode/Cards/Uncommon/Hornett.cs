@@ -11,13 +11,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Rover.Cards;
 
-public class Hornett() : RoverCard(2,
+public class Hornett() : RoverCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AllAllies)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(4m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(6m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         IEnumerable<Creature> enumerable = from c in base.CombatState.GetTeammatesOf(base.Owner.Creature)
@@ -31,7 +31,7 @@ public class Hornett() : RoverCard(2,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["VigorPower"].UpgradeValueBy(2m);
+        base.DynamicVars["VigorPower"].UpgradeValueBy(3m);
         base.EnergyCost.UpgradeBy(-1);
     }
 }

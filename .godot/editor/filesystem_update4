@@ -1,6 +1,0 @@
-res://scenes/combat/energy_counters/rover_energy_counter.tscn
-res://shaders/vfx/common/vfx_grayscale_particle_shader.gdshader
-res://materials/vfx/common/vfx_glow.tres
-res://materials/vfx/common/vfx_ring_polar.tres
-res://materials/vfx/ribbon_flipbook/vfx_ribbon_flipbook_1_2_blue.tres
-res://materials/vfx/fire_impact/vfx_fire_embers_straight.tres

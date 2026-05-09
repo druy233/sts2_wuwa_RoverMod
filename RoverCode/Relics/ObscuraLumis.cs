@@ -30,7 +30,7 @@ namespace Rover.Relics;
 
 public class ObscuraLumis : RoverRelic
 {
-    public static int unlockBurst = 18;// 解锁共鸣解放所需的最大能量数
+    public int unlockBurst = 18;// 解锁共鸣解放所需的最大能量数
 
     private int _turnCounter; // 回合计数器
 
@@ -69,7 +69,7 @@ public class ObscuraLumis : RoverRelic
 
         int newValue = this._energytCounter + amount;
         if (newValue < 0) newValue = 0;
-        if (newValue > unlockBurst) newValue = unlockBurst;
+        if (newValue > 36) newValue = 36;
         this._energytCounter = newValue;
         Flash();
         InvokeDisplayAmountChanged();  // 刷新 UI 显示
@@ -90,7 +90,7 @@ public class ObscuraLumis : RoverRelic
         }
     }
     public int TurnGetValue => this._turnGetValue;
-    public static int UnlockBurst
+    public int GaSunlockBurst
     {
         get => unlockBurst;
         set => unlockBurst = value;
@@ -320,7 +320,7 @@ public class ObscuraLumis : RoverRelic
 
     public override async Task AfterEnergySpent(CardModel card, int amount)
     {// 能量消耗时事件
-        if (card.Owner != Owner) return;// 只处理自己打出的卡牌
+        if (card.Owner != base.Owner) return;// 只处理自己打出的卡牌
 
         int lastValue =  this._energytCounter + amount;
         this._energytCounter = (lastValue > unlockBurst) ? unlockBurst : lastValue;
@@ -331,7 +331,7 @@ public class ObscuraLumis : RoverRelic
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {// 玩家回合开始时
-        if (player != Owner) return;
+        if (player != base.Owner) return;// 只处理自己的回合
         _turnCounter++;// 回合计数器
         _turnGetValue = 0;
 
@@ -339,7 +339,7 @@ public class ObscuraLumis : RoverRelic
         var enemies = player.Creature.CombatState.HittableEnemies;// 获取可供攻击的敌人
 
         if (StoredMonsterId.Entry.Equals("EYE_WITH_TEETH") || StoredMonsterId.Entry.Equals("NOISEBOT"))
-        {// 2%概率眩晕随机敌人
+        {// 3%概率眩晕随机敌人
             if (roll < 0.03f)
             {
                 if (enemies.Count == 0) return;
@@ -499,6 +499,7 @@ public class ObscuraLumis : RoverRelic
         }
 
         if (side != CombatSide.Player) return; // 玩家回合开始时
+        if (CombatSide.Player != base.Owner.Creature.Side) return; // 只处理遗物持有者的回合
 
         if (StoredMonsterId.Entry.Equals("LIVING_FOG"))
         {
@@ -551,19 +552,16 @@ public class ObscuraLumis : RoverRelic
             // 随机选择 0、1、2 对应三种增益
             int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 3); // 0,1,2
             PowerModel? debuff = null;
-            decimal amount;
 
             switch (roll)
             {
                 case 0:
                     debuff = ModelDb.Power<StrengthPower>(); // 力量
-                    amount = 1m;
-                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, amount, Owner.Creature, null);
+                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, 1m, Owner.Creature, null);
                     break;
                 case 1:
                     debuff = ModelDb.Power<DexterityPower>(); // 敏捷
-                    amount = 1m;
-                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, amount, Owner.Creature, null);
+                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, 1m, Owner.Creature, null);
                     break;
                 case 2:
                     await CreatureCmd.Heal(base.Owner.Creature, 3m); // 生命恢复
@@ -636,7 +634,7 @@ public class ObscuraLumis : RoverRelic
     public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
     {// 某回合开始前事件
         // 只在第一回合开始时触发怪物能力(一次性怪物能力)
-        if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1)
+        if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1 && CombatSide.Player == base.Owner.Creature.Side)
         {
             if (StoredMonsterId.Entry.Equals("NONE") || StoredMonsterId.Entry.Equals("VINE_SHAMBLER") || StoredMonsterId.Entry.Equals("EYE_WITH_TEETH")
                 || StoredMonsterId.Entry.Equals("PHROG_PARASITE") || StoredMonsterId.Entry.Equals("WRIGGLER")
@@ -710,7 +708,7 @@ public class ObscuraLumis : RoverRelic
                     await PowerCmd.Apply<RitualPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
                     break;
                 case "CORPSE_SLUG":
-                    List<CardModel> cardsToExhaust = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner, new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, 999999999), null, this)).ToList();
+                    List<CardModel> cardsToExhaust = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner, new CardSelectorPrefs(new LocString("relics", "ROVER_CORPSE_SLUG"), 0, 10), null, this)).ToList();
                     if (cardsToExhaust.Count > 0)
                     {
                         foreach (var card in cardsToExhaust)

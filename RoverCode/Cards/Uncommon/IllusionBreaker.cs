@@ -17,23 +17,29 @@ namespace Rover.Cards;
 
 public class IllusionBreaker() : RoverCard(2,
     CardType.Attack, CardRarity.Uncommon,
-    TargetType.AllEnemies)
+    TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12m, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<WeakPower>(3m),
+        new DamageVar(12m, ValueProp.Move)];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<AeroPower>(),
+        HoverTipFactory.FromPower<WeakPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-        if (StanceHelper.GetPreviousPlayedCardType(this) == CardType.Attack)
+        if (StanceHelper.IsInStance<AeroPower>(base.Owner.Creature))
         {
-            this.EnergyCost.SetUntilPlayed(0);
+            await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars.Damage.UpgradeValueBy(4m);
+        base.DynamicVars.Weak.UpgradeValueBy(1m);
     }
-
 }

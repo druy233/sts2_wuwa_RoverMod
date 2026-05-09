@@ -23,7 +23,7 @@ public class BleakCrescendoPower : RoverPower
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         var relic = cardPlay.Card.Owner.GetRelic<ObscuraLumis>();
-        if (cardPlay.Card.GetType() == typeof(RoverStrike) && relic != null && StanceHelper.IsInStance<HavocPower>(base.Owner))
+        if (cardPlay.Card.Type == CardType.Attack && relic != null && StanceHelper.IsInStance<HavocPower>(base.Owner))
         {
             await relic.AddToEnergyCounter(base.Amount);
         }

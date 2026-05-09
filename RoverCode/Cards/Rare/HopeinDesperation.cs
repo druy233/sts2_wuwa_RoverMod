@@ -16,7 +16,7 @@ public class HopeinDesperation() : RoverCard(0,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(70m, ValueProp.Unblockable)];
-    protected override bool IsPlayable => Owner.Creature.CurrentHp == 1;
+    protected override bool IsPlayable => Owner.Creature.CurrentHp <= Owner.Creature.MaxHp * 0.1;
     protected override bool ShouldGlowGoldInternal => IsPlayable;
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -25,6 +25,6 @@ public class HopeinDesperation() : RoverCard(0,
     }
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(20m);
+        AddKeyword(CardKeyword.Retain);
     }
 }

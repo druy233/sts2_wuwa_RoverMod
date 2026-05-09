@@ -19,7 +19,7 @@ public class ResonatingLamellaPower : RoverPower
     public override PowerStackType StackType => PowerStackType.Counter;
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player != null && StanceHelper.IsInStance<SpectroPower>(base.Owner))
+        if (player != null && StanceHelper.IsInStance<SpectroPower>(base.Owner) && player == base.Owner.Player)
         {
             await CreatureCmd.GainBlock(base.Owner, base.Amount, ValueProp.Unpowered, null);
         }

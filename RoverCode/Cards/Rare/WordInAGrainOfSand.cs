@@ -13,7 +13,7 @@ namespace Rover.Cards;
 
 public class WordInAGrainOfSand() : RoverCard(0,
     CardType.Skill, CardRarity.Rare,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -22,9 +22,13 @@ public class WordInAGrainOfSand() : RoverCard(0,
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
         int enemyStrength = cardPlay.Target.GetPowerAmount<StrengthPower>();
-        int gain = Math.Max(1, enemyStrength);
+        int gain = enemyStrength;
         if (base.IsUpgraded) gain += 2;
 
         await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, gain, base.Owner.Creature, this);
+    }
+    protected override void OnUpgrade()
+    {
+        
     }
 }

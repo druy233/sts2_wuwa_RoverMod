@@ -14,47 +14,26 @@ namespace Rover.Powers;
 
 public class MechModePower : RoverPower
 {
-    private bool _isProcessing = false;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
-
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target == base.Owner && amount > 0)
+        if (dealer == base.Owner && target != base.Owner && cardSource != null) // 自己造成伤害
         {
-            return 0.3m;
+            decimal healthPercent = (decimal)base.Owner.CurrentHp / base.Owner.MaxHp;
+            if (healthPercent > 0.5m)
+            {
+                return 2m;
+            }
         }
-        if (dealer == base.Owner && target != base.Owner && amount > 0 && cardSource != null)
+        else if (target == base.Owner) // 自己受到伤害
         {
-            return 3m;
+            decimal healthPercent = (decimal)base.Owner.CurrentHp / base.Owner.MaxHp;
+            if (healthPercent <= 0.5m)
+            {
+                return 0.5m;
+            }
         }
         return 1m;
-    }
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {
-        if (_isProcessing) return;
-        _isProcessing = true;
-        try
-        {
-            if (player.Creature != base.Owner) return;
-            var relic = player.GetRelic<ObscuraLumis>();
-            if (relic != null && relic.EnergyCounter >= base.Amount)
-            {
-                await relic.AddToEnergyCounter(-base.Amount);
-            }
-            else
-            {
-                await PowerCmd.Remove(this);
-            }
-        }
-        finally
-        {
-            _isProcessing = false;
-        }
-    }
-    public override async Task AfterRemoved(Creature oldOwner)
-    {
-        await PowerCmd.Remove<NoBlockPower>(oldOwner);
-        await PowerCmd.Remove<CantChangeStancePower>(oldOwner);
     }
 }

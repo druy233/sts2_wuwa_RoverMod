@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
@@ -20,7 +21,7 @@ public class ResonanceLiberation() : RoverCard(0,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(30, ValueProp.Move)];
-    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Innate,CardKeyword.Retain,CardKeyword.Eternal];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Eternal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
@@ -46,6 +47,18 @@ public class ResonanceLiberation() : RoverCard(0,
                 yield return HoverTipFactory.FromCard<DeadeningAbyss>();
                 yield return HoverTipFactory.FromCard<OmegaStorm>();
             }
+            if (base.IsMutable && base.Owner != null) 
+            {
+                var relic = base.Owner?.GetRelic<ObscuraLumis>();
+                if (relic != null)
+                {
+                    int required = relic.unlockBurst; // 实例字段
+                    var title = new LocString("cards", "ROVER_RESONANCE_LIBERATION_REQUIRED_TITLE");
+                    var desc = new LocString("cards", "ROVER_RESONANCE_LIBERATION_REQUIRED_DESC");
+                    desc.Add("value", required.ToString());
+                    yield return new HoverTip(title, desc);
+                }
+            }
         }
     }
     // 是否可以打出
@@ -54,7 +67,7 @@ public class ResonanceLiberation() : RoverCard(0,
         get 
         {
             var relic = base.Owner.GetRelic<ObscuraLumis>();
-            if (relic != null && relic.EnergyCounter >= ObscuraLumis.unlockBurst)
+            if (relic != null && relic.EnergyCounter >= relic.unlockBurst)
                 return true;
             return false;
         }
@@ -108,14 +121,13 @@ public class ResonanceLiberation() : RoverCard(0,
         var relic = base.Owner.GetRelic<ObscuraLumis>();
         if (relic != null)
         {
-            await relic.SetEnergyCounter(0);
+            await relic.AddToEnergyCounter(-relic.unlockBurst);
         }
         await Cmd.Wait(0.25f);
     }
 
     protected override PileType GetResultPileType()
     {
-        PileType resultPileType = base.GetResultPileType();
         return PileType.Hand;
     }
 

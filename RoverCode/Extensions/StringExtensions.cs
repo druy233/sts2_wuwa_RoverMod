@@ -34,6 +34,11 @@ public static class StringExtensions
         return $"res://images/relics/{path}";
     }
 
+    public static string RelicOutlineImagePath(this string path)
+    {
+        return $"res://images/relics/outline/{path}";
+    }
+
     public static string BigRelicImagePath(this string path)
     {
         return $"res://images/relics/{path}";

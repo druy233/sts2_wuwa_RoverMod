@@ -14,8 +14,6 @@ public class CrystalSolvent : RoverRelic
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
 
-    public override bool IsAllowedInShops => false;
-
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         var relic = base.Owner.GetRelic<ObscuraLumis>();

@@ -24,7 +24,6 @@ public class PlowPowerCopy : RoverPower
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
     {
-        HoverTipFactory.Static(StaticHoverTip.Stun),
         HoverTipFactory.FromPower<StrengthPower>()
     };
 

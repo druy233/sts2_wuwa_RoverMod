@@ -26,7 +26,7 @@ public class Metamorph() : RoverCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<StrengthPower>(2m),
         new PowerVar<DexterityPower>(2m),
-        new MaxHpVar(3m),
+        new MaxHpVar(2m),
         new EnergyVar(2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

@@ -8,7 +8,7 @@ using Rover.Powers;
 
 namespace Rover.Cards;
 
-public class BleakCrescendo() : RoverCard(2,
+public class BleakCrescendo() : RoverCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
@@ -22,6 +22,6 @@ public class BleakCrescendo() : RoverCard(2,
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
     }
 }
