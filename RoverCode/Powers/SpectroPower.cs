@@ -26,13 +26,13 @@ public class SpectroPower : RoverPower
         await Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target == base.Owner)
         {
-            return -1m;
+            return 0.8m;
         }
-        return 0m;
+        return 1m;
     }
 
     public override async Task AfterRemoved(Creature oldOwner)

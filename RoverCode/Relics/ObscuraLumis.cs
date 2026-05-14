@@ -770,7 +770,7 @@ public class ObscuraLumis : RoverRelic
                     await PowerCmd.Apply<HardToKillPowerCopy>(base.Owner.Creature, 15m, base.Owner.Creature, null);
                     break;
                 case "TUNNELER":
-                    await CreatureCmd.GainBlock(base.Owner.Creature, 24m, ValueProp.Unpowered, null);
+                    await CreatureCmd.GainBlock(base.Owner.Creature, 36m, ValueProp.Unpowered, null);
                     await PowerCmd.Apply<BurrowedPowerCopy>(base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "THIEVING_HOPPER":
