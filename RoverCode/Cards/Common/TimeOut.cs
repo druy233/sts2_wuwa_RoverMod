@@ -29,7 +29,7 @@ public class TimeOut() : RoverCard(1,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(2m);
+        base.DynamicVars.Block.UpgradeValueBy(3m);
     }
 
 }

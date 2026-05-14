@@ -107,7 +107,7 @@ public class ObscuraLumis : RoverRelic
     // 存储怪物能力
     protected ModelId StoredMonsterId
     {
-        get => StoredMonsterIdField.Get(this);
+        get => StoredMonsterIdField.Get(this) ?? ModelId.none;
         set => StoredMonsterIdField.Set(this, value);
     }
     // 是否已存储力量
@@ -136,6 +136,7 @@ public class ObscuraLumis : RoverRelic
         }
         return loc?.GetRawText() ?? monsterId.Entry;
     }
+
     // 怪物能力描述
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
@@ -200,6 +201,18 @@ public class ObscuraLumis : RoverRelic
                     case "THIEVING_HOPPER":
                         yield return HoverTipFactory.FromPower<FlutterPowerCopy>();
                         break;
+                    case "FOSSIL_STALKER":
+                        yield return HoverTipFactory.FromPower<SuckPower>();
+                        break;
+                    case "BYRDONIS":
+                        yield return HoverTipFactory.FromPower<TerritorialPower>();
+                        break;
+                    case "SKULKING_COLONY":
+                        yield return HoverTipFactory.FromPower<HardenedShellPower>();
+                        break;
+                    case "PHANTASMAL_GARDENER":
+                        yield return HoverTipFactory.FromPower<SkittishPower>();
+                        break;
                 }
             }
         }
@@ -208,7 +221,8 @@ public class ObscuraLumis : RoverRelic
     public override async Task BeforeCombatStart()// 战斗开始时事件
     {
         // 放入一张“为我所用+”
-        var card = base.Owner.Creature.CombatState.CreateCard<WorkForMe>(base.Owner);
+        var card = base.Owner.Creature.CombatState?.CreateCard<WorkForMe>(base.Owner);
+        if (card == null) return;
         CardCmd.Upgrade(card);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true);
 
@@ -336,17 +350,18 @@ public class ObscuraLumis : RoverRelic
         _turnGetValue = 0;
 
         float roll = base.Owner.RunState.Rng.CombatTargets.NextFloat();// 随机一个数
-        var enemies = player.Creature.CombatState.HittableEnemies;// 获取可供攻击的敌人
+        var enemies = player.Creature.CombatState?.HittableEnemies;// 获取可供攻击的敌人
 
         if (StoredMonsterId.Entry.Equals("EYE_WITH_TEETH") || StoredMonsterId.Entry.Equals("NOISEBOT"))
         {// 3%概率眩晕随机敌人
             if (roll < 0.03f)
             {
-                if (enemies.Count == 0) return;
+                if (enemies?.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count); 
-                var target = enemies[index];
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies?.Count ?? 0); 
+                var target = enemies?[index];
+                if (target == null) return;
                 await CreatureCmd.Stun(target);
             }
         }
@@ -355,11 +370,12 @@ public class ObscuraLumis : RoverRelic
         {// 5%概率眩晕随机敌人
             if (roll < 0.05f)
             {
-                if (enemies.Count == 0) return;
+                if (enemies?.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-                var target = enemies[index];
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies?.Count ?? 0);
+                var target = enemies?[index];
+                if (target == null) return;
                 await CreatureCmd.Stun(target);
             }
         }
@@ -377,16 +393,18 @@ public class ObscuraLumis : RoverRelic
         if (StoredMonsterId.Entry.Equals("PHROG_PARASITE"))
         {
             Flash();
-            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-            var target = enemies[index];
+            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies?.Count ?? 0);
+            var target = enemies?[index];
+            if (target == null) return;
             await CreatureCmd.Damage(choiceContext, target, 9m, ValueProp.Unpowered, player.Creature);
         }
 
         if (StoredMonsterId.Entry.Equals("WRIGGLER"))
         {
             Flash();
-            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-            var target = enemies[index];
+            int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies?.Count ?? 0);
+            var target = enemies?[index];
+            if (target == null) return;
             await CreatureCmd.Damage(choiceContext, target, 3m, ValueProp.Unpowered, player.Creature);
         }
 
@@ -400,11 +418,12 @@ public class ObscuraLumis : RoverRelic
         {
             if (roll < 0.03f)
             {
-                if (enemies.Count == 0) return;
+                if (enemies?.Count == 0) return;
                 Flash();
                 // 随机选择一个敌人
-                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-                var target = enemies[index];
+                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies?.Count ?? 0);
+                var target = enemies?[index];
+                if (target == null) return;
                 await CreatureCmd.Stun(target);
             }
         }
@@ -414,6 +433,7 @@ public class ObscuraLumis : RoverRelic
             if (StoredMonsterId.Entry.Equals("KIN_PRIEST"))
             {
                 Flash();
+                if (enemies == null) return;
                 await CreatureCmd.Damage(choiceContext, enemies, 9m, ValueProp.Unpowered, player.Creature);
             }
 
@@ -429,6 +449,7 @@ public class ObscuraLumis : RoverRelic
             if (StoredMonsterId.Entry.Equals("SOUL_FYSH"))
             {
                 Flash();
+                if (enemies == null) return;
                 await PowerCmd.Apply<IntangiblePower>(base.Owner.Creature, 1m ,base.Owner.Creature, null);
                 await CreatureCmd.Damage(choiceContext, enemies, 12m, ValueProp.Unblockable, player.Creature);
             }
@@ -520,7 +541,7 @@ public class ObscuraLumis : RoverRelic
                 if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.NextMove.Id;
                 if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.MoveStateMachine?.States.Keys.FirstOrDefault();
 
-                int damage = 15; // 可自定义伤害
+                int damage = 6; // 可自定义伤害
                 var attackIntent = new SingleAttackIntent(damage);
 
                 async Task PerformAttack(IReadOnlyList<Creature> _)
@@ -719,7 +740,7 @@ public class ObscuraLumis : RoverRelic
                     }
                     break;
                 case "GAS_BOMB":
-                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 1m, base.Owner.Creature, null)).SetDamage(base.DynamicVars["BombDamage"].BaseValue);
+                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 1m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["BombDamage"].BaseValue);
                     break;
                 case "FOSSIL_STALKER":
                     await PowerCmd.Apply<SuckPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
@@ -775,7 +796,7 @@ public class ObscuraLumis : RoverRelic
                     await PowerCmd.Apply<SandpitPowerCopy>(base.Owner.Creature, 5m, base.Owner.Creature, null);
                     break;
                 case "ROCKET":
-                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 3m, base.Owner.Creature, null)).SetDamage(base.DynamicVars["RocketDamage"].BaseValue);
+                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 3m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["RocketDamage"].BaseValue);
                     break;
                 case "DEVOTED_SCULPTOR":
                     await PowerCmd.Apply<RitualPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);

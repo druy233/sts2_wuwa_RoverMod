@@ -48,8 +48,14 @@ public static class StringExtensions
     {
         return $"res://images/ui/{path}";
     }
+
     public static string PotionImagePath(this string path)
     {
         return $"res://images/potions/{path}";
+    }
+
+    public static string PotionOutlineImagePath(this string path)
+    {
+        return $"res://images/potions/outline/{path}";
     }
 }

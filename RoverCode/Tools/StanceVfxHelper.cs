@@ -117,7 +117,7 @@ internal class StanceVfxHelper
         return cache;
     }
 
-    // 创建雾气粒子（用于姿态背景）
+    // 创建雾气粒子（用于属性背景）
     private static CpuParticles2D CreateFogParticles(int amount, double lifetime, Vector2 emissionExtents,
         float scaleMin, float scaleMax, Color peakColor, float peakAlpha, float angularVelocity)
     {

@@ -22,8 +22,8 @@ public abstract class RoverPotion : CustomPotionModel
     {
         get
         {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".RelicImagePath();
+            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PotionOutlineImagePath();
+            return ResourceLoader.Exists(path) ? path : "potion.png".PotionOutlineImagePath();
         }
     }
 }

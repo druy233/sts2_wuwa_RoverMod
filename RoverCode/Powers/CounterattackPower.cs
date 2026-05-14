@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rover.Tools;
 
 namespace Rover.Powers;
 
@@ -22,6 +23,7 @@ public class CounterattackPower : RoverPower
         if (dealer != null && dealer.IsAlive)
         {
             int damage = Math.Max(1, (int)(dealer.CurrentHp * 0.05m));
+            RoverAudioHelper.PlayOneShot("res://debug_audio/counterattack.wav");
             CreatureCmd.Damage(new BlockingPlayerChoiceContext(), dealer, damage, ValueProp.Unblockable, base.Owner, null);
         }
         return 0m;

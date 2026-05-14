@@ -10,5 +10,5 @@ namespace Rover.Powers;
 public class EchoesOfWanderlustPower : RoverPower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 }

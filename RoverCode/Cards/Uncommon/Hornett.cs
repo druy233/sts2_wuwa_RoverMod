@@ -20,7 +20,7 @@ public class Hornett() : RoverCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<VigorPower>(6m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        IEnumerable<Creature> enumerable = from c in base.CombatState.GetTeammatesOf(base.Owner.Creature)
+        IEnumerable<Creature> enumerable = from c in base.CombatState?.GetTeammatesOf(base.Owner.Creature)
                                            where c != null && c.IsAlive && c.IsPlayer
                                            select c;
         foreach (Creature item in enumerable)

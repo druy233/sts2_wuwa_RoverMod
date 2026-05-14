@@ -15,11 +15,11 @@ public class Carnival() : RoverCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AeroPower>()];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await StanceHelper.EnterHavoc(base.Owner, this);
+        await StanceHelper.EnterAero(base.Owner, this);
     }
 
     protected override void OnUpgrade()

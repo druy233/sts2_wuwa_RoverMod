@@ -6,7 +6,9 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rover.Powers;
 using Rover.Relics;
+using Rover.Tools;
 
 
 namespace Rover.Cards;
@@ -15,15 +17,18 @@ public class Resonance() : RoverCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<SpectroPower>(),
+        RoverHoverTips.Charge];
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("RoverNum", 1m),
+        new DynamicVar("RoverNum", 3m),
         new DamageVar(9m, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
         var relic = base.Owner.GetRelic<ObscuraLumis>();
-        if (relic != null)
+        if (relic != null && base.Owner.Creature.HasPower<SpectroPower>())
         {
             await relic.AddToEnergyCounter((int)base.DynamicVars["RoverNum"].BaseValue);
         }
@@ -33,5 +38,6 @@ public class Resonance() : RoverCard(1,
     protected override void OnUpgrade()
     {
         base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
+        base.DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

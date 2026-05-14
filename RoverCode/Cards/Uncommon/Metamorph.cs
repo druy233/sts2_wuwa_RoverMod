@@ -42,5 +42,6 @@ public class Metamorph() : RoverCard(1,
     {
         base.DynamicVars.Strength.UpgradeValueBy(-1m);
         base.DynamicVars.Dexterity.UpgradeValueBy(-1m);
+        base.DynamicVars.MaxHp.UpgradeValueBy(-1m);
     }
 }

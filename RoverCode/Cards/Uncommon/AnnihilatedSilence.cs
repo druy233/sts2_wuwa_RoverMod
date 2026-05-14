@@ -17,7 +17,7 @@ public class AnnihilatedSilence() : RoverCard(2,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4m, ValueProp.Move),
+        new DamageVar(6m, ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar("TotalHits").WithMultiplier(static (card, target) =>

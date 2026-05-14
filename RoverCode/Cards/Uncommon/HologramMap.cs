@@ -15,7 +15,6 @@ public class HologramMap() : RoverCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var hand = PileType.Hand.GetPile(base.Owner).Cards
@@ -30,11 +29,11 @@ public class HologramMap() : RoverCard(1,
         CardModel targetCard = selected.ElementAt(0);
         int currentCost = targetCard.EnergyCost.GetAmountToSpend();
         int newCost = Math.Max(0, currentCost - 1);
-        targetCard.EnergyCost.SetUntilPlayed(newCost);
+        targetCard.EnergyCost.SetThisCombat(newCost);
     }
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

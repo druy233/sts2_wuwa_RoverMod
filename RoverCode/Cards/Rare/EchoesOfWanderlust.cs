@@ -9,7 +9,7 @@ using Rover.Powers;
 
 namespace Rover.Cards;
 
-public class EchoesOfWanderlust() : RoverCard(2,
+public class EchoesOfWanderlust() : RoverCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
@@ -22,7 +22,6 @@ public class EchoesOfWanderlust() : RoverCard(2,
     }
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
         base.DynamicVars.Energy.UpgradeValueBy(1);
     }
 }

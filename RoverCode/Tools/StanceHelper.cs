@@ -118,26 +118,9 @@ public static class StanceHelper
         }
 
         // BoundlessWinds(无垠之风)的方法
-        if (owner.Creature.HasPower<BoundlessWindsPower>())
+        if (owner.Creature.HasPower<ColdRiverBoatPower>())
         {
-            await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), owner.Creature.GetPowerAmount<BoundlessWindsPower>(), owner);
-        }
-
-        // CycleOfWind(风息流转)的方法
-        if (owner.Creature.HasPower<CycleOfWindPower>())
-        {
-            await CreatureCmd.GainBlock(owner.Creature, owner.Creature.GetPowerAmount<CycleOfWindPower>(), ValueProp.Unpowered, null);
-        }
-
-        // AftertunePower(余音)的方法
-        if (owner.Creature.HasPower<AftertunePower>() && oldStance != newStance)
-        {
-            var combatState = owner.Creature.CombatState;
-            if (combatState != null)
-            {
-                var enemies = combatState.HittableEnemies;
-                await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), enemies, owner.Creature.GetPowerAmount<AftertunePower>(), ValueProp.Unpowered, owner.Creature); 
-            }
+            await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), owner.Creature.GetPowerAmount<ColdRiverBoatPower>(), owner);
         }
 
         // Lifetaker(破命)的方法
@@ -158,12 +141,6 @@ public static class StanceHelper
         {
             await PlayerCmd.GainEnergy(1m, owner);
             await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), 2, owner);
-        }
-
-        // 遗物Afterlife（来生）的方法
-        if (owner.Relics.Any((RelicModel relic) => relic.Id.Entry.Equals("ROVER-AFTERLIFE")))
-        {
-            await PowerCmd.Apply<StrengthPower>(owner.Creature, 1m, owner.Creature, null);
         }
 
         // 遗物SacredSalt（潮汐圣盐）的方法

@@ -19,10 +19,10 @@ public class UnboundFlow() : RoverCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<HavocPower>(),
+        HoverTipFactory.FromPower<AeroPower>(),
         HoverTipFactory.FromPower<VulnerablePower>(),
         HoverTipFactory.FromPower<WeakPower>()];
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 1m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 2m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await PowerCmd.Apply<UnboundFlowPower>(Owner.Creature, DynamicVars["RoverNum"].BaseValue, Owner.Creature, this);

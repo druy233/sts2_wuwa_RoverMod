@@ -12,11 +12,10 @@ using System.Threading.Tasks;
 
 namespace Rover.Cards;
 
-public class FaceTheEvil() : RoverCard(3,
+public class FaceTheEvil() : RoverCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         int currentBlock = base.Owner.Creature.Block;
@@ -25,7 +24,6 @@ public class FaceTheEvil() : RoverCard(3,
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
         AddKeyword(CardKeyword.Retain);
     }
 }
