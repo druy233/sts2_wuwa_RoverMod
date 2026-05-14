@@ -25,6 +25,7 @@ public class ReticencePower : RoverPower
         if (target == base.Owner)
         {
             var player = base.Owner.Player;
+            if (player == null) return;
             var relic = player.GetRelic<ObscuraLumis>();
             if (relic != null) {
                 await relic.AddToEnergyCounter(base.Amount);

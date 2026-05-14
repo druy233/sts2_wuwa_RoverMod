@@ -20,10 +20,9 @@ public class AwakeningGale() : RoverCard(2,
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<VulnerablePower>(),
         HoverTipFactory.FromPower<WeakPower>()];
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new PowerVar<VulnerablePower>(2),
-        new PowerVar<WeakPower>(2),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<VulnerablePower>(3m),
+        new PowerVar<WeakPower>(3m),
         new CalculationBaseVar(0m),
         new ExtraDamageVar(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? target) =>
@@ -32,8 +31,7 @@ public class AwakeningGale() : RoverCard(2,
             int vuln = target.GetPowerAmount<VulnerablePower>();
             int weak = target.GetPowerAmount<WeakPower>();
             return vuln + weak;
-        })
-    };
+        })];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -48,7 +46,8 @@ public class AwakeningGale() : RoverCard(2,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Vulnerable.UpgradeValueBy(1);
-        base.DynamicVars.Weak.UpgradeValueBy(1);
+        base.DynamicVars.Vulnerable.UpgradeValueBy(2m);
+        base.DynamicVars.Weak.UpgradeValueBy(2m);
     }
+
 }

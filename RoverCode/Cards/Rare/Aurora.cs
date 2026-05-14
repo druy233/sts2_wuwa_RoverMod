@@ -28,6 +28,7 @@ public class Aurora() : RoverCard(2,
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Innate);
+        base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
     }
 
 }

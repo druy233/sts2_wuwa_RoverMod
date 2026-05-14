@@ -12,12 +12,15 @@ using System.Threading.Tasks;
 
 namespace Rover.Cards;
 
-public class CycleOfWind() : RoverCard(1,
+public class CycleOfWind() : RoverCard(2,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 4m)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<AeroPower>()];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new EnergyVar(2),
+        new DynamicVar("RoverNum", 1m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
@@ -26,6 +29,6 @@ public class CycleOfWind() : RoverCard(1,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["RoverNum"].UpgradeValueBy(2m);
+        base.DynamicVars["RoverNum"].UpgradeValueBy(1m);
     }
 }

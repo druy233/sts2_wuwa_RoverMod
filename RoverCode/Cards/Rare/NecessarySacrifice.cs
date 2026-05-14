@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Rover.Cards;
 
-public class NecessarySacrifice() : RoverCard(0,
+public class NecessarySacrifice() : RoverCard(3,
     CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {

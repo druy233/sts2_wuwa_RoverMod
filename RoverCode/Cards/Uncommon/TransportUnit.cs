@@ -16,24 +16,20 @@ public class TransportUnit() : RoverCard(1,
     CardType.Skill, CardRarity.Uncommon, 
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DynamicVar("RoverNum", 2m)
-    };
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 2m)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CardModel[] selected = (await CardSelectCmd.FromHand(
-            context: choiceContext,
-            player: base.Owner,
-            prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 0, base.DynamicVars["RoverNum"].IntValue),
-            filter: null,
-            source: this
-        )).ToArray();
+        var drawPile = PileType.Draw.GetPile(base.Owner);
+        var drawCards = drawPile.Cards.ToList();
+        if (drawCards.Count == 0) return;
 
-        if (selected.Length > 0)
+        var prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, base.DynamicVars["RoverNum"].IntValue);
+        var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, drawCards, base.Owner, prefs);
+
+        foreach (var card in selected)
         {
-            await CardPileCmd.Add(selected, PileType.Draw, CardPilePosition.Top);
+            await CardPileCmd.Add(card, PileType.Hand);
         }
     }
 

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Rover.Cards;
 
-internal class WindCutter() : RoverCard(2,
+internal class WindCutter() : RoverCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
@@ -38,7 +38,7 @@ internal class WindCutter() : RoverCard(2,
 
     protected override void OnUpgrade()
     {
+        base.DynamicVars.Repeat.UpgradeValueBy(1);
         base.DynamicVars.Weak.UpgradeValueBy(1m);
-        base.EnergyCost.UpgradeBy(-1);
     }
 }

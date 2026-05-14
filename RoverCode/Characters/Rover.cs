@@ -31,7 +31,7 @@ public class Rover : PlaceholderCharacterModel
     //角色能量计数器文字轮廓
     public override Color EnergyLabelOutlineColor => new Color("#920065");
     // 角色相关对白、气泡、事件发言等文本的颜色
-    public override Color DialogueColor => new Color("#f2e753");
+    public override Color DialogueColor => new Color("#8c8214");
     // 地图上该角色绘制连线时使用的颜色
     public override Color MapDrawingColor => new Color("#f2e753");
     //初始血量
@@ -100,13 +100,4 @@ public class Rover : PlaceholderCharacterModel
 	];
     //初始遗物
     public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<ObscuraLumis>()];
-
-    // 攻击建筑师的攻击特效列表
-    public override List<string> GetArchitectAttackVfx() => [
-        "vfx/vfx_attack_blunt",
-        "vfx/vfx_heavy_blunt",
-        "vfx/vfx_attack_slash",
-        "vfx/vfx_bloody_impact",
-        "vfx/vfx_rock_shatter"
-    ];
 }

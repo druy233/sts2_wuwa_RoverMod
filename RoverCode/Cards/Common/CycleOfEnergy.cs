@@ -19,7 +19,9 @@ public class CycleOfEnergy() : RoverCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [base.EnergyHoverTip];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        RoverHoverTips.Charge,
+        base.EnergyHoverTip];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
 
     // 是否可以打出

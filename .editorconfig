@@ -7,4 +7,4 @@ dotnet_diagnostic.CS8600.severity = warning
 dotnet_diagnostic.IDE0028.severity = suggestion
 
 # STS001: Symbol missing localization
-dotnet_diagnostic.STS001.severity = error
+dotnet_diagnostic.STS001.severity = warning

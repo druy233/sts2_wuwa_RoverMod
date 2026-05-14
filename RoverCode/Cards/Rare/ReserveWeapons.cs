@@ -21,7 +21,7 @@ public class ReserveWeapons() : RoverCard(1,
         List<CardModel> cards = CardFactory.GetDistinctForCombat(base.Owner, 
             from c in base.Owner.Character.CardPool.GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint)
             where c.Type == CardType.Attack
-            where c.Rarity == CardRarity.Rare
+            where c.Rarity == CardRarity.Rare || c.Rarity == CardRarity.Uncommon
             select c, 3, base.Owner.RunState.Rng.CombatCardGeneration).ToList();
         CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, base.Owner, canSkip: true);
         if (cardModel != null)

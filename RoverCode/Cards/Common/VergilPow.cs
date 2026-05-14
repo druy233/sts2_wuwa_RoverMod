@@ -15,7 +15,7 @@ public class VergilPow() : RoverCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<HavocPower>()];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
