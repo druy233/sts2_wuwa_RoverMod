@@ -1,0 +1,17 @@
+{
+  "ROVER-ROVER.title": "Rover",
+  "ROVER-ROVER.titleObject": "Rover",
+  "ROVER-ROVER.description": "A wanderer from another world who stumbled into the Spire.\nIs this a vision of the Somnoire, or a Sonoro Sphere?\nPerhaps only by reaching the top of the Spire will you find the answer.",
+  "ROVER-ROVER.aromaPrinciple": "[sine][gold]Nothing can stand in my way.[/gold][/sine]",
+  "ROVER-ROVER.cardsModifierDescription": "Rover's cards will appear in rewards and shops.",
+  "ROVER-ROVER.cardsModifierTitle": "Rover Cards",
+  "ROVER-ROVER.eventDeathPrevention": "I will be there for everyone...",
+  "ROVER-ROVER.goldMonologue": "[sine]So this is the currency of this place?[/sine]",
+  "ROVER-ROVER.possessiveAdjective": "his",
+  "ROVER-ROVER.pronounObject": "him",
+  "ROVER-ROVER.pronounPossessive": "his",
+  "ROVER-ROVER.pronounSubject": "he",
+  "ROVER-ROVER.banter.alive.endTurnPing": "No need to hurry.",
+  "ROVER-ROVER.banter.dead.endTurnPing": "......",
+  "ROVER-ROVER.unlockText": "The Rover mod character is ready to play."
+}
