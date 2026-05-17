@@ -22,7 +22,7 @@ public class HavocPower : RoverPower
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (dealer == Owner && cardSource != null && cardSource.Type != CardType.Status)
+        if (dealer == Owner && cardSource != null && cardSource.Type != CardType.Status && target != base.Owner)
             return 1.5m;
         return 1m;
     }
