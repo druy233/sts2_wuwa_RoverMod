@@ -42,6 +42,8 @@ public class ObscuraLumis : RoverRelic
 
     private int _turnGetValue; // 每回合获得的充能
 
+    private readonly int _MaxCharge = 36;// 最大能量储存
+
     public override RelicModel? GetUpgradeReplacement()
     {// 先古升级：你漂哥已经是最高级了
         return this;
@@ -69,7 +71,7 @@ public class ObscuraLumis : RoverRelic
 
         int newValue = this._energytCounter + amount;
         if (newValue < 0) newValue = 0;
-        if (newValue > 36) newValue = 36;
+        if (newValue > _MaxCharge) newValue = _MaxCharge;
         this._energytCounter = newValue;
         Flash();
         InvokeDisplayAmountChanged();  // 刷新 UI 显示
@@ -102,7 +104,7 @@ public class ObscuraLumis : RoverRelic
     // 遗物稀有度（起始遗物）
     public override RelicRarity Rarity => RelicRarity.Starter;
     // 使用 SavedSpireField 持久化存储怪物 ID
-    public static SavedSpireField<ObscuraLumis, ModelId> StoredMonsterIdField =
+    private static readonly SavedSpireField<ObscuraLumis, ModelId> StoredMonsterIdField =
         new(() => ModelId.none, "Rover_ObscuraLumis_MonsterId");
     // 存储怪物能力
     protected ModelId StoredMonsterId
@@ -232,7 +234,7 @@ public class ObscuraLumis : RoverRelic
     {
         if (StoredMonsterId.Entry.Equals("SOUL_NEXUS"))
         {
-            if (dealer == Owner?.Creature)
+            if (dealer == Owner?.Creature && cardSource != null)
             {
                 return 6m;
             }
@@ -287,8 +289,6 @@ public class ObscuraLumis : RoverRelic
     {// 卡牌打出后
         if (cardPlay.Card.Owner != Owner) return;// 只处理自己打出的卡牌
 
-        base.Status = this._energytCounter == 21 ? RelicStatus.Active : RelicStatus.Normal;// 共鸣能量充满时，高亮遗物
-
         if (StoredMonsterId.Entry.Equals("GREMLIN_MERC"))
         {
             if (cardPlay.Card.Type == CardType.Attack)
@@ -337,7 +337,7 @@ public class ObscuraLumis : RoverRelic
         if (card.Owner != base.Owner) return;// 只处理自己打出的卡牌
 
         int lastValue =  this._energytCounter + amount;
-        this._energytCounter = (lastValue > unlockBurst) ? unlockBurst : lastValue;
+        this._energytCounter = Math.Min(lastValue, _MaxCharge);
         this._turnGetValue += amount;
         InvokeDisplayAmountChanged();
         await Task.CompletedTask;

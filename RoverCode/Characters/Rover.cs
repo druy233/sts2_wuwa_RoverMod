@@ -3,6 +3,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Models.PotionPools;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -17,8 +18,6 @@ namespace Rover.Character;
 public class Rover : PlaceholderCharacterModel
 {
 	public const string CharacterId = "Rover";
-
-	public override string PlaceholderID => "rover";
 
 	public static readonly Color Color = new Color("f2e753");
 
@@ -44,8 +43,10 @@ public class Rover : PlaceholderCharacterModel
      public override string CustomTrailPath => "res://scenes/vfx/card_trail_rover.tscn";
     //角色头像路径
     public override string CustomIconTexturePath => "top_panel/character_icon_rover.png".CharacterUiPath();
+    public override string CustomIconOutlineTexturePath => "top_panel/character_icon_rover_outline.png".CharacterUiPath();
+    public override string CustomIconPath => "res://scenes/ui/character_icons/rover_icon.tscn";
     // 篝火休息场景。
-     public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/rover_rest_site.tscn";
+    public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/rover_rest_site.tscn";
     // 商店人物场景。
      public override string CustomMerchantAnimPath => "res://scenes/merchant/characters/rover_merchant.tscn";
     // 多人模式角色手臂
@@ -78,9 +79,9 @@ public class Rover : PlaceholderCharacterModel
     // 死亡音效
     // public override string CustomDeathSfx => null;
     // 角色选择音效
-     public override string CharacterSelectSfx => "";
+    public override string CharacterSelectSfx => ModelDb.Character<Necrobinder>().CharacterSelectSfx;
     // 过渡音效。这个不能删。
-    public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_necrobinder";
+    public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
 
     public override CardPoolModel CardPool => ModelDb.CardPool<RoverCardPool>();
 	public override RelicPoolModel RelicPool => ModelDb.RelicPool<RoverRelicPool>();

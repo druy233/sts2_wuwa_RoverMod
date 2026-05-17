@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi55i8b8s4g4w"]
+[gd_scene load_steps=8 format=3 uid="uid://biditd4j0mu41"]
 
 [ext_resource type="PackedScene" uid="uid://dkp3jmhbo5axx" path="res://scenes/vfx/energy/rover/rover_energy_vfx_back.tscn" id="1_w1q3x"]
 [ext_resource type="Texture2D" uid="uid://cq8uon8r3owqb" path="res://images/ui/combat/energy_counters/rover_orb_layer_1.png" id="2_ml7wq"]

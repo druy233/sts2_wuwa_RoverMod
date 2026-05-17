@@ -160,7 +160,7 @@
   "ROVER-HOLOGRAM_MAP.description": "选择一张牌，这张牌在本场战斗耗能减少1。",
   "ROVER-HOLOGRAM_MAP.selectionScreenPrompt": "选择一张牌，使其在本场战斗耗能减少1。",
   "ROVER-HOLOGRAM_MAP.title": "全息地图",
-  "ROVER-JOURNEY_WELL.description": "从3张其他颜色攻击牌中选择1张加入你的手牌{IfUpgraded:show:并将其升级}。",
+  "ROVER-JOURNEY_WELL.description": "从3张其他角色的{IfUpgraded:show:[gold]升级过的[/gold]}攻击牌中选择1张加入你的[gold]手牌[/gold]。",
   "ROVER-JOURNEY_WELL.title": "旅途愉快",
   "ROVER-SILENT_LISTENER.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]衍射[/gold]：抽{Cards:diff()}张牌。",
   "ROVER-SILENT_LISTENER.title": "静聆",
@@ -193,6 +193,11 @@
   "ROVER-ILLUSION_BREAKER.description": "造成{Damage:diff()}点伤害。\n[gold]气动[/gold]：给予{WeakPower:diff()}层[gold]虚弱[/gold]。",
   "ROVER-ILLUSION_BREAKER.title": "裂象",
   "ROVER-NEVER_GIVE_UP.description": "造成等同于目标格挡的伤害。\n获得等量格挡。",
-  "ROVER-NEVER_GIVE_UP.title": "永不放弃"
+  "ROVER-NEVER_GIVE_UP.title": "永不放弃",
+
+
+
+  "ROVER-APOTHEOSIS.description": "[gold]升级[/gold]你的全部卡牌。",
+  "ROVER-APOTHEOSIS.title": "神化"
 
 }

@@ -193,5 +193,10 @@
   "ROVER-ILLUSION_BREAKER.description": "Deal {Damage:diff()} damage.\n[gold]Aero[/gold]: Apply {WeakPower:diff()} [gold]Weak[/gold].",
   "ROVER-ILLUSION_BREAKER.title": "Illusion Breaker",
   "ROVER-NEVER_GIVE_UP.description": "Deal damage equal to the target's [gold]Block[/gold].\nGain [gold]Block[/gold] equal to the damage dealt.",
-  "ROVER-NEVER_GIVE_UP.title": "Never Give Up"
+  "ROVER-NEVER_GIVE_UP.title": "Never Give Up",
+
+
+
+  "ROVER-APOTHEOSIS.description": "[gold]Upgrade[/gold] ALL your cards.",
+  "ROVER-APOTHEOSIS.title": "Apotheosis"
 }

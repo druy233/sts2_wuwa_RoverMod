@@ -10,7 +10,7 @@ public class Afterlife : RoverRelic
 
     public override bool HasUponPickupEffect => true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new MaxHpVar(10m)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new MaxHpVar(9m)];
 
     public override async Task AfterObtained()
     {

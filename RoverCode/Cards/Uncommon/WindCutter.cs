@@ -29,9 +29,9 @@ internal class WindCutter() : RoverCard(1,
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
-        if (StanceHelper.IsInStance<HavocPower>(base.Owner.Creature))
+        if (StanceHelper.IsInStance<AeroPower>(base.Owner.Creature))
         {
-            await CardPileCmd.Draw(context, base.DynamicVars.Cards.BaseValue, base.Owner);
+            await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
         }
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).WithHitCount((int)base.DynamicVars.Repeat.BaseValue).Targeting(cardPlay.Target).Execute(context);
     }

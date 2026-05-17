@@ -19,34 +19,48 @@ namespace Rover.Cards;
 public class JourneyWell() : RoverCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
-{    
-        protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+{
+    private CardModel? _mockGeneratedCard;
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        CardModel cardModel;
+        if (_mockGeneratedCard == null)
         {
-        //bool hasNecrobinder = base.Owner.RunState.Players.Any((Player p) => p.Character.CardPool is NecrobinderCardPool);
-        bool isSinglePlayer = base.Owner.RunState.Players.Count <= 1;
-        List<CardModel> options = (from card in (from _ in CardFactory.FilterForCombat(ModelDb.AllCards)
-                                                 where _.Type == CardType.Attack && _.Id != base.Id 
-                                                 && _.Rarity != CardRarity.Token 
-                                                 //&& (hasNecrobinder || !(_.Pool is NecrobinderCardPool)) 
-                                                 && (!isSinglePlayer || _.MultiplayerConstraint != CardMultiplayerConstraint.MultiplayerOnly) 
-                                                 && (isSinglePlayer || _.MultiplayerConstraint != CardMultiplayerConstraint.SingleplayerOnly)
-                                                 && _.Pool != base.Owner.Character.CardPool
-                                                 orderby base.Owner.RunState.Rng.Niche.NextInt()
-                                                 select _).Take(3)
-                                   select base.CombatState?.CreateCard(card, base.Owner)).ToList();
-        CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, base.Owner, false);
-        if (cardModel != null)
-        {
+            List<CardPoolModel> list = base.Owner.UnlockState.CharacterCardPools.ToList();
+            if (list.Count > 1)
+            {
+                list.Remove(base.Owner.Character.CardPool);
+            }
+            IEnumerable<CardModel> cards = from c in list.SelectMany((CardPoolModel c) => c.GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint))
+                                           where c.Type == CardType.Attack
+                                           select c;
+            List<CardModel> list2 = CardFactory.GetDistinctForCombat(base.Owner, cards, 3, base.Owner.RunState.Rng.CombatCardGeneration).ToList();
             if (base.IsUpgraded)
             {
-                CardCmd.Upgrade(cardModel, CardPreviewStyle.HorizontalLayout);
+                foreach (CardModel item in list2)
+                {
+                    CardCmd.Upgrade(item);
+                }
             }
+            cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, list2, base.Owner, canSkip: true);
+        }
+        else
+        {
+            cardModel = _mockGeneratedCard;
+            if (base.IsUpgraded)
+            {
+                CardCmd.Upgrade(cardModel);
+            }
+        }
+        if (cardModel != null)
+        {
             await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
         }
     }
 
-    protected override void OnUpgrade()
+    public void MockGeneratedCard(CardModel card)
     {
-
+        AssertMutable();
+        _mockGeneratedCard = card;
     }
 }
