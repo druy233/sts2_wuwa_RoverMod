@@ -1,11 +1,10 @@
 {
-  "ASHWATER.description": "[gold]消耗[/gold]你[gold]手牌[/gold]中的任意张牌。",
-  "ASHWATER.selectionScreenPrompt": "选择任意张牌[gold]消耗[/gold]。",
-  "ASHWATER.title": "灰水",
-  "ROVER-PREMIUM_ENERGY_BAG.description": "回复[blue]15[/blue]点生命。",
-  "ROVER-PREMIUM_ENERGY_BAG.title": "特级能量袋",
-  "ROVER-COMPLETE_NUTRITION_SQUEEZY_JELLY.description": "获得[blue]10[/blue]点格挡，获得[green]2[/green]点敏捷。",
-  "ROVER-COMPLETE_NUTRITION_SQUEEZY_JELLY.title": "全营养嘻嘻果冻",
-  "ROVER-HEARTPOUR.description": "使用后，充能[blue]9[/blue]点。",
-  "ROVER-HEARTPOUR.title": "「饮心」"
+  "ROVER-PREMIUM_ENERGY_BAG.description": "체력을 [green]15[/green] 회복합니다.",
+  "ROVER-PREMIUM_ENERGY_BAG.title": "특급 에너지 주머니",
+
+  "ROVER-COMPLETE_NUTRITION_SQUEEZY_JELLY.description": "[gold]방어도[/gold]를 [blue]10[/blue] 얻습니다. [blue]민첩[/blue]을 [green]2[/green] 얻습니다.",
+  "ROVER-COMPLETE_NUTRITION_SQUEEZY_JELLY.title": "종합 영양 겔",
+
+  "ROVER-HEARTPOUR.description": "사용 시, [gold]충전[/gold]을 [gold]9[/gold] 얻습니다.",
+  "ROVER-HEARTPOUR.title": "심장의 선택"
 }

@@ -113,7 +113,7 @@ public class ObscuraLumis : RoverRelic
         set => StoredMonsterIdField.Set(this, value);
     }
     // 是否已存储力量
-    public bool HasStoredPower => StoredMonsterId != ModelId.none;
+    public bool HasStoredPower => StoredMonsterId.Entry != "NONE";
     // 对外方法
     public void StoreMonsterId(ModelId monsterId)
     {
@@ -144,6 +144,9 @@ public class ObscuraLumis : RoverRelic
     {
         get
         {
+            if (StoredMonsterId.Entry.Equals("NONE"))
+                yield break;
+
             if (HasStoredPower)
             {
                 // 获取怪物本地化名称

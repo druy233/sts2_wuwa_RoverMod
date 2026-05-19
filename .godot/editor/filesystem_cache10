@@ -1,9 +1,9 @@
 cb68465a049d370e5dc715e0fed1d1f8
-::res://::1779155142
+::res://::1779239033
 character_icon_rover.png::CompressedTexture2D::8538563897890791706::1775805738::1777605361::1::::<><><>0<>0<>9712d749aede0181f272f53c97bc32a5<>res://.godot/imported/character_icon_rover.png-c450253d6f78cbff403b15cbb789aa3e.ctex::
-export_presets.cfg::TextFile::-1::1779155142::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1779204375::0::1::::<><><>0<>0<><>::
 README.md::TextFile::-1::1778079743::0::1::::<><><>0<>0<><>::
-rover.json::JSON::-1::1779154806::0::1::::<><><>0<>0<><>::
+rover.json::JSON::-1::1779165265::0::1::::<><><>0<>0<><>::
 spine_godot_extension.gdextension::GDExtension::401861254137176983::1773373641::0::1::::<><><>0<>0<><>::
 ::res://addons/::1778989186
 ::res://addons/mega_text/::1778989186
@@ -16,7 +16,7 @@ Rover.skel::SpineSkeletonFileResource::3686734669660930034::1776597841::17765978
 ::res://animations/character_select/::1776221718
 ::res://animations/character_select/rover/::1776612289
 rover_bg.png::CompressedTexture2D::726399841378527699::1776612288::1776612289::1::::<><><>0<>0<>5bf282bf7047942e0d0357417938b353<>res://.godot/imported/rover_bg.png-80bdc287ba529d057c25b42c52d36640.ctex::
-::res://debug_audio/::1779155633
+::res://debug_audio/::1779155641
 attack.wav::AudioStreamWAV::4819705532993955353::1777516046::1777690323::1::::<><><>0<>0<>2fcd7ef8e539463c5dc59904cadf3aac<>res://.godot/imported/attack.wav-b9ab6927fa6a8b814134e1c37b1481cd.sample::
 counterattack.wav::AudioStreamWAV::1242765324572310844::1778473336::1778473336::1::::<><><>0<>0<>82a98c9899fcb8393fed4ba157db9b0f<>res://.godot/imported/counterattack.wav-87e75f6a1204346dd662422c6ff18ccd.sample::
 deadening_abyss.wav::AudioStreamWAV::1616640222774965638::1777516046::1777690323::1::::<><><>0<>0<>50ddf9f4f545821936e46c7b2d5c6b62<>res://.godot/imported/deadening_abyss.wav-21000f5d9990d51a4b910400c87d009d.sample::
@@ -457,8 +457,8 @@ SurgingResonance.cs::CSharpScript::7313169479917425069::1777980610::0::1::::<><>
 TransportUnit.cs::CSharpScript::1033315239327233751::1778580043::0::1::::<><><>0<>0<><>::
 Waystone.cs::CSharpScript::1368119297892277952::1778056726::0::1::::<><><>0<>0<><>::
 WindCutter.cs::CSharpScript::4359341158810454863::1778989680::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Characters/::1779155493
-Rover.cs::CSharpScript::6607239898859515173::1779155493::0::1::::<><><>0<>0<><>::
+::res://RoverCode/Characters/::1779156642
+Rover.cs::CSharpScript::6607239898859515173::1779156642::0::1::::<><><>0<>0<><>::
 RoverCardPool.cs::CSharpScript::3571201826037247428::1778548094::0::1::::<><><>0<>0<><>::
 RoverPotionPool.cs::CSharpScript::3970100050057987737::1776789205::0::1::::<><><>0<>0<><>::
 RoverRelicPool.cs::CSharpScript::2469652948539404292::1778209031::0::1::::<><><>0<>0<><>::
@@ -469,7 +469,7 @@ CompleteNutritionSqueezyJelly.cs::CSharpScript::5019741589466091764::1778292826:
 Heartpour.cs::CSharpScript::5480461480847255843::1778243458::0::1::::<><><>0<>0<><>::
 PremiumEnergyBag.cs::CSharpScript::5881414526349425659::1778243174::0::1::::<><><>0<>0<><>::
 RoverPotion.cs::CSharpScript::2355007066070441807::1778474103::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Powers/::1779112554
+::res://RoverCode/Powers/::1779203728
 AeroPower.cs::CSharpScript::1520408584962354507::1778990480::0::1::::<><><>0<>0<><>::
 AftertunePower.cs::CSharpScript::8332291428417406106::1778661335::0::1::::<><><>0<>0<><>::
 BeProtected.cs::CSharpScript::55454078779105306::1777777409::0::1::::<><><>0<>0<><>::
@@ -479,7 +479,7 @@ CantChangeStancePower.cs::CSharpScript::4917292123795531365::1778121177::0::1:::
 Charge.cs::CSharpScript::2988304811376077512::1777804345::0::1::::<><><>0<>0<><>::
 ColdRiverBoatPower.cs::CSharpScript::918656961838853632::1778558799::0::1::::<><><>0<>0<><>::
 ConstrictPowerCopy.cs::CSharpScript::9103403724055983731::1777254109::0::1::::<><><>0<>0<><>::
-CounterattackPower.cs::CSharpScript::2817841348351945329::1779112554::0::1::::<><><>0<>0<><>::
+CounterattackPower.cs::CSharpScript::2817841348351945329::1779203728::0::1::::<><><>0<>0<><>::
 CycleOfWindPower.cs::CSharpScript::2584438498928721975::1778583039::0::1::::<><><>0<>0<><>::
 EchoesOfWanderlustPower.cs::CSharpScript::8128285855675597842::1778558893::0::1::::<><><>0<>0<><>::
 FlutterPowerCopy.cs::CSharpScript::3652306884475966192::1777770575::0::1::::<><><>0<>0<><>::
@@ -508,11 +508,11 @@ SpectroPower.cs::CSharpScript::8306597443378580131::1778812269::0::1::::<><><>0<
 StockPowerCopy.cs::CSharpScript::6134287530198022404::1777261194::0::1::::<><><>0<>0<><>::
 SurgingResonancePower.cs::CSharpScript::7570729399985468575::1778465145::0::1::::<><><>0<>0<><>::
 UnboundFlowPower.cs::CSharpScript::946810411440103291::1778319050::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Relics/::1779003104
+::res://RoverCode/Relics/::1779205899
 Afterlife.cs::CSharpScript::6869129045205235580::1779001380::0::1::::<><><>0<>0<><>::
 CrystalSolvent.cs::CSharpScript::8553694589998356252::1778211621::0::1::::<><><>0<>0<><>::
 Lunite.cs::CSharpScript::1276783672750231188::1778235273::0::1::::<><><>0<>0<><>::
-ObscuraLumis.cs::CSharpScript::3187348570911096923::1778989186::0::1::::<><><>0<>0<><>::
+ObscuraLumis.cs::CSharpScript::3187348570911096923::1779205899::0::1::::<><><>0<>0<><>::
 PremiumGoldIncenseOil.cs::CSharpScript::7452940778282349302::1778212836::0::1::::<><><>0<>0<><>::
 RoverRelic.cs::CSharpScript::7893599695146350787::1778209398::0::1::::<><><>0<>0<><>::
 SacredSalt.cs::CSharpScript::3156163880133695427::1778213147::0::1::::<><><>0<>0<><>::
@@ -587,4 +587,4 @@ NParticlesContainer.cs::CSharpScript::2658753470364266977::1778989188::0::1::::<
 ::res://themes/::1777530054
 canvas_item_material_additive_shared.tres::CanvasItemMaterial::6858014047562600805::1775791454::0::1::::<><><>0<>0<><>::
 kreon_bold_shared.tres::FontVariation::2877513682372460708::1777530054::0::1::::<><><>0<>0<><>::uid://dc8ocd36hqnbe::::res://fonts/kreon_bold.ttf
-::res://windows/::1779154705
+::res://windows/::1779239027

@@ -1,198 +1,272 @@
 {
-  "ROVER-ROVER_STRIKE.description": "造成{Damage:diff()}点伤害。",
-  "ROVER-ROVER_STRIKE.title": "打击",
-  "ROVER-ROVER_DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
-  "ROVER-ROVER_DEFEND.title": "防御",
-  "ROVER-WORK_FOR_ME.title": "为我所用",
-  "ROVER-WORK_FOR_ME.description": "造成{Damage:diff()}点伤害\n使用这张卡击杀敌人时，会获得该敌人一部分的能力。",
-  "ROVER-RESONANCE_LIBERATION.description": "[gold]共鸣解放[/gold]：对全体敌人造成{Damage:diff()}点伤害。",
-  "ROVER-RESONANCE_LIBERATION.title": "共鸣解放",
-  "ROVER_RESONANCE_LIBERATION_REQUIRED_TITLE": "共鸣解放:",
-  "ROVER_RESONANCE_LIBERATION_REQUIRED_DESC": "需要晦明终端积累[gold]{value}[/gold]点[gold]充能[/gold]才能打出。打出时会根据当前属性变化。",
-  "ROVER-POWER_CHANGE.description": "从三个属性中选择一个切换到该属性。",
-  "ROVER-POWER_CHANGE.title": "属性切换",
-  "ROVER-SPECTRO.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n切换至[gold]衍射属性[/gold]。",
-  "ROVER-SPECTRO.title": "衍射属性",
-  "ROVER-HAVOC.description": "对全体敌人造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层[gold]易伤[/gold]。切换至[gold]湮灭属性[/gold]。",
-  "ROVER-HAVOC.title": "湮灭属性",
-  "ROVER-AERO.description": "对全体敌人造成{Damage:diff()}点伤害，给予{WeakPower:diff()}层[gold]虚弱[/gold]。切换至[gold]气动属性[/gold]。",
-  "ROVER-AERO.title": "气动属性",
-  "ROVER-ECHOING_ORCHESTRA.description": "[gold]衍射[/gold]\n对全体敌人造成{Damage:diff()}点伤害。\n获得{Block:diff()}点[gold]格挡[/gold]。",
-  "ROVER-ECHOING_ORCHESTRA.title": "回响奏鸣",
-  "ROVER-DEADENING_ABYSS.description": "[gold]湮灭[/gold]\n对全体敌人造成{Damage:diff()}点伤害。",
-  "ROVER-DEADENING_ABYSS.title": "临渊死寂",
-  "ROVER-OMEGA_STORM.description": "[gold]气动[/gold]\n对全体敌人造成{Damage:diff()}点伤害。回复{Heal:diff()}点生命。",
-  "ROVER-OMEGA_STORM.title": "万象归墟",
+  "ROVER-ROVER_STRIKE.title": "타격",
+  "ROVER-ROVER_STRIKE.description": "피해를 {Damage:diff()} 줍니다.",
 
+  "ROVER-ROVER_DEFEND.title": "수비",
+  "ROVER-ROVER_DEFEND.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.",
 
+  "ROVER-WORK_FOR_ME.title": "잔상 흡수",
+  "ROVER-WORK_FOR_ME.description": "피해를 {Damage:diff()} 줍니다.\n이 카드로 적을 처치하면, 해당 적의 능력 일부를 획득합니다.",
 
-  "ROVER-PEACEFUL.description": "切换至[gold]衍射属性[/gold]。",
-  "ROVER-PEACEFUL.title": "宁静",
-  "ROVER-VERGIL_POW.description": "切换至[gold]湮灭属性[/gold]。",
-  "ROVER-VERGIL_POW.title": "抛瓦！",
-  "ROVER-CARNIVAL.description": "切换至[gold]气动属性[/gold]。",
-  "ROVER-CARNIVAL.title": "狂欢",
-  "ROVER-SHORT_REST.description": "[gold]充能[/gold]{RoverNum:diff()}点。\n获得{Block:diff()}点[gold]格挡[/gold]。",
-  "ROVER-SHORT_REST.title": "小憩",
-  "ROVER-CATCH.description": "[gold]充能[/gold]{RoverNum:diff()}点。\n将[gold]弃牌堆[/gold]中的一张牌放入你的[gold]手牌[/gold]。",
-  "ROVER-CATCH.selectionScreenPrompt": "选择一张牌放入手牌。",
-  "ROVER-CATCH.title": "捕获",
-  "ROVER-TIME_OUT.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]衍射[/gold]：额外获得{RoverNum:diff()}点[gold]格挡[/gold]。",
-  "ROVER-TIME_OUT.title": "暂避锋芒",
-  "ROVER-WIND_EROSION.description": "给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]气动[/gold]：额外给予1层[gold]虚弱[/gold]",
-  "ROVER-WIND_EROSION.title": "风蚀",
-  "ROVER-CYCLE_OF_ENERGY.description": "消耗3点[gold]充能[/gold]。\n获得{Energy:energyIcons()}。",
-  "ROVER-CYCLE_OF_ENERGY.title": "能量流转",
-  "ROVER-FLY.description": "失去{HpLoss:diff()}点生命。\n获得{RoverNum:diff()}点[gold]充能[/gold]。",
-  "ROVER-FLY.title": "翱翔",
-  "ROVER-DASH.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n抽2张牌。",
-  "ROVER-DASH.title": "冲刺",
+  "ROVER-RESONANCE_LIBERATION.description": "[gold]공명 해방[/gold].\n모든 적에게 피해를 {Damage:diff()} 줍니다.",
+  "ROVER-RESONANCE_LIBERATION.title": "공명 해방",
+  "ROVER_RESONANCE_LIBERATION_REQUIRED_TITLE": "공명 해방:",
+  "ROVER_RESONANCE_LIBERATION_REQUIRED_DESC": "사용하려면 단말기에 축적된 [gold]충전[/gold]이 {value}만큼 필요합니다. 현재 속성에 따라 효과가 변경됩니다.",
 
-  "ROVER-VIBRATION_MANIFESTATION.description": "造成{Damage:diff()}点伤害。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
-  "ROVER-VIBRATION_MANIFESTATION.title": "化声为形",
-  "ROVER-RESONATING_ECHOES.description": "造成{Damage:diff()}点伤害。\n[gold]衍射[/gold]：获得{Block:diff()}点[gold]格挡[/gold]。\n每当你打出[gold]浮声千斩[/gold]时，将这张牌放入手牌。",
-  "ROVER-RESONATING_ECHOES.title": "浮声千斩·回声",
-  "ROVER-SHOOTING_STAR.description": "对敌人造成{Damage:diff()}点伤害{Repeat:diff()}次。",
-  "ROVER-SHOOTING_STAR.title": "流星",
-  "ROVER-POMMEL_ATTACK.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。",
-  "ROVER-POMMEL_ATTACK.title": "剑柄攻击",
-  "ROVER-WINGBLADE.description": "造成{Damage:diff()}点伤害。\n[gold]湮灭[/gold]：攻击2次。",
-  "ROVER-WINGBLADE.title": "行刃",
-  "ROVER-HIGH_SPEED_CRASH.description": "造成你当前[gold]格挡[/gold]值的伤害。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
-  "ROVER-HIGH_SPEED_CRASH.title": "高速撞击",
-  "ROVER-RESONATING_SPIN.description": "对所有敌人造成{Damage:diff()}点伤害{Repeat:diff()}次。",
-  "ROVER-RESONATING_SPIN.title": "浮声千斩·旋音",
-  "ROVER-CONFRONTATION.description": "造成{Damage:diff()}点伤害。\n选择{RoverNum:diff()}张牌消耗。",
-  "ROVER-CONFRONTATION.selectionScreenPrompt": "选择最多{RoverNum:diff()}张牌消耗",
-  "ROVER-CONFRONTATION.title": "对抗",
-  "ROVER-CHARGE_ATTACK.description": "[gold]充能[/gold]{RoverNum:diff()}点。\n造成{Damage:diff()}点伤害。",
-  "ROVER-CHARGE_ATTACK.title": "蓄力攻击",
-  "ROVER-SWORD_COMBO.description": "造成{Damage:diff()}点伤害。\n每当切换至不同的属性时，将这张牌放回你的手牌。",
-  "ROVER-SWORD_COMBO.title": "剑刃连击",
+  "ROVER-POWER_CHANGE.description": "3가지 속성 중에 하나를 골라 전환합니다.",
+  "ROVER-POWER_CHANGE.title": "음의 순서 전환",
 
+  "ROVER-SPECTRO.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n[gold]회절[/gold]로 전환합니다.",
+  "ROVER-SPECTRO.title": "회절",
 
+  "ROVER-HAVOC.description": "모든 적에게 피해를 {Damage:diff()} 줍니다. [gold]취약[/gold]을 {VulnerablePower:diff()} 부여합니다.\n[gold]인멸[/gold]로 전환합니다.",
+  "ROVER-HAVOC.title": "인멸",
 
-  "ROVER-THE_END.description": "对全体敌人造成{Damage:diff()}点伤害。\n这张牌的耗能减少2。",
-  "ROVER-THE_END.title": "终局",
-  "ROVER-AWAKENING_GALE.description": "造成等同于目标[gold]易伤[/gold]和[gold]虚弱[/gold]层数相加的伤害。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]，{WeakPower:diff()}层[gold]虚弱[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
-  "ROVER-AWAKENING_GALE.title": "苍息破象",
-  "ROVER-TUNESLAYER.description": "造成{Damage:diff()}点伤害。\n如果敌人的意图是攻击，则造成双倍伤害。",
-  "ROVER-TUNESLAYER.title": "裁羽弑音",
-  "ROVER-HOPEIN_DESPERATION.description": "只有当生命值低于最大生命值的10%时才能打出。使所有敌人失去{Damage:diff()}点生命值。",
-  "ROVER-HOPEIN_DESPERATION.title": "绝境生机",
-  "ROVER-NECESSARY_SACRIFICE.description": "对全体敌人造成{Damage:diff()}点伤害。升级牌组中随机一张牌，从牌组中移除这张牌。",
-  "ROVER-NECESSARY_SACRIFICE.title": "解放大业",
-  "ROVER-WAVECLEAVE.description": "造成{Damage:diff()}点伤害。\n额外造成目标已损生命值15%的伤害。",
-  "ROVER-WAVECLEAVE.title": "斩海断浪",
-  "ROVER-UMBRA_ECLIPSE.description": "随机对敌人造成{Damage:diff()}点伤害3次。\n本回合每获得一点[gold]充能[/gold]就额外攻击一次。{InCombat:\n（攻击{TotalHits:diff()}次。）|}",
-  "ROVER-UMBRA_ECLIPSE.title": "永夜开明",
-  "ROVER-SAND_IN_THE_STORM.description": "[gold]充能[/gold]{RoverNum:diff()}点。\n造成{Damage:diff()}点伤害。\n将一张此牌的复制品加入你的[gold]弃牌堆[/gold]。",
-  "ROVER-SAND_IN_THE_STORM.title": "空渡浮尘",
+  "ROVER-AERO.description": "모든 적에게 피해를 {Damage:diff()} 줍니다. [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.\n[gold]기류[/gold]로 전환합니다.",
+  "ROVER-AERO.title": "기류",
 
-  "ROVER-UMBRELLA.description": "指定一名队友，本回合该名队友受到的伤害由你代为承担。",
-  "ROVER-UMBRELLA.title": "庇护",
-  "ROVER-TIDAL_HERITAGE.description": "生成X{IfUpgraded:show:+1}张攻击牌，它们在本回合可以免费打出。",
-  "ROVER-TIDAL_HERITAGE.title": "潮汐之遗",
-  "ROVER-RESERVE_WEAPONS.description": "从3张[gold]稀有[/gold]和[gold]罕见[/gold]攻击牌中选择1张加入你的[gold]手牌[/gold]。这张牌在本回合可以免费打出。",
-  "ROVER-RESERVE_WEAPONS.title": "储备武器",
-  "ROVER-END_OF_WANDERING.description": "[gold]充能[/gold]{RoverNum:diff()}点。",
-  "ROVER-END_OF_WANDERING.title": "漂泊的终点",
-  "ROVER-WORD_IN_A_GRAIN_OF_SAND.description": "获得等同于目标[gold]力量[/gold]层数{IfUpgraded:show:+2}的[gold]力量[/gold]。",
-  "ROVER-WORD_IN_A_GRAIN_OF_SAND.title": "万物微尘",
-  "ROVER-STORMS_ECHO.description": "消耗9点[gold]充能[/gold]。选择弃牌堆中的一张牌，将其打出{RoverNum:diff()}次后消耗。",
-  "ROVER-STORMS_ECHO.selectionScreenPrompt": "选择你要打出的牌",
-  "ROVER-STORMS_ECHO.title": "流风回响",
-  "ROVER-FACE_THE_EVIL.description": "将你当前的格挡翻倍。",
-  "ROVER-FACE_THE_EVIL.title": "直面灾厄",
-  "ROVER-ODYSSEY_OF_BEGINNINGS.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n你的下一回合开始时[gold]格挡[/gold]不会消失。",
-  "ROVER-ODYSSEY_OF_BEGINNINGS.title": "始源纪行",
-  "ROVER-CHEST_MIMIC.description": "失去{HpLoss:diff()}点生命。\n获得{RoverNum:diff()}金币。",
-  "ROVER-CHEST_MIMIC.title": "欺诈奇藏",
-  "ROVER-SOUL_RESONANCE.description": "失去你存储的怪物能力。\n获得{StrengthPower:diff()}点[gold]力量[/gold]。\n获得{Energy:energyIcons()}。\n抽{Cards:diff()}张牌。",
-  "ROVER-SOUL_RESONANCE.title": "灵魂共鸣",
+  "ROVER-ECHOING_ORCHESTRA.description": "[gold]회절[/gold].\n모든 적에게 피해를 {Damage:diff()} 줍니다.\n[gold]방어도[/gold]를 {Block:diff()} 얻습니다.",
+  "ROVER-ECHOING_ORCHESTRA.title": "울림의 연주",
 
-  "ROVER-AURORA.description": "获得{RoverNum:diff()}层[gold]人工制品[/gold]。",
-  "ROVER-AURORA.title": "极光",
-  "ROVER-MECH_MODE.description": "生命值大于50%时卡牌攻击造成2倍伤害，生命值低于50%时受到的伤害减少50%。",
-  "ROVER-MECH_MODE.title": "机兵形态",
-  "ROVER-VISAGES_OF_DUST.description": "每回合[gold]充能[/gold]3点。",
-  "ROVER-VISAGES_OF_DUST.title": "尘声百面",
-  "ROVER-RELENTLESS_SQUALL.description": "打出攻击牌后将其消耗并获得{RoverNum:diff()}点[gold]力量[/gold]。",
-  "ROVER-RELENTLESS_SQUALL.title": "狂澜未尽",
-  "ROVER-ECHOES_OF_WANDERLUST.description": "每当你切换属性时，获得{Energy:energyIcons()}。",
-  "ROVER-ECHOES_OF_WANDERLUST.title": "长路归鸣",
-  "ROVER-INDELIBLE_MEMORY.description": "每回合结束前，随机为一张卡牌添加[gold]保留[/gold]。",
-  "ROVER-INDELIBLE_MEMORY.title": "记忆铭刻",
-  "ROVER-COLD_RIVER_BOAT.description": "每当你切换属性时，抽{Cards:diff()}张牌。",
-  "ROVER-COLD_RIVER_BOAT.title": "寒江孤舟",
-  "ROVER-COUNTERATTACK.description": "获得{CounterattackPower:diff()}层[gold]逆势回击[/gold]",
-  "ROVER-COUNTERATTACK.title": "逆势回击",
+  "ROVER-DEADENING_ABYSS.description": "[gold]인멸[/gold].\n모든 적에게 피해를 {Damage:diff()} 줍니다.",
+  "ROVER-DEADENING_ABYSS.title": "임연사적",
 
+  "ROVER-OMEGA_STORM.description": "[gold]기류[/gold].\n모든 적에게 피해를 {Damage:diff()} 줍니다. HP를 {Heal:diff()} 회복합니다.",
+  "ROVER-OMEGA_STORM.title": "만물의 허상",
 
+  "ROVER-PEACEFUL.description": "[gold]회절[/gold]로 전환합니다.",
+  "ROVER-PEACEFUL.title": "평온",
 
-  "ROVER-SURGING_RESONANCE.description": "当你处在[gold]湮灭[/gold]属性时，每打出一张攻击牌就会回复10%已损生命值。",
-  "ROVER-SURGING_RESONANCE.title": "声息涌动",
-  "ROVER-INSTANT_OF_ANNIHILATION.description": "当你处在[gold]湮灭[/gold]属性时，每打出一张攻击牌就会获得{RoverNum:diff()}点[gold]充能[/gold]。",
-  "ROVER-INSTANT_OF_ANNIHILATION.title": "化刹",
-  "ROVER-RESONATING_LAMELLA.description": "回合开始时若你处在[gold]衍射[/gold]属性，则获得{RoverNum:diff()}点[gold]格挡[/gold]",
-  "ROVER-RESONATING_LAMELLA.title": "连音扫弦",
-  "ROVER-CYCLE_OF_WIND.description": "回合开始时若你处在[gold]气动[/gold]属性，则获得{Energy:energyIcons()}，抽{RoverNum:diff()}张牌。",
-  "ROVER-CYCLE_OF_WIND.title": "风息流转",
-  "ROVER-LANTERN_LIGHTS_GLOW_WARM.description": "回合开始时消耗2点[gold]充能[/gold]，抽1张牌并获得3点[gold]活力[/gold]。",
-  "ROVER-LANTERN_LIGHTS_GLOW_WARM.title": "千窗灯火温",
-  "ROVER-UNBOUND_FLOW.description": "回合开始时若你处在[gold]气动[/gold]属性，则对所有敌人施加{RoverNum:diff()}层[gold]易伤[/gold]和{RoverNum:diff()}层[gold]虚弱[/gold]。",
-  "ROVER-UNBOUND_FLOW.title": "缥缈无相",
-  "ROVER-METAMORPH.description": "失去{StrengthPower:inverseDiff()}点[gold]力量[/gold]。\n失去{DexterityPower:inverseDiff()}点[gold]敏捷[/gold]。\n失去{MaxHp:diff()}点最大生命。\n获得{Energy:energyIcons()}最大能量。",
-  "ROVER-METAMORPH.title": "变格",
-  "ROVER-HOVERDROID_SHOOTER.description": "当你打出攻击牌时，对命中的敌人追加{RoverNum:diff()}点伤害。",
-  "ROVER-HOVERDROID_SHOOTER.title": "辅助机：射击",
-  "ROVER-AFTERTUNE.description": "回合开始时若你处在[gold]衍射[/gold]属性，则降低所有敌人{RoverNum:diff()}点[gold]力量[/gold]。",
-  "ROVER-AFTERTUNE.title": "余音",
-  "ROVER-REPETITION_SIDE_STEP.description": "获得{DexterityPower:diff()}点[gold]敏捷[/gold]。",
-  "ROVER-REPETITION_SIDE_STEP.title": "加速",
+  "ROVER-VERGIL_POW.description": "[gold]인멸[/gold]로 전환합니다.",
+  "ROVER-VERGIL_POW.title": "더 많은 힘!",
 
-  "ROVER-HORNETT.description": "给予所有玩家{VigorPower:diff()}点[gold]活力[/gold]",
-  "ROVER-HORNETT.title": "行猎号角",
-  "ROVER-WAYSTONE.description": "获得{Energy:energyIcons()}。\n在下个回合获得{Energy:energyIcons()}。",
-  "ROVER-WAYSTONE.title": "路标刻像",
-  "ROVER-GRAPPLE.description": "在本回合获得{DexterityPower:diff()}点[gold]敏捷[/gold]。\n抽{Cards:diff()}张牌。",
-  "ROVER-GRAPPLE.title": "钩锁",
-  "ROVER-HOLOGRAM_MAP.description": "选择一张牌，这张牌在本场战斗耗能减少1。",
-  "ROVER-HOLOGRAM_MAP.selectionScreenPrompt": "选择一张牌，使其在本场战斗耗能减少1。",
-  "ROVER-HOLOGRAM_MAP.title": "全息地图",
-  "ROVER-JOURNEY_WELL.description": "从3张其他颜色攻击牌中选择1张加入你的手牌{IfUpgraded:show:并将其升级}。",
-  "ROVER-JOURNEY_WELL.title": "旅途愉快",
-  "ROVER-SILENT_LISTENER.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]衍射[/gold]：抽{Cards:diff()}张牌。",
-  "ROVER-SILENT_LISTENER.title": "静聆",
-  "ROVER-RETICENCE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n在这个回合，你每受到一次攻击，[gold]充能[/gold]{RoverNum:diff()}点。",
-  "ROVER-RETICENCE.title": "屏息",
-  "ROVER-SKYFALL_SEVERANCE.description": "给予一名敌人{VulnerablePower:diff()}层[gold]易伤[/gold]，如果敌人身上带有[gold]力量[/gold]，则改为给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]气动[/gold]：造成的弱化层数翻倍。",
-  "ROVER-SKYFALL_SEVERANCE.title": "碧霄断行",
-  "ROVER-TRANSPORT_UNIT.description": "选择你[gold]抽牌堆[/gold]中最多{RoverNum:diff()}张牌加入[gold]手牌[/gold]。",
-  "ROVER-TRANSPORT_UNIT.selectionScreenPrompt": "选择要加入手牌的牌",
-  "ROVER-TRANSPORT_UNIT.title": "转运机XE-01",
-  "ROVER-MICROCOSMIC_MURMURS.description": "获得{VigorPower:diff()}点[gold]活力[/gold]。",
-  "ROVER-MICROCOSMIC_MURMURS.title": "微物细语",
-  "ROVER-DEFY_FATE.description": "消耗{RoverNum:diff()}点[gold]充能[/gold]。\n获得{Block:diff()}点[gold]格挡[/gold]。\n将此牌返回你的[gold]手牌[/gold]。",
-  "ROVER-DEFY_FATE.title": "对峙命运",
+  "ROVER-CARNIVAL.description": "[gold]기류[/gold]로 전환합니다.",
+  "ROVER-CARNIVAL.title": "카니발",
 
-  "ROVER-RAZOR_WIND.description": "造成{Damage:diff()}点伤害X次。\n消耗9点[gold]充能[/gold]使攻击次数翻倍。",
-  "ROVER-RAZOR_WIND.title": "绞息",
-  "ROVER-LIFETAKER.description": "造成{Damage:diff()}点伤害。\n每当你切换到[gold]湮灭[/gold]属性时，将这张牌放入你的手牌。",
-  "ROVER-LIFETAKER.title": "破命",
-  "ROVER-RESONANCE.description": "造成{Damage:diff()}点伤害。\n[gold]衍射[/gold]：[gold]充能[/gold]{RoverNum:diff()}点。",
-  "ROVER-RESONANCE.title": "鸣奏",
-  "ROVER-RESONATING_SLASHES.description": "造成{Damage:diff()}点伤害。\n[gold]衍射[/gold]：攻击2次。",
-  "ROVER-RESONATING_SLASHES.title": "浮声千斩",
-  "ROVER-DEVASTATION.description": "造成{Damage:diff()}点伤害。\n[gold]湮灭[/gold]：抽{Cards:diff()}张牌。",
-  "ROVER-DEVASTATION.title": "灭音",
-  "ROVER-ANNIHILATED_SILENCE.description": "造成{Damage:diff()}点伤害。手牌中每有一张攻击牌，额外攻击一次。{InCombat:\n（攻击{TotalHits:diff()}次。）|}",
-  "ROVER-ANNIHILATED_SILENCE.title": "尘声湮灭",
-  "ROVER-WIND_CUTTER.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n[gold]气动[/gold]：给予{WeakPower:diff()}层[gold]虚弱[/gold]。",
-  "ROVER-WIND_CUTTER.title": "刻雾裁风",
-  "ROVER-ILLUSION_BREAKER.description": "造成{Damage:diff()}点伤害。\n[gold]气动[/gold]：给予{WeakPower:diff()}层[gold]虚弱[/gold]。",
-  "ROVER-ILLUSION_BREAKER.title": "裂象",
-  "ROVER-NEVER_GIVE_UP.description": "造成等同于目标格挡的伤害。\n获得等量格挡。",
-  "ROVER-NEVER_GIVE_UP.title": "永不放弃"
+  "ROVER-SHORT_REST.description": "[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.\n[gold]방어도[/gold]를 {Block:diff()} 얻습니다.",
+  "ROVER-SHORT_REST.title": "짧은 휴식",
 
+  "ROVER-CATCH.description": "[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.\n[gold]버린 카드 더미[/gold]에서 카드 1장을 [gold]손[/gold]으로 가져옵니다.",
+  "ROVER-CATCH.selectionScreenPrompt": "손으로 가져올 카드를 선택하십시오.",
+  "ROVER-CATCH.title": "포획",
+
+  "ROVER-TIME_OUT.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n[gold]회절[/gold]: [gold]방어도[/gold]를 {RoverNum:diff()} 추가로 얻습니다.",
+  "ROVER-TIME_OUT.title": "기회 포착",
+
+  "ROVER-WIND_EROSION.description": "[gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.\n[gold]기류[/gold]: [gold]약화[/gold]를 1 추가로 부여합니다.",
+  "ROVER-WIND_EROSION.title": "풍식",
+
+  "ROVER-CYCLE_OF_ENERGY.description": "[gold]충전[/gold]을 3 소비합니다.\n{Energy:energyIcons()} 얻습니다.",
+  "ROVER-CYCLE_OF_ENERGY.title": "에너지 순환",
+
+  "ROVER-FLY.description": "체력을 {HpLoss:diff()} 잃습니다.\n[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-FLY.title": "비상",
+
+  "ROVER-DASH.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n카드를 2장 뽑습니다.",
+  "ROVER-DASH.title": "회피",
+
+  "ROVER-VIBRATION_MANIFESTATION.description": "피해를 {Damage:diff()} 줍니다.\n[gold]취약[/gold]을 {VulnerablePower:diff()} 부여합니다.",
+  "ROVER-VIBRATION_MANIFESTATION.title": "공진",
+
+  "ROVER-RESONATING_ECHOES.description": "피해를 {Damage:diff()} 줍니다.\n[gold]회절[/gold]: [gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n[gold]공명하는 참격[/gold]을 사용할 때마다, 이 카드를 [gold]손[/gold]으로 가져옵니다.",
+  "ROVER-RESONATING_ECHOES.title": "공명하는 잔향",
+
+  "ROVER-SHOOTING_STAR.description": "적에게 피해를 {Damage:diff()}만큼 {Repeat:diff()}번 줍니다.",
+  "ROVER-SHOOTING_STAR.title": "유성",
+
+  "ROVER-POMMEL_ATTACK.description": "피해를 {Damage:diff()} 줍니다.\n카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-POMMEL_ATTACK.title": "폼멜 타격",
+
+  "ROVER-WINGBLADE.description": "피해를 {Damage:diff()} 줍니다.\n[gold]인멸[/gold]: 타수가 1 증가합니다.",
+  "ROVER-WINGBLADE.title": "날개치기",
+
+  "ROVER-HIGH_SPEED_CRASH.description": "현재 [gold]방어도[/gold]만큼 피해를 줍니다.{InCombat:\n(피해를 {CalculatedDamage:diff()} 줍니다.)|}",
+  "ROVER-HIGH_SPEED_CRASH.title": "고속 충돌",
+
+  "ROVER-RESONATING_SPIN.description": "모든 적에게 피해를 {Damage:diff()}만큼 {Repeat:diff()}번 줍니다.",
+  "ROVER-RESONATING_SPIN.title": "선회",
+
+  "ROVER-CONFRONTATION.description": "피해를 {Damage:diff()} 줍니다.\n[gold]손[/gold]에서 카드를 최대 {RoverNum:diff()}장까지 [gold]소멸[/gold]시킵니다.",
+  "ROVER-CONFRONTATION.selectionScreenPrompt": "[gold]소멸[/gold]시킬 카드를 최대 {RoverNum:diff()}장까지 선택하십시오.",
+  "ROVER-CONFRONTATION.title": "대면",
+
+  "ROVER-CHARGE_ATTACK.description": "[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.\n피해를 {Damage:diff()} 줍니다.",
+  "ROVER-CHARGE_ATTACK.title": "강공격",
+
+  "ROVER-SWORD_COMBO.description": "피해를 {Damage:diff()} 줍니다.\n속성을 전환할 때마다, 이 카드를 [gold]손[/gold]으로 가져옵니다.",
+  "ROVER-SWORD_COMBO.title": "연격",
+
+  "ROVER-THE_END.description": "모든 적에게 피해를 {Damage:diff()} 줍니다.\n이 카드의 비용이 2 감소합니다.",
+  "ROVER-THE_END.title": "종언",
+
+  "ROVER-AWAKENING_GALE.description": "대상의 [gold]취약[/gold]과 [gold]약화[/gold] 수치의 합계만큼 피해를 줍니다.\n[gold]취약[/gold]을 {VulnerablePower:diff()}, [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.{InCombat:\n(피해를 {CalculatedDamage:diff()} 줍니다.)|}",
+  "ROVER-AWAKENING_GALE.title": "각성의 바람",
+
+  "ROVER-TUNESLAYER.description": "피해를 {Damage:diff()} 줍니다.\n적의 의도가 공격일 경우, 피해를 배로 줍니다.",
+  "ROVER-TUNESLAYER.title": "선율 파괴자",
+
+  "ROVER-HOPEIN_DESPERATION.description": "현재 체력이 최대 체력의 10% 미만일 때만 사용할 수 있습니다.\n모든 적이 체력을 {Damage:diff()} 잃습니다.",
+  "ROVER-HOPEIN_DESPERATION.title": "절망 속의 희망",
+
+  "ROVER-NECESSARY_SACRIFICE.description": "모든 적에게 피해를 {Damage:diff()} 줍니다.\n덱의 무작위 카드 1장을 [gold]강화[/gold]하고, 이 카드를 덱에서 제거합니다.",
+  "ROVER-NECESSARY_SACRIFICE.title": "희생",
+
+  "ROVER-WAVECLEAVE.description": "피해를 {Damage:diff()} 줍니다.\n대상의 잃은 HP의 15%만큼 추가 피해를 줍니다.",
+  "ROVER-WAVECLEAVE.title": "파도 가르기",
+
+  "ROVER-UMBRA_ECLIPSE.description": "무작위 적에게 피해를 {Damage:diff()}만큼 3번 줍니다.\n이번 턴에 [gold]충전[/gold]을 얻을 때마다, 타수가 1 증가합니다.{InCombat:\n({TotalHits:diff()}번 타격합니다.)|}",
+  "ROVER-UMBRA_ECLIPSE.title": "그림자 일식",
+
+  "ROVER-SAND_IN_THE_STORM.description": "[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.\n피해를 {Damage:diff()} 줍니다.\n이 카드의 복사본 1장을 [gold]버린 카드 더미[/gold]에 추가합니다.",
+  "ROVER-SAND_IN_THE_STORM.title": "폭풍 속 모래",
+
+  "ROVER-UMBRELLA.description": "아군 1명을 선택합니다. 당신이 그 피해를 대신하여 받습니다.",
+  "ROVER-UMBRELLA.title": "우산",
+
+  "ROVER-TIDAL_HERITAGE.description": "무작위 공격 카드를 X{IfUpgraded:show:+1}장 생성합니다. 이 카드들은 이번 턴에 비용이 0이 됩니다.",
+  "ROVER-TIDAL_HERITAGE.title": "조석의 유산",
+
+  "ROVER-RESERVE_WEAPONS.description": "[gold]희귀[/gold] 또는 [gold]고급[/gold] 공격 카드 3장 중 1장을 선택하여 [gold]손[/gold]으로 가져옵니다. 이 카드는 이번 턴에 비용이 0이 됩니다.",
+  "ROVER-RESERVE_WEAPONS.title": "예비 무기",
+
+  "ROVER-END_OF_WANDERING.description": "[gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-END_OF_WANDERING.title": "방랑의 종점",
+
+  "ROVER-WORD_IN_A_GRAIN_OF_SAND.description": "대상의 [gold]힘[/gold]{IfUpgraded:show:+2}만큼 [gold]힘[/gold]을 얻습니다.",
+  "ROVER-WORD_IN_A_GRAIN_OF_SAND.title": "모래 속의 한마디",
+
+  "ROVER-STORMS_ECHO.description": "[gold]충전[/gold]을 9 소비합니다. [gold]버린 카드 더미[/gold]에서 카드 1장을 선택합니다. 그 카드를 {RoverNum:diff()}번 사용한 후 [gold]소멸[/gold]시킵니다.",
+  "ROVER-STORMS_ECHO.selectionScreenPrompt": "사용할 카드를 선택하십시오.",
+  "ROVER-STORMS_ECHO.title": "폭풍의 잔향",
+
+  "ROVER-FACE_THE_EVIL.description": "현재 [gold]방어도[/gold]를 2배로 증가시킵니다.",
+  "ROVER-FACE_THE_EVIL.title": "악을 마주하라",
+
+  "ROVER-ODYSSEY_OF_BEGINNINGS.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n다음 턴이 시작될 때 [gold]방어도[/gold]가 사라지지 않습니다.",
+  "ROVER-ODYSSEY_OF_BEGINNINGS.title": "여정의 서막",
+
+  "ROVER-CHEST_MIMIC.description": "체력을 {HpLoss:diff()} 잃습니다.\n[gold]골드[/gold]를 {RoverNum:diff()}만큼 얻습니다.",
+  "ROVER-CHEST_MIMIC.title": "거짓 보물상자",
+
+  "ROVER-SOUL_RESONANCE.description": "흡수한 능력을 잃습니다.\n[gold]힘[/gold]을 {StrengthPower:diff()} 얻습니다.\n{Energy:energyIcons()}을 얻습니다.\n카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-SOUL_RESONANCE.title": "영혼 공명",
+
+  "ROVER-AURORA.description": "[gold]인공물[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-AURORA.title": "오로라",
+
+  "ROVER-MECH_MODE.description": "체력이 50% 이상일 때, 공격으로 주는 피해가 2배가 됩니다.\n체력이 50% 미만일 때, 받는 피해가 절반이 됩니다.",
+  "ROVER-MECH_MODE.title": "메카 모드",
+
+  "ROVER-VISAGES_OF_DUST.description": "매 턴 시작할 때마다 [gold]충전[/gold]을 3 얻습니다.",
+  "ROVER-VISAGES_OF_DUST.title": "먼지의 초상",
+
+  "ROVER-RELENTLESS_SQUALL.description": "공격 카드를 사용할 때마다, 그 카드를 [gold]소멸[/gold]시키고 [gold]힘[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-RELENTLESS_SQUALL.title": "무자비한 파도",
+
+  "ROVER-ECHOES_OF_WANDERLUST.description": "속성을 전환할 때마다, {Energy:energyIcons()}을 얻습니다.",
+  "ROVER-ECHOES_OF_WANDERLUST.title": "방랑의 메아리",
+
+  "ROVER-INDELIBLE_MEMORY.description": "턴 종료시, 무작위 카드 1장에 [gold]보존[/gold]을 부여합니다.",
+  "ROVER-INDELIBLE_MEMORY.title": "지워지지 않는 기억",
+
+  "ROVER-COLD_RIVER_BOAT.description": "속성을 전환할 때마다, 카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-COLD_RIVER_BOAT.title": "도원을 향한 항해",
+
+  "ROVER-COUNTERATTACK.description": "[gold]반격[/gold]을 {CounterattackPower:diff()} 얻습니다.",
+  "ROVER-COUNTERATTACK.title": "반격",
+
+  "ROVER-SURGING_RESONANCE.description": "[gold]인멸[/gold]일 때, 공격 카드를 사용할 때마다 잃은 체력의 10%를 회복합니다.",
+  "ROVER-SURGING_RESONANCE.title": "인멸의 숨결",
+
+  "ROVER-INSTANT_OF_ANNIHILATION.description": "[gold]인멸[/gold]일 때, 공격 카드를 사용할 때마다 [gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-INSTANT_OF_ANNIHILATION.title": "멸망의 징조",
+
+  "ROVER-RESONATING_LAMELLA.description": "턴 시작 시 [gold]회절[/gold]이면, [gold]방어도[/gold]를 {RoverNum:diff()} 얻습니다.",
+  "ROVER-RESONATING_LAMELLA.title": "회절의 파편",
+
+  "ROVER-CYCLE_OF_WIND.description": "턴 시작 시 [gold]기류[/gold]면, {Energy:energyIcons()}을 얻고 카드를 {RoverNum:diff()}장 뽑습니다.",
+  "ROVER-CYCLE_OF_WIND.title": "바람의 순환",
+
+  "ROVER-LANTERN_LIGHTS_GLOW_WARM.description": "턴 시작 시, [gold]충전[/gold]을 2 잃습니다. 카드를 1장 뽑고, [gold]활력[/gold]을 3 얻습니다.",
+  "ROVER-LANTERN_LIGHTS_GLOW_WARM.title": "따스한 등불의 잔영",
+
+  "ROVER-UNBOUND_FLOW.description": "턴 시작 시 [gold]기류[/gold]면, 모든 적에게 [gold]취약[/gold]을 {RoverNum:diff()}, [gold]약화[/gold]를 {RoverNum:diff()} 부여합니다.",
+  "ROVER-UNBOUND_FLOW.title": "해방된 흐름",
+
+  "ROVER-METAMORPH.description": "[gold]힘[/gold]을 {StrengthPower:inverseDiff()} 잃습니다.\n[gold]민첩[/gold]을 {DexterityPower:inverseDiff()} 잃습니다.\n최대 체력을 {MaxHp:diff()} 잃습니다.\n최대 에너지가 {Energy:energyIcons()} 증가합니다.",
+  "ROVER-METAMORPH.title": "변신",
+
+  "ROVER-HOVERDROID_SHOOTER.description": "공격 카드를 사용할 때마다, 대상에게 피해를 {RoverNum:diff()} 추가로 줍니다.",
+  "ROVER-HOVERDROID_SHOOTER.title": "보조기:사격",
+
+  "ROVER-AFTERTUNE.description": "턴 시작 시 [gold]회절[/gold]이면, 모든 적의 [gold]힘[/gold]을 {RoverNum:diff()} 감소시킵니다.",
+  "ROVER-AFTERTUNE.title": "선율의 여운",
+
+  "ROVER-REPETITION_SIDE_STEP.description": "[gold]민첩[/gold]을 {DexterityPower:diff()} 얻습니다.",
+  "ROVER-REPETITION_SIDE_STEP.title": "가속",
+
+  "ROVER-HORNETT.description": "모든 플레이어에게 [gold]활력[/gold]을 {VigorPower:diff()} 부여합니다.",
+  "ROVER-HORNETT.title": "개척의 뿔나팔",
+
+  "ROVER-WAYSTONE.description": "{Energy:energyIcons()}을 얻습니다.\n다음 턴에 {Energy:energyIcons()}을 얻습니다.",
+  "ROVER-WAYSTONE.title": "이정표",
+
+  "ROVER-GRAPPLE.description": "이번 턴 동안 [gold]민첩[/gold]을 {DexterityPower:diff()} 얻습니다.\n카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-GRAPPLE.title": "로프 액션",
+
+  "ROVER-HOLOGRAM_MAP.description": "카드 1장을 선택합니다. 이번 전투 동안 그 카드의 비용이 1 감소합니다.",
+  "ROVER-HOLOGRAM_MAP.selectionScreenPrompt": "이번 전투 동안 비용을 1 감소시킬 카드 1장을 선택하십시오.",
+  "ROVER-HOLOGRAM_MAP.title": "홀로그램 지도",
+
+  "ROVER-JOURNEY_WELL.description": "다른 캐릭터의 공격 카드 3장 중 1장을 선택하여 [gold]손[/gold]으로 가져옵니다{IfUpgraded:show:. 그 카드를 [gold]강화[/gold]합니다}.",
+  "ROVER-JOURNEY_WELL.title": "즐거운 여행 되시길",
+
+  "ROVER-SILENT_LISTENER.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n[gold]회절[/gold]: 카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-SILENT_LISTENER.title": "침묵의 청취자",
+
+  "ROVER-RETICENCE.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n이번 턴에 공격받을 때마다 [gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-RETICENCE.title": "과묵함",
+
+  "ROVER-SKYFALL_SEVERANCE.description": "적에게 [gold]취약[/gold]을 {VulnerablePower:diff()} 부여합니다. 만약 적에게 [gold]힘[/gold]이 있다면, 대신 [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.\n[gold]기류[/gold]: 부여하는 디버프의 수치가 2배가 됩니다.",
+  "ROVER-SKYFALL_SEVERANCE.title": "창공 가르기",
+
+  "ROVER-TRANSPORT_UNIT.description": "[gold]뽑을 카드 더미[/gold]에서 카드를 최대 {RoverNum:diff()}장까지 선택하여 [gold]손[/gold]으로 가져옵니다.",
+  "ROVER-TRANSPORT_UNIT.selectionScreenPrompt": "[gold]손[/gold]으로 가져올 카드를 선택하십시오.",
+  "ROVER-TRANSPORT_UNIT.title": "수송 유닛 XE-01",
+
+  "ROVER-MICROCOSMIC_MURMURS.description": "[gold]활력[/gold]을 {VigorPower:diff()} 얻습니다.",
+  "ROVER-MICROCOSMIC_MURMURS.title": "희미한 속삭임",
+
+  "ROVER-DEFY_FATE.description": "[gold]충전[/gold]을 {RoverNum:diff()} 소비합니다.\n[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n이 카드를 [gold]손[/gold]으로 되돌립니다.",
+  "ROVER-DEFY_FATE.title": "운명 거부",
+
+  "ROVER-RAZOR_WIND.description": "피해를 {Damage:diff()}만큼 X번 줍니다. \n[gold]충전[/gold]을 9 소모하면 타수가 배가 됩니다.",
+  "ROVER-RAZOR_WIND.title": "바람의 칼날",
+
+  "ROVER-LIFETAKER.description": "피해를 {Damage:diff()} 줍니다.\n[gold]인멸[/gold]로 변환할 때마다, 이 카드를 [gold]손[/gold]으로 되돌립니다.",
+  "ROVER-LIFETAKER.title": "생명 탈취",
+
+  "ROVER-RESONANCE.description": "피해를 {Damage:diff()} 줍니다.\n[gold]회절[/gold]: [gold]충전[/gold]을 {RoverNum:diff()} 얻습니다.",
+  "ROVER-RESONANCE.title": "공명",
+
+  "ROVER-RESONATING_SLASHES.description": "피해를 {Damage:diff()} 줍니다.\n[gold]회절[/gold]: 타수가 1 증가합니다.",
+  "ROVER-RESONATING_SLASHES.title": "공명하는 참격",
+
+  "ROVER-DEVASTATION.description": "피해를 {Damage:diff()} 줍니다.\n[gold]인멸[/gold]: 카드를 {Cards:diff()}장 뽑습니다.",
+  "ROVER-DEVASTATION.title": "황폐화",
+
+  "ROVER-ANNIHILATED_SILENCE.description": "피해를 {Damage:diff()} 줍니다. [gold]손[/gold]에 있는 공격 카드 1장당 타수가 1 증가합니다.{InCombat:\n({TotalHits:diff()}번 타격합니다.)|}",
+  "ROVER-ANNIHILATED_SILENCE.title": "살의의 침묵",
+
+  "ROVER-WIND_CUTTER.description": "피해를 {Damage:diff()} 줍니다. {Repeat:diff()}번 타격합니다.\n[gold]기류[/gold]: [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.",
+  "ROVER-WIND_CUTTER.title": "바람의 궤적",
+
+  "ROVER-ILLUSION_BREAKER.description": "피해를 {Damage:diff()} 줍니다.\n[gold]기류[/gold]: [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.",
+  "ROVER-ILLUSION_BREAKER.title": "환상 파괴자",
+
+  "ROVER-NEVER_GIVE_UP.description": "대상의 [gold]방어도[/gold] 수치만큼 피해를 줍니다.\n준 피해만큼 [gold]방어도[/gold]를 얻습니다.",
+  "ROVER-NEVER_GIVE_UP.title": "걸음을 멈추지 마세요.",
+
+  "ROVER-APOTHEOSIS.description": "모든 카드를 [gold]강화[/gold]합니다.",
+  "ROVER-APOTHEOSIS.title": "신성"
 }

@@ -14,7 +14,7 @@ namespace Rover.Cards;
 
 public class AnnihilatedSilence() : RoverCard(2,
     CardType.Attack, CardRarity.Uncommon,
-    TargetType.AllEnemies)
+    TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(6m, ValueProp.Move),
@@ -32,12 +32,12 @@ public class AnnihilatedSilence() : RoverCard(2,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         int hitCount = (int)((CalculatedVar)DynamicVars["TotalHits"]).Calculate(cardPlay.Target);
         int damage = (int)DynamicVars.Damage.BaseValue;
-        for (int i = 0; i < hitCount; i++)
+        for (int i = 0; i <= hitCount; i++)
         {
-            await DamageCmd.Attack(damage).FromCard(this).TargetingAllOpponents(base.CombatState).Execute(choiceContext);
+            await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
         }
     }
 

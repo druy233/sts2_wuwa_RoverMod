@@ -7,11 +7,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rover.Powers;
 using Rover.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rover.Cards;
 
@@ -29,11 +24,14 @@ internal class WindCutter() : RoverCard(1,
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitFx("vfx/vfx_attack_slash", null, "attack.wav")
+            .WithHitCount((int)base.DynamicVars.Repeat.BaseValue)
+            .Targeting(cardPlay.Target).Execute(context);
         if (StanceHelper.IsInStance<AeroPower>(base.Owner.Creature))
         {
             await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
         }
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).WithHitCount((int)base.DynamicVars.Repeat.BaseValue).Targeting(cardPlay.Target).Execute(context);
     }
 
     protected override void OnUpgrade()
