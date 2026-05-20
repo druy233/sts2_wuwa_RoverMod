@@ -1,2 +1,2 @@
-res://addons/mega_text/MegaLabel.cs
-res://shaders/vfx/common/vfx_grayscale_particle_shader.gdshader
+res://RoverCode/Tools/RoverAbilitySwitchPanel.cs
+res://RoverCode/Tools/RoverAbilitySwitchButton.cs

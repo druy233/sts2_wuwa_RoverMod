@@ -16,6 +16,7 @@ public class CrystalSolvent : RoverRelic
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
+        if (player != base.Owner) return;
         var relic = base.Owner.GetRelic<ObscuraLumis>();
         if (relic != null)
         {

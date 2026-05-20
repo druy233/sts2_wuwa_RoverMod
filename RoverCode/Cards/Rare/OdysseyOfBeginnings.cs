@@ -19,7 +19,7 @@ public class OdysseyOfBeginnings() : RoverCard(2,
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     public override bool GainsBlock => true;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(18m, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(21m, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
@@ -28,7 +28,7 @@ public class OdysseyOfBeginnings() : RoverCard(2,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(9m);
+        base.DynamicVars.Block.UpgradeValueBy(6m);
         RemoveKeyword(CardKeyword.Exhaust);
     }
 

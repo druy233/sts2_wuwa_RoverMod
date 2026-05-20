@@ -58,10 +58,20 @@ public class ObscuraLumis : RoverRelic
         new HealVar("Sleep", 3m),
         new EnergyVar(1)
     };
+    public String TurnCounter => _turnCounter.ToString(); // 回合计数器（显示用）
 
-    [SavedProperty]
-    private bool _reviveUsed = false; // 是否已使用过复活能力
-    public String TurnCounter => _turnCounter.ToString();
+    // 使用 SavedSpireField 持久化存储复活使用状态
+    private static readonly SavedSpireField<ObscuraLumis, bool> ReviveUsedField =
+    new(() => false, "Rover_ReviveUsed");
+    // 使用 SavedSpireField 存储已吸收过的怪物 ID 列表
+    private static readonly SavedSpireField<ObscuraLumis, string> _absorbedMonsterEntriesField =
+    new(() => "", "Rover_AbsorbedMonsterEntries");
+    // 用于 UI 展示
+    public IReadOnlyList<ModelId> AbsorbedMonsterIds =>
+    AbsorbedMonsterEntries.Select(entry => new ModelId("MONSTER", entry)).ToList();
+
+
+
 
     // 共鸣解放充能计数器
     public int EnergyCounter => this._energytCounter;
@@ -114,29 +124,61 @@ public class ObscuraLumis : RoverRelic
     }
     // 是否已存储力量
     public bool HasStoredPower => StoredMonsterId.Entry != "NONE";
+    // 已吸收过的怪物 ID 列表
+    public IReadOnlyList<string> AbsorbedMonsterEntries
+    {
+        get
+        {
+            string str = _absorbedMonsterEntriesField.Get(this);
+            if (string.IsNullOrEmpty(str))
+                return Array.Empty<string>();
+            return str.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        }
+    }
+    private void SetAbsorbedMonsterEntries(IEnumerable<string> entries)
+    {
+        string str = string.Join(",", entries);
+        _absorbedMonsterEntriesField.Set(this, str);
+    }
     // 对外方法
     public void StoreMonsterId(ModelId monsterId)
     {
+        var entries = AbsorbedMonsterEntries.ToList();
+        string entry = monsterId.Entry;
+        if (!entries.Contains(entry))
+        {
+            entries.Add(entry);
+            SetAbsorbedMonsterEntries(entries);
+        }
         StoredMonsterId = monsterId;
-        Flash(); // 播放特效
+        Flash();
         Log.Info($"晦明终端已存储怪物: {monsterId.Entry}");
         Log.Info("怪物本地化名称:" + GetMonsterLocalizedName(monsterId));
+        InvokeDisplayAmountChanged();
     }
+    // 切换到吸收过的怪物能力
+    public void SwitchToMonster(ModelId monsterId)
+    {
+        if (AbsorbedMonsterEntries.Contains(monsterId.Entry))
+        {
+            StoredMonsterId = monsterId;
+            Flash();
+            InvokeDisplayAmountChanged();
+        }
+    }
+    // 当前激活的怪物能力 ID
+    public ModelId CurrentMonsterId => StoredMonsterId;
     // 获取怪物本地化名称
-    private string GetMonsterLocalizedName(ModelId monsterId)
+    public string GetMonsterLocalizedName(ModelId monsterId)
     {
         // 怪物名称的本地化键为 "MONSTER.{Entry}.name"
-        var loc = LocString.GetIfExists("monsters", monsterId.Entry + ".name");
-
-        if (StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_FRONT") || StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_MIDDLE") || StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_BACK"))
-        {
-            return "残杀千足虫";
-        }
-        if (StoredMonsterId.Entry.Equals("TEST_SUBJECT"))
-        {
-            return "实验体";
-        }
-        return loc?.GetRawText() ?? monsterId.Entry;
+        if (monsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_FRONT") || monsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_MIDDLE") || monsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_BACK"))
+    {
+        var loc_decimillipede_segment = LocString.GetIfExists("monsters", "DECIMILLIPEDE_SEGMENT.name");
+        return loc_decimillipede_segment?.GetRawText() ?? "残杀千足虫";
+    }
+    var loc = LocString.GetIfExists("monsters", monsterId.Entry + ".name");
+    return loc?.GetRawText() ?? monsterId.Entry;
     }
 
     // 怪物能力描述
@@ -251,7 +293,7 @@ public class ObscuraLumis : RoverRelic
             || StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_BACK"))
         {
             // 只对遗物持有者生效，且尚未使用过复活
-            if (creature == base.Owner.Creature && !_reviveUsed)
+            if (creature == base.Owner.Creature && !ReviveUsedField.Get(this))
             {
                 // 阻止死亡
                 return false;
@@ -261,16 +303,39 @@ public class ObscuraLumis : RoverRelic
     }
 
     public override async Task AfterPreventingDeath(Creature creature)
-    {// 死亡被阻止后
-        if (_reviveUsed) return;
-        if (StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_FRONT") || StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_MIDDLE")
-        || StoredMonsterId.Entry.Equals("DECIMILLIPEDE_SEGMENT_BACK"))
+    {
+        if (ReviveUsedField.Get(this)) return;
+
+        string monsterEntry = StoredMonsterId.Entry;
+        // 判断是否为残杀千足虫的任何一段
+        if (monsterEntry.Equals("DECIMILLIPEDE_SEGMENT_FRONT") ||monsterEntry.Equals("DECIMILLIPEDE_SEGMENT_MIDDLE") ||monsterEntry.Equals("DECIMILLIPEDE_SEGMENT_BACK"))
         {
-            _reviveUsed = true;
-            // 回复最大生命值的 50%（至少回复 1 点）
+            ReviveUsedField.Set(this, true);
             int healAmount = Math.Max(creature.MaxHp / 2, 1);
             await CreatureCmd.Heal(creature, healAmount);
-            this.StoredMonsterId = ModelId.none;
+
+            // 获取当前已吸收的怪物条目列表
+            var entries = AbsorbedMonsterEntries.ToList();
+            // 定义残杀千足虫的三个可能条目
+            var centipedeEntries = new[]
+            {
+            "DECIMILLIPEDE_SEGMENT_FRONT",
+            "DECIMILLIPEDE_SEGMENT_MIDDLE",
+            "DECIMILLIPEDE_SEGMENT_BACK"};
+
+            bool changed = false;
+            foreach (var centipedeEntry in centipedeEntries)
+            {
+                if (entries.Contains(centipedeEntry))
+                {
+                    entries.Remove(centipedeEntry);
+                    changed = true;
+                }
+            }
+            if (changed) SetAbsorbedMonsterEntries(entries);
+
+            // 清空当前激活的能力
+            StoredMonsterId = ModelId.none;
             Flash();
             InvokeDisplayAmountChanged();
         }
@@ -773,7 +838,6 @@ public class ObscuraLumis : RoverRelic
                     await PowerCmd.Apply<HardToKillPowerCopy>(base.Owner.Creature, 15m, base.Owner.Creature, null);
                     break;
                 case "TUNNELER":
-                    await CreatureCmd.GainBlock(base.Owner.Creature, 36m, ValueProp.Unpowered, null);
                     await PowerCmd.Apply<BurrowedPowerCopy>(base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "THIEVING_HOPPER":

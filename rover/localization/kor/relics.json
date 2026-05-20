@@ -5,6 +5,8 @@
   "ROVER-OBSCURA_LUMIS.description": "[gold]에너지[/gold]를 소모할 때마다 [gold]충전[/gold]을 얻습니다. 처치한 적의 능력을 일부 흡수할 수 있습니다. (최대 1개)",
   "ROVER-OBSCURA_LUMIS.flavor": "당신이 깨어날 때부터 지니고 다녔던 단말기. 모양은 황룡의 반고 단말기와 비슷하다. 그것은 당신 여정의 흔적을 기록하며 늘 묵묵히 당신 곁을 지켜왔다.",
 
+  "ABILITY_SWITCH_NOT_IN_COMBAT": "전투 중에는 능력을 \n 전환할 수 없습니다.",
+
   "ROVER_CHARGE_TITLE": "충전",
   "ROVER_CHARGE_DESC": "특정 카드나 파워에 사용됩니다. 현재 충전량은 시작 유물 우측 하단의 솟자로 확인할 수 있습니다.",
 

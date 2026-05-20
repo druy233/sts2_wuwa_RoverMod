@@ -23,3 +23,5 @@ res://themes/kreon_bold_shared.tres::b02aac59b3bc186268e1abcf727b11b7::177753005
 res://scenes/combat/energy_counters/rover_energy_counter.tscn::9e5ebe54caa61d9514e0730d0f00eb0c::1779107366::res://.godot/exported/133200997/export-7b04640a79f43c3907ba06e2143ba63b-rover_energy_counter.scn
 res://scenes/combat/energy_counters/necrobinder_energy_counter.tscn::5aa79dd6c013b4803fecb7134001849f::1779107374::res://.godot/exported/133200997/export-50f482851383dc2cd47fff3c98555eaa-necrobinder_energy_counter.scn
 res://scenes/ui/character_icons/rover_icon.tscn::a7a547bec7a1d973eecc9a948f092ce0::1779154289::res://.godot/exported/133200997/export-484247605f8c53fa163319529a897ddd-rover_icon.scn
+res://scenes/ui/rover_ability_switch_panel.tscn::9ac1a1fb9eb277e3ce36ec5322e80efa::1780308288::res://.godot/exported/133200997/export-47aec135f920133cc13b7a343b939cd3-rover_ability_switch_panel.scn
+res://scenes/ui/rover_ability_switch_button.tscn::0732d26f2c3b0b8100351efa8b7974d5::1780277795::res://.godot/exported/133200997/export-e3b82a4a03de347fa642014537e5726e-rover_ability_switch_button.scn

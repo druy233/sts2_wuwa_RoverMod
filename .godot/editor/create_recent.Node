@@ -1,4 +1,12 @@
+MarginContainer
 TextureRect
+TextureButton
+Button
+ItemList
+Label
+VBoxContainer
+Panel
+ColorRect
 SpineSprite
 Node2D
 Window

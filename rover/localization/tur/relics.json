@@ -5,7 +5,9 @@
   "ROVER-OBSCURA_LUMIS.flavor": "你自初醒来便携带于身的终端，样式与瑝珑的盘古终端类似。它记录着你旅途的行迹，也是一直陪伴你的无声助力。",
   "ROVER_CHARGE_TITLE": "充能",
   "ROVER_CHARGE_DESC": "充能可以被一部分卡牌或能力使用，当前充能可以在初始遗物旁查看。",
-  
+
+  "ABILITY_SWITCH_NOT_IN_COMBAT": "战斗中无法切换能力",
+
   "ROVER-OBSCURA_LUMIS.selectionScreenPrompt": "请选择你想消耗的牌",
   "ROVER_CORPSE_SLUG": "选择最多10张牌消耗",
 

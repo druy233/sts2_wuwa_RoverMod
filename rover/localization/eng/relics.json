@@ -6,6 +6,8 @@
   "ROVER_CHARGE_TITLE": "Charge",
   "ROVER_CHARGE_DESC": "Charge is used by certain cards and powers. Your current Charge can be seen next to your starting relic.",
 
+  "ABILITY_SWITCH_NOT_IN_COMBAT": "Cannot switch \n ability during combat",
+
   "ROVER-OBSCURA_LUMIS.selectionScreenPrompt": "Choose cards to [gold]Exhaust[/gold]",
   "ROVER_CORPSE_SLUG": "Choose up to 10 cards to [gold]Exhaust[/gold]",
 
