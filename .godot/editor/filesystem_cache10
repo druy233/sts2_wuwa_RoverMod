@@ -4,7 +4,31 @@ character_icon_rover.png::CompressedTexture2D::8538563897890791706::1775805738::
 export_presets.cfg::TextFile::-1::1780308290::0::1::::<><><>0<>0<><>::
 README.md::TextFile::-1::1778079743::0::1::::<><><>0<>0<><>::
 rover.json::JSON::-1::1780307994::0::1::::<><><>0<>0<><>::
-spine_godot_extension.gdextension::GDExtension::401861254137176983::1773373641::0::1::::<><><>0<>0<><>::
+rover.json::JSON::-1::1779154806::0::1::::<><><>0<>0<><>::
+=========
+::res://::1779239033
+character_icon_rover.png::CompressedTexture2D::8538563897890791706::1775805738::1777605361::1::::<><><>0<>0<>9712d749aede0181f272f53c97bc32a5<>res://.godot/imported/character_icon_rover.png-c450253d6f78cbff403b15cbb789aa3e.ctex::
+export_presets.cfg::TextFile::-1::1779204375::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1778079743::0::1::::<><><>0<>0<><>::
+rover.json::JSON::-1::1779165265::0::1::::<><><>0<>0<><>::
+>>>>>>>>> Temporary merge branch 2
+rover.json::JSON::-1::1779154806::0::1::::<><><>0<>0<><>::
+=========
+::res://::1779239033
+character_icon_rover.png::CompressedTexture2D::8538563897890791706::1775805738::1777605361::1::::<><><>0<>0<>9712d749aede0181f272f53c97bc32a5<>res://.godot/imported/character_icon_rover.png-c450253d6f78cbff403b15cbb789aa3e.ctex::
+export_presets.cfg::TextFile::-1::1779204375::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1778079743::0::1::::<><><>0<>0<><>::
+rover.json::JSON::-1::1779165265::0::1::::<><><>0<>0<><>::
+>>>>>>>>> Temporary merge branch 2
+rover.json::JSON::-1::1779154806::0::1::::<><><>0<>0<><>::
+=========
+::res://::1779239033
+character_icon_rover.png::CompressedTexture2D::8538563897890791706::1775805738::1777605361::1::::<><><>0<>0<>9712d749aede0181f272f53c97bc32a5<>res://.godot/imported/character_icon_rover.png-c450253d6f78cbff403b15cbb789aa3e.ctex::
+export_presets.cfg::TextFile::-1::1779204375::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1778079743::0::1::::<><><>0<>0<><>::
+rover_ability_set.wav::AudioStreamWAV::8087531899166629059::1780280196::1780280196::1::::<><><>0<>0<>a7cdb85371a925f2f4887870e15c5fef<>res://.godot/imported/rover_ability_set.wav-b20c2f50782f8602cae32c14d5290642.sample::
+rover_close.wav::AudioStreamWAV::5849895999969526073::1780309575::1780309575::1::::<><><>0<>0<>3087361c7624fead1ad94a59caca397a<>res://.godot/imported/rover_close.wav-3a0970aa2a146c4db645d47024d74cb2.sample::
+rover_ui_click.wav::AudioStreamWAV::5894759833632764211::1780280196::1780280196::1::::<><><>0<>0<>3b173a8bda54199ef44ab515e5f770b5<>res://.godot/imported/rover_ui_click.wav-21a32249ebe22aae3053775cbff5eb12.sample::
 ::res://addons/::1778989186
 ::res://addons/mega_text/::1779244195
 MegaLabel.cs::CSharpScript::2402429578341179740::1779244195::0::1::::<><><>0<>0<><>::
@@ -441,36 +465,59 @@ Aftertune.cs::CSharpScript::4564358533275779629::1778657356::0::1::::<><><>0<>0<
 AnnihilatedSilence.cs::CSharpScript::8157125708917768898::1779239589::0::1::::<><><>0<>0<><>::
 CycleOfWind.cs::CSharpScript::2498012755153422290::1778759770::0::1::::<><><>0<>0<><>::
 DefyFate.cs::CSharpScript::6718937478195728907::1778667980::0::1::::<><><>0<>0<><>::
-Devastation.cs::CSharpScript::8158803447873597260::1778076370::0::1::::<><><>0<>0<><>::
-Grapple.cs::CSharpScript::3685106926508626290::1778045181::0::1::::<><><>0<>0<><>::
-HologramMap.cs::CSharpScript::6653047816893118806::1778473735::0::1::::<><><>0<>0<><>::
+WindCutter.cs::CSharpScript::4359341158810454863::1779247293::0::1::::<><><>0<>0<><>::
+::res://RoverCode/Characters/::1780281132
+Rover.cs::CSharpScript::6607239898859515173::1780281132::0::1::::<><><>0<>0<><>::
 Hornett.cs::CSharpScript::337589146169263048::1778467548::0::1::::<><><>0<>0<><>::
 HoverdroidShooter.cs::CSharpScript::5234843666116940164::1777982122::0::1::::<><><>0<>0<><>::
 IllusionBreaker.cs::CSharpScript::2004209790358264295::1778322742::0::1::::<><><>0<>0<><>::
 InstantOfAnnihilation.cs::CSharpScript::4020691400036246462::1778667865::0::1::::<><><>0<>0<><>::
 JourneyWell.cs::CSharpScript::8676253803084686825::1779110970::0::1::::<><><>0<>0<><>::
-LanternLightsGlowWarm.cs::CSharpScript::3291306392713546762::1778667881::0::1::::<><><>0<>0<><>::
-Lifetaker.cs::CSharpScript::3934197520399626963::1778059791::0::1::::<><><>0<>0<><>::
-Metamorph.cs::CSharpScript::1904921297572883031::1778409011::0::1::::<><><>0<>0<><>::
+WindCutter.cs::CSharpScript::4359341158810454863::1778989680::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Characters/::1779155493
+Rover.cs::CSharpScript::6607239898859515173::1779155493::0::1::::<><><>0<>0<><>::
+=========
+::res://RoverCode/Powers/::1780194141
+Rover.cs::CSharpScript::6607239898859515173::1779156642::0::1::::<><><>0<>0<><>::
+>>>>>>>>> Temporary merge branch 2
 MicrocosmicMurmurs.cs::CSharpScript::8275068859995989203::1778065206::0::1::::<><><>0<>0<><>::
 NeverGiveUp.cs::CSharpScript::1993472458639310533::1778555605::0::1::::<><><>0<>0<><>::
 RazorWind.cs::CSharpScript::-1::1778668025::0::1::::<><><>0<>0<><>::
 RepetitionSideStep.cs::CSharpScript::8435590107945742002::1778058953::0::1::::<><><>0<>0<><>::
 Resonance.cs::CSharpScript::5035484314340557125::1778668073::0::1::::<><><>0<>0<><>::
-ResonatingLamella.cs::CSharpScript::2556451016928856788::1778299690::0::1::::<><><>0<>0<><>::
-ResonatingSlashes.cs::CSharpScript::792391420222559430::1778062347::0::1::::<><><>0<>0<><>::
-Reticence.cs::CSharpScript::3173383448423122672::1778667930::0::1::::<><><>0<>0<><>::
+WindCutter.cs::CSharpScript::4359341158810454863::1778989680::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Characters/::1779155493
+Rover.cs::CSharpScript::6607239898859515173::1779155493::0::1::::<><><>0<>0<><>::
+=========
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Powers/::1779112554
+=========
+::res://RoverCode/Powers/::1779203728
+>>>>>>>>> Temporary merge branch 2
+Rover.cs::CSharpScript::6607239898859515173::1779156642::0::1::::<><><>0<>0<><>::
+>>>>>>>>> Temporary merge branch 2
 SilentListener.cs::CSharpScript::368722424872180542::1778053636::0::1::::<><><>0<>0<><>::
 SkyfallSeverance.cs::CSharpScript::8960603040168563453::1778058222::0::1::::<><><>0<>0<><>::
 SurgingResonance.cs::CSharpScript::7313169479917425069::1777980610::0::1::::<><><>0<>0<><>::
 TransportUnit.cs::CSharpScript::1033315239327233751::1778580043::0::1::::<><><>0<>0<><>::
 Waystone.cs::CSharpScript::1368119297892277952::1778056726::0::1::::<><><>0<>0<><>::
-WindCutter.cs::CSharpScript::4359341158810454863::1779247293::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Characters/::1780281132
-Rover.cs::CSharpScript::6607239898859515173::1780281132::0::1::::<><><>0<>0<><>::
+WindCutter.cs::CSharpScript::4359341158810454863::1778989680::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Characters/::1779155493
+Rover.cs::CSharpScript::6607239898859515173::1779155493::0::1::::<><><>0<>0<><>::
+=========
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Powers/::1779112554
+=========
+::res://RoverCode/Powers/::1779203728
+>>>>>>>>> Temporary merge branch 2
+Rover.cs::CSharpScript::6607239898859515173::1779156642::0::1::::<><><>0<>0<><>::
+>>>>>>>>> Temporary merge branch 2
 RoverCardPool.cs::CSharpScript::3571201826037247428::1778548094::0::1::::<><><>0<>0<><>::
 RoverPotionPool.cs::CSharpScript::3970100050057987737::1776789205::0::1::::<><><>0<>0<><>::
-RoverRelicPool.cs::CSharpScript::2469652948539404292::1778209031::0::1::::<><><>0<>0<><>::
+::res://RoverCode/Relics/::1780284768
 ::res://RoverCode/Extensions/::1778474090
 StringExtensions.cs::CSharpScript::7561456625590680566::1778474090::0::1::::<><><>0<>0<><>::
 ::res://RoverCode/Potions/::1778474103
@@ -478,12 +525,20 @@ CompleteNutritionSqueezyJelly.cs::CSharpScript::5019741589466091764::1778292826:
 Heartpour.cs::CSharpScript::5480461480847255843::1778243458::0::1::::<><><>0<>0<><>::
 PremiumEnergyBag.cs::CSharpScript::5881414526349425659::1778243174::0::1::::<><><>0<>0<><>::
 RoverPotion.cs::CSharpScript::2355007066070441807::1778474103::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Powers/::1780194141
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Powers/::1779112554
+=========
+::res://RoverCode/Powers/::1779203728
+>>>>>>>>> Temporary merge branch 2
 AeroPower.cs::CSharpScript::1520408584962354507::1778990480::0::1::::<><><>0<>0<><>::
 AftertunePower.cs::CSharpScript::8332291428417406106::1778661335::0::1::::<><><>0<>0<><>::
 BeProtected.cs::CSharpScript::55454078779105306::1777777409::0::1::::<><><>0<>0<><>::
 BurnPower.cs::CSharpScript::8189142889716529555::1778164949::0::1::::<><><>0<>0<><>::
-BurrowedPowerCopy.cs::CSharpScript::2102243131771754948::1780194141::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Relics/::1779003104
+=========
+::res://RoverCode/Relics/::1779205899
+>>>>>>>>> Temporary merge branch 2
 CantChangeStancePower.cs::CSharpScript::4917292123795531365::1778121177::0::1::::<><><>0<>0<><>::
 Charge.cs::CSharpScript::2988304811376077512::1777804345::0::1::::<><><>0<>0<><>::
 ColdRiverBoatPower.cs::CSharpScript::918656961838853632::1778558799::0::1::::<><><>0<>0<><>::
@@ -500,7 +555,11 @@ IndelibleMemoryPower.cs::CSharpScript::274314439506683312::1778297581::0::1::::<
 InstantOfAnnihilationPower.cs::CSharpScript::6782463730176217299::1778556842::0::1::::<><><>0<>0<><>::
 LanternLightsGlowWarmPower.cs::CSharpScript::7345804872770159967::1778664753::0::1::::<><><>0<>0<><>::
 MechModePower.cs::CSharpScript::5074713584117697123::1778296810::0::1::::<><><>0<>0<><>::
-MetamorphPower.cs::CSharpScript::3198817635936766631::1777979415::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Relics/::1779003104
+=========
+::res://RoverCode/Relics/::1779205899
+>>>>>>>>> Temporary merge branch 2
 MultiCastExtraPower.cs::CSharpScript::7556695901718480663::1777792100::0::1::::<><><>0<>0<><>::
 OdysseyOfBeginningsPower.cs::CSharpScript::6312694622738326427::1778317413::0::1::::<><><>0<>0<><>::
 PaperCutsPowerCopy.cs::CSharpScript::7296088839868396686::1777940974::0::1::::<><><>0<>0<><>::
@@ -517,7 +576,11 @@ SpectroPower.cs::CSharpScript::8306597443378580131::1778812269::0::1::::<><><>0<
 StockPowerCopy.cs::CSharpScript::6134287530198022404::1777261194::0::1::::<><><>0<>0<><>::
 SurgingResonancePower.cs::CSharpScript::7570729399985468575::1778465145::0::1::::<><><>0<>0<><>::
 UnboundFlowPower.cs::CSharpScript::946810411440103291::1778319050::0::1::::<><><>0<>0<><>::
-::res://RoverCode/Relics/::1780284768
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Relics/::1779003104
+=========
+::res://RoverCode/Relics/::1779205899
+>>>>>>>>> Temporary merge branch 2
 Afterlife.cs::CSharpScript::6869129045205235580::1779001380::0::1::::<><><>0<>0<><>::
 CrystalSolvent.cs::CSharpScript::8553694589998356252::1780193869::0::1::::<><><>0<>0<><>::
 Lunite.cs::CSharpScript::1276783672750231188::1778235273::0::1::::<><><>0<>0<><>::
@@ -537,7 +600,7 @@ StanceVfxHelper.cs::CSharpScript::4334791608147026965::1778558632::0::1::::<><><
 TextureHelper.cs::CSharpScript::8879361415399045607::1777516294::0::1::::<><><>0<>0<><>::
 ::res://scenes/::1776221718
 ::res://scenes/combat/::1776221718
-::res://scenes/combat/energy_counters/::1779107374
+::res://windows/::1780309548
 necrobinder_energy_counter.tscn::PackedScene::1348431799417246976::1779107374::0::1::::<><><>0<>0<><>::uid://dh4d0sqk21k6::::res://src/Core/Nodes/Combat/NEnergyCounter.cs<>uid://cxxspap1fm8io::::res://images/ui/combat/energy_counters/necrobinder/necrobinder_orb_layer_1.png<>uid://dkp3jmhbo5axx::::res://scenes/vfx/energy/rover/rover_energy_vfx_back.tscn<>uid://bkjxouj01calm::::res://images/ui/combat/energy_counters/necrobinder/necrobinder_orb_layer_2.png<>uid://cjl86dm20gcfr::::res://images/ui/combat/energy_counters/necrobinder/necrobinder_orb_layer_3.png<>uid://vc0rip4kaglo::::res://scenes/vfx/energy/rover/rover_energy_vfx_front.tscn<>uid://bg85h22rkxs6g::::res://themes/kreon_bold_shared.tres<>uid://bah0wt08qb78s::::res://addons/mega_text/MegaLabel.cs
 rover_energy_counter.tscn::PackedScene::2954644434898065684::1779107366::0::1::::<><><>0<>0<><>::uid://dkp3jmhbo5axx::::res://scenes/vfx/energy/rover/rover_energy_vfx_back.tscn<>uid://cq8uon8r3owqb::::res://images/ui/combat/energy_counters/rover_orb_layer_1.png<>uid://tkujsgdbh0kp::::res://images/ui/combat/energy_counters/energy.png<>uid://vc0rip4kaglo::::res://scenes/vfx/energy/rover/rover_energy_vfx_front.tscn<>uid://2geu4pwae72s::::res://images/vfx/stance/calm_orb.png<>uid://bg85h22rkxs6g::::res://themes/kreon_bold_shared.tres
 ::res://scenes/creature_visuals/::1777376056
@@ -558,7 +621,11 @@ selection_reticle.tscn::PackedScene::1394595487092284129::1776770405::0::1::::<>
 ::res://scenes/ui/character_icons/::1779154289
 rover_icon.tscn::PackedScene::6744021640113793264::1779154289::0::1::::<><><>0<>0<><>::uid://30jwnmajcqti::::res://images/ui/top_panel/character_icon_rover.png
 ::res://scenes/vfx/::1776753416
-card_trail_rover.tscn::PackedScene::5468477831998108232::1776753416::0::1::::<><><>0<>0<><>::uid://bb3fwupsnhf43::::res://src/Core/Nodes/Vfx/NCardTrailVfx.cs<>uid://cbcq8r5cx5yl6::::res://images/packed/vfx/trail.png<>uid://cl44l3vqar6tb::::res://src/Core/Nodes/Vfx/NCardTrail.cs<>uid://cq8xbr754n1eb::::res://images/packed/vfx/trail2.png<>uid://bxqg3wafdbdr5::::res://images/vfx/brush_particle_2.png<>uid://dne5pa5gcftob::::res://images/vfx/vfx_ghostly_power_up/sparkle.png<>uid://caf8qmuvlx34i::::res://images/packed/vfx/small_card_silhouette.png<>uid://c4ycqv0gdxvmr::::res://themes/canvas_item_material_additive_shared.tres
+<<<<<<<<< Temporary merge branch 1
+::res://windows/::1778813123
+=========
+::res://windows/::1779239027
+>>>>>>>>> Temporary merge branch 2
 ::res://scenes/vfx/common/::1776649058
 vfx_common_glow.tscn::PackedScene::5301681905796695053::1776649045::0::1::::<><><>0<>0<><>::uid://cqnw207yfbaua::::res://materials/vfx/common/vfx_glow.tres<>uid://m5mbugl61637::::res://images/vfx/common/common_glow.png
 vfx_common_ring_polar_a.tscn::PackedScene::7126848973980229095::1776649058::0::1::::<><><>0<>0<><>::uid://dbbrx0swmom7::::res://materials/vfx/common/vfx_ring_polar.tres<>uid://dnsaa1os3ii0d::::res://images/vfx/common/common_ring_polar_a.png
@@ -579,7 +646,11 @@ flipbook.gdshaderinc::ShaderInclude::999885948749226544::1776483350::0::1::::<><
 hue_shift.gdshaderinc::ShaderInclude::7403518171367183289::1776483373::0::1::::<><><>0<>0<><>::
 polar_coordinates.gdshaderinc::ShaderInclude::3833519840096727069::1776483992::0::1::::<><><>0<>0<><>::
 ::res://shaders/vfx/common/::1780285545
-vfx_flipbook_shader.gdshader::Shader::2730901100255050071::1776483992::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://windows/::1778813123
+=========
+::res://windows/::1779239027
+>>>>>>>>> Temporary merge branch 2
 vfx_grayscale_particle_shader.gdshader::Shader::7417054930610931681::1780285545::0::1::::<><><>0<>0<><>::
 vfx_ring_polar_shader.gdshader::Shader::5108135965529267380::1776483992::0::1::::<><><>0<>0<><>::
 ::res://src/::1779010227
@@ -600,4 +671,8 @@ NParticlesContainer.cs::CSharpScript::2658753470364266977::1778989188::0::1::::<
 ::res://themes/::1777530054
 canvas_item_material_additive_shared.tres::CanvasItemMaterial::6858014047562600805::1775791454::0::1::::<><><>0<>0<><>::
 kreon_bold_shared.tres::FontVariation::2877513682372460708::1777530054::0::1::::<><><>0<>0<><>::uid://dc8ocd36hqnbe::::res://fonts/kreon_bold.ttf
-::res://windows/::1780309548
+<<<<<<<<< Temporary merge branch 1
+::res://windows/::1778813123
+=========
+::res://windows/::1779239027
+>>>>>>>>> Temporary merge branch 2

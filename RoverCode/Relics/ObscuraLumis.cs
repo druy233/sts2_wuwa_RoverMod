@@ -71,8 +71,6 @@ public class ObscuraLumis : RoverRelic
     AbsorbedMonsterEntries.Select(entry => new ModelId("MONSTER", entry)).ToList();
 
 
-
-
     // 共鸣解放充能计数器
     public int EnergyCounter => this._energytCounter;
     public async Task AddToEnergyCounter(int amount)
@@ -135,12 +133,13 @@ public class ObscuraLumis : RoverRelic
             return str.Split(',', StringSplitOptions.RemoveEmptyEntries);
         }
     }
+    // 设置已吸收过的怪物 ID 列表
     private void SetAbsorbedMonsterEntries(IEnumerable<string> entries)
     {
         string str = string.Join(",", entries);
         _absorbedMonsterEntriesField.Set(this, str);
     }
-    // 对外方法
+    // 存储怪物能力并加入历史列表
     public void StoreMonsterId(ModelId monsterId)
     {
         var entries = AbsorbedMonsterEntries.ToList();
@@ -165,6 +164,23 @@ public class ObscuraLumis : RoverRelic
             Flash();
             InvokeDisplayAmountChanged();
         }
+    }
+    // 永久移除怪物能力（灵魂共鸣卡牌效果）
+    public void RemoveCurrentMonsterFromHistory()
+    {
+        string currentEntry = StoredMonsterId.Entry;
+        if (currentEntry == "NONE") return;
+
+        var entries = AbsorbedMonsterEntries.ToList();
+        if (entries.Contains(currentEntry))
+        {
+            entries.Remove(currentEntry);
+            SetAbsorbedMonsterEntries(entries);
+        }
+        // 清空当前激活的能力
+        StoredMonsterId = ModelId.none;
+        Flash();
+        InvokeDisplayAmountChanged();
     }
     // 当前激活的怪物能力 ID
     public ModelId CurrentMonsterId => StoredMonsterId;

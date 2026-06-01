@@ -43,7 +43,9 @@ public class SoulResonance() : RoverCard(0,
         var relic = base.Owner.GetRelic<ObscuraLumis>();
         if (relic == null) return;
         if (relic.HasStoredPower == false) return;
-        relic.StoreMonsterId(ModelId.none);
+
+        relic.RemoveCurrentMonsterFromHistory();
+
         await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
