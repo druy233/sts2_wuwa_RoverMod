@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
 using Rover.Relics;
-using Rover.Tools; // 请根据你实际的命名空间调整
+using Rover.Tools;
 
 namespace Rover.RoverCode.Tools;
 
@@ -55,11 +55,6 @@ public partial class RoverAbilitySwitchButton : Control
 
 	private async void OpenPanel()
 	{
-		if (CombatManager.Instance.IsInProgress)
-		{
-			ShowFloatingText("ABILITY_SWITCH_NOT_IN_COMBAT");
-			return;
-		}
 		// 如果已有面板，先销毁
 		if (_panel != null && IsInstanceValid(_panel))
 		{
@@ -84,8 +79,13 @@ public partial class RoverAbilitySwitchButton : Control
 		_panel = panelScene.Instantiate<RoverAbilitySwitchPanel>();
 		if (_panel == null) return;
 
-		// 添加到地图屏幕
-		NMapScreen.Instance?.AddChild(_panel);
+		// 添加到全局 UI（确保在任何场景都能显示）
+		var container = NRun.Instance?.GlobalUi;
+		if (container != null)
+			container.AddChild(_panel);
+		else
+			GetTree().Root.AddChild(_panel); // 后备方案
+
 		_panel.ShowPanel(relic);
 	}
 
@@ -93,40 +93,5 @@ public partial class RoverAbilitySwitchButton : Control
 	{
 		var me = LocalContext.GetMe(RunManager.Instance.DebugOnlyGetState()?.Players);
 		return me?.GetRelic<ObscuraLumis>();
-	}
-
-	private void ShowFloatingText(string locKey)
-	{
-		var locString = new LocString("relics", locKey);
-		string message = locString.GetFormattedText();
-		// 获取合适的容器（优先地图屏幕，否则全局 UI）
-		Control container = null;
-		if (NMapScreen.Instance != null && NMapScreen.Instance.Visible)
-			container = NMapScreen.Instance;
-		else if (NRun.Instance?.GlobalUi != null)
-			container = NRun.Instance.GlobalUi;
-
-		if (container == null) return;
-
-		var label = new Label();
-		label.Text = message;
-		label.HorizontalAlignment = HorizontalAlignment.Center;
-		label.VerticalAlignment = VerticalAlignment.Center;
-		label.Modulate = Colors.Gold;
-		label.AddThemeFontSizeOverride("font_size", 95);
-		label.AddThemeConstantOverride("outline_size", 5);          // 添加描边
-		label.AddThemeColorOverride("font_outline_color", Colors.Black); // 描边颜色黑色
-
-		// 获取当前视口大小（确保坐标正确）
-		var viewportSize = GetViewport().GetVisibleRect().Size;
-		label.Position = new Vector2(viewportSize.X / 2 - 450, viewportSize.Y / 2 - 300);
-		label.Size = new Vector2(300, 40);
-
-		container.AddChild(label);
-
-		// 淡出动画并自动销毁
-		var tween = label.CreateTween();
-		tween.TweenProperty(label, "modulate:a", 0f, 0.8f).SetDelay(0.65f);
-		tween.TweenCallback(Callable.From(() => label.QueueFree()));
 	}
 }

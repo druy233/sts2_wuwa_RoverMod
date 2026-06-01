@@ -54,7 +54,7 @@ public class PowerChange() : RoverCard(1,
     {
         if (base.Owner.Creature.CombatState == null) return;
         // 获取当前战斗状态
-        CombatState combatState = base.Owner.Creature.CombatState;
+        ICombatState combatState = base.Owner.Creature.CombatState;
 
         // 通过 CombatState 创建卡牌（自动关联 Owner 和 CombatState）
         CardModel cardA = combatState.CreateCard(ModelDb.Card<Spectro>(), base.Owner);

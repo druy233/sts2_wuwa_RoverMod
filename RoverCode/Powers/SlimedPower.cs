@@ -19,7 +19,6 @@ public class SlimedPower : RoverPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => false;
     public override int DisplayAmount => base.Amount;
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
@@ -32,11 +31,11 @@ public class SlimedPower : RoverPower
         return -base.Amount;
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != Owner.Side) return;
 
-        await PowerCmd.ModifyAmount(this, -1m, null, null);
+        await PowerCmd.ModifyAmount(choiceContext, this, -1m, null, null);
         InvokeDisplayAmountChanged();
 
         // 层数归零则移除

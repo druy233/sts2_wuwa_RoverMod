@@ -2,10 +2,16 @@
   "id": "rover",
   "name": "漂泊者角色模组",
   "author": "MC-druy",
-  "description": "添加了一位角色",
-  "version": "1.3.0",
+  "description": "添加了一位《鸣潮》中的角色到游戏中。",
+  "version": "1.4.0",
   "has_pck": true,
   "has_dll": true,
-  "dependencies": [ "BaseLib" ],
+  "tags": ["wuwa","WUWA","wuthering waves","Rover","rover","鸣潮","漂泊者"],
+  "dependencies": [
+    {
+        "id": "BaseLib",
+        "min_version": "3.1.2"
+    }
+],
   "affects_gameplay": true
 }

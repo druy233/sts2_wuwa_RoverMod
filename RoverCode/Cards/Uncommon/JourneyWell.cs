@@ -54,7 +54,7 @@ public class JourneyWell() : RoverCard(0,
         }
         if (cardModel != null)
         {
-            await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
         }
     }
 

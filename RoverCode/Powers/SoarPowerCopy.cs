@@ -14,7 +14,6 @@ public sealed class SoarPowerCopy : RoverPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;   // 使用层数作为剩余次数
-    public override bool IsInstanced => true;
     public override int DisplayAmount => base.Amount;
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
@@ -30,14 +29,14 @@ public sealed class SoarPowerCopy : RoverPower
         return 1m;
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Card.Owner.Creature != Owner) return;
         if (cardPlay.Card.Type != CardType.Attack) return;
         if (base.Amount <= 0) return;
 
         // 减少一层（剩余次数减一）
-        await PowerCmd.ModifyAmount(this, -1m, null, null);
+        await PowerCmd.ModifyAmount(choiceContext, this, -1m, null, null);
         InvokeDisplayAmountChanged();
 
         if (base.Amount <= 0)

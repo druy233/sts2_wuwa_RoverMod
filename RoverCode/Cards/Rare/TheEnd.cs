@@ -17,12 +17,12 @@ using Rover.Powers;
 
 namespace Rover.Cards;
 
-public class TheEnd() : RoverCard(6,
+public class TheEnd() : RoverCard(5,
     CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {
     private int _timesPlayedThisCombat;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(60m, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(44m, ValueProp.Move)];
     private int TimesPlayedThisCombat
     {
         get
@@ -67,12 +67,26 @@ public class TheEnd() : RoverCard(6,
                 }
             })
             .Execute(choiceContext);
+
+        if (base.IsUpgraded)
+        {
+            decimal percent = 0.05m;
+            foreach (var enemy in base.CombatState.Enemies.Where(e => e.IsAlive))
+            {
+                int extraDamage = (int)(enemy.MaxHp * percent);
+                if (extraDamage > 0)
+                {
+                    await CreatureCmd.Damage(choiceContext, enemy, extraDamage, ValueProp.Unpowered, base.Owner.Creature, this);
+                }
+            }
+        }
+
         TimesPlayedThisCombat++;
         base.EnergyCost.AddThisCombat(-2);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(20m);
+        
     }
 }

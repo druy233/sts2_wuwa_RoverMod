@@ -15,14 +15,14 @@ public class RelentlessSquallPower : RoverPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         if (cardPlay.Card.Type != CardType.Attack) return;
 
-        await CardCmd.Exhaust(context, cardPlay.Card, causedByEthereal: false);
+        await CardCmd.Exhaust(choiceContext, cardPlay.Card, causedByEthereal: false);
 
-        await PowerCmd.Apply<StrengthPower>(base.Owner, base.Amount, base.Owner, cardPlay.Card);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, base.Amount, base.Owner, cardPlay.Card);
     }
 }

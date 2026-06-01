@@ -23,11 +23,12 @@ public class Tuneslayer() : RoverCard(2,
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         bool intendsAttack = cardPlay.Target.Monster?.IntendsToAttack ?? false;
 
+        decimal damage = base.DynamicVars.Damage.BaseValue;
         if (intendsAttack)
         {
-            base.DynamicVars.Damage.BaseValue *= 2;
+            damage *= 2;
         }
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(damage).FromCard(this)
             .Targeting(cardPlay.Target).Execute(choiceContext);
     }
 

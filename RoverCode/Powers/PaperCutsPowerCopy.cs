@@ -14,7 +14,6 @@ public class PaperCutsPowerCopy : RoverPower
     private bool _isProcessing; // 防止递归的标志
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => false;
     public override int DisplayAmount => base.Amount;
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)

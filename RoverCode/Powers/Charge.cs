@@ -14,7 +14,6 @@ public class Charge : RoverPower
     private bool _isProcessing = false;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override bool IsInstanced => false;
     public override bool AllowNegative => false;
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)

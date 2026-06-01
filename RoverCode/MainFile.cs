@@ -4,12 +4,14 @@ using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Screens.Map;
 using MegaCrit.Sts2.Core.Runs;
-using Rover.Relics;
+using Rover.RoverCode.Actions;
 using Rover.RoverCode.Tools;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
@@ -44,14 +46,13 @@ public class MainFile
     }
 }
 
-[HarmonyPatch(typeof(NMapScreen), nameof(NMapScreen._Ready))]
-static class NMapScreenReadyPatch
+[HarmonyPatch(typeof(NRun), nameof(NRun._Ready))]
+static class NRunReadyPatch
 {
-    static void Postfix(NMapScreen __instance)
+    static void Postfix(NRun __instance)
     {
         // 已经添加过则不再重复
-        if (__instance.GetNodeOrNull<RoverAbilitySwitchButton>("AbilitySwitchBtn") != null) return;
-        if (!RunManager.Instance.IsInProgress) return;
+        if (NRun.Instance?.GlobalUi?.GetNodeOrNull<RoverAbilitySwitchButton>("AbilitySwitchBtn") != null) return;
 
         // 获取本地玩家
         var runState = RunManager.Instance.DebugOnlyGetState();
@@ -59,13 +60,13 @@ static class NMapScreenReadyPatch
         var me = LocalContext.GetMe(runState.Players);
         if (me == null) return;
 
-        // 只对漂泊者角色显示按钮
+        // 只对漂泊者角色显示
         if (me.Character.Id.Entry != "ROVER-ROVER") return;
 
         var scene = PreloadManager.Cache.GetScene("res://scenes/ui/rover_ability_switch_button.tscn");
         if (scene == null) return;
         var btn = scene.Instantiate<RoverAbilitySwitchButton>();
         btn.Name = "AbilitySwitchBtn";
-        __instance.AddChild(btn);
+        NRun.Instance?.GlobalUi?.AddChild(btn);
     }
 }

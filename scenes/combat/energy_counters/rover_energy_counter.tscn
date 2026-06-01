@@ -21,6 +21,7 @@ metadata/_edit_lock_ = true
 
 [node name="EnergyVfxBack" parent="." instance=ExtResource("1_w1q3x")]
 unique_name_in_owner = true
+position = Vector2(63, 62)
 script = null
 
 [node name="Layers" type="Control" parent="."]
@@ -81,6 +82,7 @@ texture = ExtResource("5_owtdi")
 
 [node name="EnergyVfxFront" parent="." instance=ExtResource("4_ahleg")]
 unique_name_in_owner = true
+position = Vector2(67, 62)
 script = null
 
 [node name="Label" type="Label" parent="."]

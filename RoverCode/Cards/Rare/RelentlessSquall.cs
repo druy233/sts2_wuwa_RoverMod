@@ -23,7 +23,7 @@ public class RelentlessSquall() : RoverCard(2,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<RelentlessSquallPower>(base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<RelentlessSquallPower>(choiceContext, base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

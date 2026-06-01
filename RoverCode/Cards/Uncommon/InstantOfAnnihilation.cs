@@ -20,7 +20,7 @@ public class InstantOfAnnihilation() : RoverCard(1,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<InstantOfAnnihilationPower>(Owner.Creature, DynamicVars["RoverNum"].BaseValue,Owner.Creature,this); 
+        await PowerCmd.Apply<InstantOfAnnihilationPower>(choiceContext, base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

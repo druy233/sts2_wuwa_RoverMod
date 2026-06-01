@@ -25,7 +25,7 @@ public class Hornett() : RoverCard(1,
                                            select c;
         foreach (Creature item in enumerable)
         {
-            await PowerCmd.Apply<VigorPower>(item, base.DynamicVars["VigorPower"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<VigorPower>(choiceContext, item, base.DynamicVars["VigorPower"].BaseValue, base.Owner.Creature, this);
         }
     }
 

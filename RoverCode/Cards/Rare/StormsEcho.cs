@@ -54,7 +54,7 @@ public class StormsEcho() : RoverCard(0,
         if (chosen == null) return;
 
         int extraTimes = base.DynamicVars["RoverNum"].IntValue;
-        await PowerCmd.Apply<MultiCastExtraPower>(base.Owner.Creature, extraTimes - 1, base.Owner.Creature, this);
+        await PowerCmd.Apply<MultiCastExtraPower>(choiceContext, base.Owner.Creature, extraTimes - 1, base.Owner.Creature, this);
         await CardCmd.AutoPlay(choiceContext, chosen, null);
 
         if (chosen.Pile?.Type != PileType.Exhaust)

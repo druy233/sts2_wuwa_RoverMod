@@ -30,7 +30,7 @@ internal class WindCutter() : RoverCard(1,
             .Targeting(cardPlay.Target).Execute(context);
         if (StanceHelper.IsInStance<AeroPower>(base.Owner.Creature))
         {
-            await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<WeakPower>(context, cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
         }
     }
 

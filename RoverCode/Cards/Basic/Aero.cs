@@ -34,7 +34,7 @@ public class Aero() : RoverCard(-1,
         if (base.CombatState == null) return;
         await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
         await StanceHelper.EnterAero(base.Owner, this);
-        await PowerCmd.Apply<WeakPower>(base.CombatState.HittableEnemies, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

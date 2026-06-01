@@ -28,7 +28,7 @@ public class LanternLightsGlowWarmPower : RoverPower
             if (relic != null && relic.EnergyCounter >= 2) {
                 await relic.AddToEnergyCounter(-2);
                 await CardPileCmd.Draw(choiceContext, 1m, base.Owner.Player);
-                await PowerCmd.Apply<VigorPower>(base.Owner, 3m, base.Owner, null);
+                await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner, 3m, base.Owner, null);
             }
         }
     }

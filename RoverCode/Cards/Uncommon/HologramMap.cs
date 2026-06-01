@@ -34,6 +34,6 @@ public class HologramMap() : RoverCard(1,
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Retain);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

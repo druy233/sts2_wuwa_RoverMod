@@ -26,7 +26,7 @@ public class WindErosion() : RoverCard(1,
         {
             baseValue += base.DynamicVars["RoverNum"].BaseValue;
         }
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, baseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, baseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

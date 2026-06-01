@@ -31,7 +31,7 @@ public class TidalHeritage() : RoverCard(0,
         foreach (CardModel item in list)
         {
             item.SetToFreeThisTurn();
-            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, base.Owner);
         }
     }
 }

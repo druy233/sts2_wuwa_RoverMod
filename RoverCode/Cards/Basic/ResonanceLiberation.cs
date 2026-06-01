@@ -79,7 +79,7 @@ public class ResonanceLiberation() : RoverCard(0,
         if (card != this) return;
         // 手牌未满时移回
         var hand = CardPile.Get(PileType.Hand, base.Owner);
-        if (hand != null && hand.Cards.Count < CardPile.maxCardsInHand)
+        if (hand != null && hand.Cards.Count < CardPile.MaxCardsInHand)
         {
             await CardPileCmd.Add(this, PileType.Hand, CardPilePosition.Top);
         }
@@ -89,7 +89,7 @@ public class ResonanceLiberation() : RoverCard(0,
     {
         ArgumentNullException.ThrowIfNull(base.Owner.Creature.CombatState, "base.Owner.Creature.CombatState");
         // 获取当前战斗状态
-        CombatState combatState = base.Owner.Creature.CombatState;
+        ICombatState combatState = base.Owner.Creature.CombatState;
 
         // 通过 CombatState 创建卡牌（自动关联 Owner 和 CombatState）
         CardModel cardA = combatState.CreateCard(ModelDb.Card<EchoingOrchestra>(), base.Owner);
@@ -126,7 +126,7 @@ public class ResonanceLiberation() : RoverCard(0,
         await Cmd.Wait(0.25f);
     }
 
-    protected override PileType GetResultPileType()
+    protected override PileType GetResultPileTypeForCardPlay()
     {
         return PileType.Hand;
     }

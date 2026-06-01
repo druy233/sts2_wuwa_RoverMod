@@ -4,10 +4,10 @@ res://scenes/screens/char_select/char_select_bg_rover.tscn::a0a41bd63acd881ccd0e
 res://materials/ui/energy_orb_dark.tres::81a46d27ba055dbc0e79eba754c0f56e::1775791453::res://.godot/exported/133200997/export-4f7176325dada4891883dade93873be7-energy_orb_dark.res
 res://themes/canvas_item_material_additive_shared.tres::912eb6dba1232f4f646092f217535eb9::1775791454::res://.godot/exported/133200997/export-82503f3aac2f4bb8fa436a967dc7b17e-canvas_item_material_additive_shared.res
 res://scenes/vfx/card_trail_rover.tscn::d5651419dc6e42c59aa1d420cd845e00::1776753416::res://.godot/exported/133200997/export-0b9b5be8ecad25874e3cecff936de0b4-card_trail_rover.scn
-res://materials/vfx/common/vfx_glow.tres::5b4595a7936ae1850ef8e511a565f0c3::1779107131::res://.godot/exported/133200997/export-b27911595d6c28401582b7610d1d9bb1-vfx_glow.res
-res://materials/vfx/common/vfx_ring_polar.tres::a36f883ebd620026e6d52314e9384e10::1779107131::res://.godot/exported/133200997/export-35da22abcaada79a2c125eefbd8470b6-vfx_ring_polar.res
-res://materials/vfx/fire_impact/vfx_fire_embers_straight.tres::270c3d4f741f0e690e8b7fd108ca923d::1779107131::res://.godot/exported/133200997/export-61e74c0e76a02cb405f6cd5eec8efcb3-vfx_fire_embers_straight.res
-res://materials/vfx/ribbon_flipbook/vfx_ribbon_flipbook_1_2_blue.tres::7b9f006ab7aada1333afed3a06c6a21d::1779107131::res://.godot/exported/133200997/export-4b6e0a7076238b2aec5c9d2a345b5f35-vfx_ribbon_flipbook_1_2_blue.res
+res://materials/vfx/common/vfx_glow.tres::5b4595a7936ae1850ef8e511a565f0c3::1782009228::res://.godot/exported/133200997/export-b27911595d6c28401582b7610d1d9bb1-vfx_glow.res
+res://materials/vfx/common/vfx_ring_polar.tres::a36f883ebd620026e6d52314e9384e10::1782009228::res://.godot/exported/133200997/export-35da22abcaada79a2c125eefbd8470b6-vfx_ring_polar.res
+res://materials/vfx/fire_impact/vfx_fire_embers_straight.tres::270c3d4f741f0e690e8b7fd108ca923d::1782009228::res://.godot/exported/133200997/export-61e74c0e76a02cb405f6cd5eec8efcb3-vfx_fire_embers_straight.res
+res://materials/vfx/ribbon_flipbook/vfx_ribbon_flipbook_1_2_blue.tres::7b9f006ab7aada1333afed3a06c6a21d::1782009228::res://.godot/exported/133200997/export-4b6e0a7076238b2aec5c9d2a345b5f35-vfx_ribbon_flipbook_1_2_blue.res
 res://materials/vfx/ribbon_flipbook/vfx_ribbon_flipbook_1_2_green.tres::a09483cc4801f2e9d1a69b6b88240e04::1776482974::res://.godot/exported/133200997/export-374ad004792d1d67696d94cfdef10f55-vfx_ribbon_flipbook_1_2_green.res
 res://scenes/vfx/common/vfx_common_glow.tscn::1cb8ef330f64b7b14966ecb49ea7e8aa::1776649045::res://.godot/exported/133200997/export-7b5d0c30e7c4ba3a72f03e13716622b2-vfx_common_glow.scn
 res://scenes/vfx/common/vfx_common_ring_polar_a.tscn::cd61aca5950c9d835d17ad4945408297::1776649058::res://.godot/exported/133200997/export-77a8587464fa1b937051320e765f710a-vfx_common_ring_polar_a.scn
@@ -20,7 +20,7 @@ res://scenes/merchant/characters/rover_merchant.tscn::ae313abd0c4745748bc2e25a67
 res://scenes/rest_site/characters/rover_rest_site.tscn::f2f108c8f9739f52e5efda96a3a8679d::1776770408::res://.godot/exported/133200997/export-bf6979bbf0240dd5715e7cb84acbca91-rover_rest_site.scn
 res://scenes/ui/selection_reticle.tscn::16cd1c8b5a34b067c1d202197255b2a8::1776770405::res://.godot/exported/133200997/export-dd22fb15f8d6c0cfd51785d17b7c5eb3-selection_reticle.scn
 res://themes/kreon_bold_shared.tres::b02aac59b3bc186268e1abcf727b11b7::1777530054::res://.godot/exported/133200997/export-3b2c08dbe1cc34eae78f01f6a549fe07-kreon_bold_shared.res
-res://scenes/combat/energy_counters/rover_energy_counter.tscn::9e5ebe54caa61d9514e0730d0f00eb0c::1779107366::res://.godot/exported/133200997/export-7b04640a79f43c3907ba06e2143ba63b-rover_energy_counter.scn
+res://scenes/combat/energy_counters/rover_energy_counter.tscn::ca0c5418358291836cbf9b7a746b87bd::1782009228::res://.godot/exported/133200997/export-7b04640a79f43c3907ba06e2143ba63b-rover_energy_counter.scn
 res://scenes/combat/energy_counters/necrobinder_energy_counter.tscn::5aa79dd6c013b4803fecb7134001849f::1779107374::res://.godot/exported/133200997/export-50f482851383dc2cd47fff3c98555eaa-necrobinder_energy_counter.scn
 res://scenes/ui/character_icons/rover_icon.tscn::a7a547bec7a1d973eecc9a948f092ce0::1779154289::res://.godot/exported/133200997/export-484247605f8c53fa163319529a897ddd-rover_icon.scn
 res://scenes/ui/rover_ability_switch_panel.tscn::9ac1a1fb9eb277e3ce36ec5322e80efa::1780308288::res://.godot/exported/133200997/export-47aec135f920133cc13b7a343b939cd3-rover_ability_switch_panel.scn

@@ -20,7 +20,7 @@ public class RepetitionSideStep() : RoverCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<DexterityPower>(2)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, base.DynamicVars.Dexterity.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Dexterity.BaseValue, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

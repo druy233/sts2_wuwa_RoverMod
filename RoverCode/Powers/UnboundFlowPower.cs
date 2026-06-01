@@ -20,8 +20,8 @@ public class UnboundFlowPower : RoverPower
     {
         if (StanceHelper.IsInStance<AeroPower>(base.Owner) && player == base.Owner.Player)
         {
-            await PowerCmd.Apply<VulnerablePower>(base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
-            await PowerCmd.Apply<WeakPower>(base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
+            await PowerCmd.Apply<WeakPower>(choiceContext, base.CombatState.HittableEnemies, base.Amount, base.Owner, null);
         }
     }
 }

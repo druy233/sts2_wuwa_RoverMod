@@ -29,11 +29,11 @@ public class PlowPowerCopy : RoverPower
 
     public override bool ShouldScaleInMultiplayer => true;
 
-    public override async Task AfterSideTurnStartLate(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side == CombatSide.Player)
         {
-        await PowerCmd.Apply<StrengthPower>(base.Owner, 3m, base.Owner, null);
+        await PowerCmd.Apply<StrengthPower>(new BlockingPlayerChoiceContext(), base.Owner, 3m, base.Owner, null);
         }
     }
 
@@ -57,7 +57,7 @@ public class PlowPowerCopy : RoverPower
                 {
                     CardModel card = combatState.CreateCard<Dazed>(player);
                     // 添加卡牌到抽牌堆顶部
-                    statusCards[i] = await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: false, CardPilePosition.Top);
+                    statusCards[i] = await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, base.Owner.Player, CardPilePosition.Top);
                 }
                 // 播放所有卡牌添加的预览特效（包括拖尾）
                 CardCmd.PreviewCardPileAdd(statusCards);

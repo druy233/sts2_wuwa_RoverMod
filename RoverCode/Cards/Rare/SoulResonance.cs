@@ -19,6 +19,7 @@ public class SoulResonance() : RoverCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         base.EnergyHoverTip,
         HoverTipFactory.FromPower<StrengthPower>()];
@@ -36,23 +37,23 @@ public class SoulResonance() : RoverCard(0,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<StrengthPower>(3m),
         new EnergyVar(3),
-        new CardsVar(3)];
+        new CardsVar(5)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var relic = base.Owner.GetRelic<ObscuraLumis>();
         if (relic == null) return;
         if (relic.HasStoredPower == false) return;
-        relic.StoreMonsterId(ModelId.none);
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
+
+        relic.RemoveCurrentMonsterFromHistory();
+
+        await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
         await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Strength.UpgradeValueBy(2m);
-        base.DynamicVars.Energy.UpgradeValueBy(1m);
-        base.DynamicVars.Cards.UpgradeValueBy(2m);
+        base.RemoveKeyword(CardKeyword.Exhaust);
     }
 }

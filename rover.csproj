@@ -41,7 +41,7 @@
       <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BaseLib">
-      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\mods\BaseLib.3.0.8\BaseLib.dll</HintPath>
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\mods\BaseLib\BaseLib.dll</HintPath>
     </Reference>
     <Reference Include="GodotSharp">
       <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>

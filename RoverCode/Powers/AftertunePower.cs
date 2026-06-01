@@ -16,7 +16,7 @@ public class AftertunePower : RoverPower
     {
         if (player != null && StanceHelper.IsInStance<SpectroPower>(base.Owner) && base.Owner.Player == player)
         {
-            await PowerCmd.Apply<StrengthPower>(base.CombatState.HittableEnemies, -1m, base.Owner, null);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, base.CombatState.HittableEnemies, -1m, base.Owner, null);
         }
     }
 }

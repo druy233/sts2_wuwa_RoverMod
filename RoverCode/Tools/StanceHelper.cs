@@ -72,7 +72,7 @@ public static class StanceHelper
         }
 
         await RemoveAllStances(owner.Creature);
-        await PowerCmd.Apply<T>(owner.Creature, 1m, owner.Creature, source);
+        await PowerCmd.Apply<T>(new ThrowingPlayerChoiceContext(), owner.Creature, 1m, owner.Creature, source);
         await OnStanceChanged(owner, currentStance, targetStance);
     }
 
@@ -98,18 +98,16 @@ public static class StanceHelper
     {
         var piles = new[] { PileType.Draw, PileType.Discard, PileType.Exhaust };
 
-        // SwordCombo(剑刃连击)的方法
-        if (oldStance != newStance)
-        {
-            var list = piles.SelectMany(p => p.GetPile(owner).Cards)
-                .OfType<SwordCombo>()
-                .ToList();
+        // SwordCombo(剑刃连击)的方法            
+        var list = piles.SelectMany(p => p.GetPile(owner).Cards)
+            .OfType<SwordCombo>()
+            .ToList();
 
-            foreach (CardModel item in list)
-            {
-                await CardPileCmd.Add(item, PileType.Hand);
-            }
+        foreach (CardModel item in list)    
+        {    
+            await CardPileCmd.Add(item, PileType.Hand);
         }
+        
 
         // EchoesOfWanderlust(长路归鸣)的方法
         if (owner.Creature.HasPower<EchoesOfWanderlustPower>())

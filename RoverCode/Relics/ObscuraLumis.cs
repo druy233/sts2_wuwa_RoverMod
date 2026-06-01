@@ -20,10 +20,13 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rover.Cards;
 using Rover.Powers;
+using Rover.RoverCode.Actions;
+using Rover.RoverCode.Tools;
 
 namespace Rover.Relics;
 
@@ -71,8 +74,6 @@ public class ObscuraLumis : RoverRelic
     AbsorbedMonsterEntries.Select(entry => new ModelId("MONSTER", entry)).ToList();
 
 
-
-
     // 共鸣解放充能计数器
     public int EnergyCounter => this._energytCounter;
     public async Task AddToEnergyCounter(int amount)
@@ -91,7 +92,6 @@ public class ObscuraLumis : RoverRelic
     {
         if (value < 0) return;
         this._energytCounter = value;
-        Flash();
         InvokeDisplayAmountChanged();
     }
     public override int DisplayAmount
@@ -113,17 +113,21 @@ public class ObscuraLumis : RoverRelic
 
     // 遗物稀有度（起始遗物）
     public override RelicRarity Rarity => RelicRarity.Starter;
+
     // 使用 SavedSpireField 持久化存储怪物 ID
     private static readonly SavedSpireField<ObscuraLumis, ModelId> StoredMonsterIdField =
         new(() => ModelId.none, "Rover_ObscuraLumis_MonsterId");
+
     // 存储怪物能力
     protected ModelId StoredMonsterId
     {
         get => StoredMonsterIdField.Get(this) ?? ModelId.none;
         set => StoredMonsterIdField.Set(this, value);
     }
+
     // 是否已存储力量
     public bool HasStoredPower => StoredMonsterId.Entry != "NONE";
+
     // 已吸收过的怪物 ID 列表
     public IReadOnlyList<string> AbsorbedMonsterEntries
     {
@@ -135,12 +139,15 @@ public class ObscuraLumis : RoverRelic
             return str.Split(',', StringSplitOptions.RemoveEmptyEntries);
         }
     }
+
+    // 设置已吸收过的怪物 ID 列表
     private void SetAbsorbedMonsterEntries(IEnumerable<string> entries)
     {
         string str = string.Join(",", entries);
         _absorbedMonsterEntriesField.Set(this, str);
     }
-    // 对外方法
+
+    // 存储怪物能力并加入历史列表
     public void StoreMonsterId(ModelId monsterId)
     {
         var entries = AbsorbedMonsterEntries.ToList();
@@ -156,18 +163,57 @@ public class ObscuraLumis : RoverRelic
         Log.Info("怪物本地化名称:" + GetMonsterLocalizedName(monsterId));
         InvokeDisplayAmountChanged();
     }
+
     // 切换到吸收过的怪物能力
     public void SwitchToMonster(ModelId monsterId)
     {
-        if (AbsorbedMonsterEntries.Contains(monsterId.Entry))
+        var entries = AbsorbedMonsterEntries.ToList();
+        if (!entries.Contains(monsterId.Entry)) return;
+        var runState = RunManager.Instance.DebugOnlyGetState();
+        if (runState != null && runState.Players.Count > 1)
         {
-            StoredMonsterId = monsterId;
-            Flash();
-            InvokeDisplayAmountChanged();
+            var action = new SwitchMonsterAction
+            {
+                PlayerNetId = Owner.NetId,
+                MonsterEntry = monsterId.Entry
+            };
+            RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(action);
+            Log.Info($"切换至怪物： {monsterId.Entry}, 多人游戏玩家={runState.Players.Count > 1}");
+        }
+        else
+        {
+            SwitchToMonsterInternal(monsterId);
         }
     }
+    internal void SwitchToMonsterInternal(ModelId monsterId)
+    {
+        StoredMonsterId = monsterId;
+        Flash();
+        InvokeDisplayAmountChanged();
+        Log.Info($"怪物能力已切换至: {monsterId.Entry}");
+    }
+
+    // 永久移除怪物能力（灵魂共鸣卡牌效果）
+    public void RemoveCurrentMonsterFromHistory()
+    {
+        string currentEntry = StoredMonsterId.Entry;
+        if (currentEntry == "NONE") return;
+
+        var entries = AbsorbedMonsterEntries.ToList();
+        if (entries.Contains(currentEntry))
+        {
+            entries.Remove(currentEntry);
+            SetAbsorbedMonsterEntries(entries);
+        }
+        // 清空当前激活的能力
+        StoredMonsterId = ModelId.none;
+        Flash();
+        InvokeDisplayAmountChanged();
+    }
+
     // 当前激活的怪物能力 ID
     public ModelId CurrentMonsterId => StoredMonsterId;
+
     // 获取怪物本地化名称
     public string GetMonsterLocalizedName(ModelId monsterId)
     {
@@ -265,14 +311,15 @@ public class ObscuraLumis : RoverRelic
         }
     }
 
+
+
     public override async Task BeforeCombatStart()// 战斗开始时事件
     {
         // 放入一张“为我所用+”
         var card = base.Owner.Creature.CombatState?.CreateCard<WorkForMe>(base.Owner);
         if (card == null) return;
         CardCmd.Upgrade(card);
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true);
-
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, base.Owner);
     }
 
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
@@ -341,8 +388,8 @@ public class ObscuraLumis : RoverRelic
         }
     }
 
-    public override decimal ModifyMaxEnergy(Player player, decimal amount)
-    {// 修改最大能量
+    public override decimal ModifyMaxEnergy(Player player, decimal amount)// 修改最大能量
+    {
         if (player == base.Owner)
         {
             if (StoredMonsterId.Entry.Equals("INFESTED_PRISM"))
@@ -353,8 +400,9 @@ public class ObscuraLumis : RoverRelic
         }
         return amount;
     }
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
-    {// 卡牌打出后
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)// 卡牌打出后
+    {
         if (cardPlay.Card.Owner != Owner) return;// 只处理自己打出的卡牌
 
         if (StoredMonsterId.Entry.Equals("GREMLIN_MERC"))
@@ -400,8 +448,8 @@ public class ObscuraLumis : RoverRelic
         await Task.CompletedTask;
     }
 
-    public override async Task AfterEnergySpent(CardModel card, int amount)
-    {// 能量消耗时事件
+    public override async Task AfterEnergySpent(CardModel card, int amount)// 能量消耗时事件
+    {
         if (card.Owner != base.Owner) return;// 只处理自己打出的卡牌
 
         int lastValue =  this._energytCounter + amount;
@@ -411,8 +459,8 @@ public class ObscuraLumis : RoverRelic
         await Task.CompletedTask;
     }
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {// 玩家回合开始时
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)// 玩家回合开始时
+    {
         if (player != base.Owner) return;// 只处理自己的回合
         _turnCounter++;// 回合计数器
         _turnGetValue = 0;
@@ -508,7 +556,7 @@ public class ObscuraLumis : RoverRelic
             if (StoredMonsterId.Entry.Equals("TERROR_EEL"))
             {
                 Flash();
-                await PowerCmd.Apply<VigorPower>(base.Owner.Creature, 6m, base.Owner.Creature, null);
+                await PowerCmd.Apply<VigorPower>(choiceContext, base.Owner.Creature, 6m, base.Owner.Creature, null);
             }
         }
 
@@ -518,20 +566,23 @@ public class ObscuraLumis : RoverRelic
             {
                 Flash();
                 if (enemies == null) return;
-                await PowerCmd.Apply<IntangiblePower>(base.Owner.Creature, 1m ,base.Owner.Creature, null);
+                await PowerCmd.Apply<IntangiblePower>(choiceContext, base.Owner.Creature, 1m ,base.Owner.Creature, null);
                 await CreatureCmd.Damage(choiceContext, enemies, 12m, ValueProp.Unblockable, player.Creature);
             }
         }
     }
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
-    {// 某一方回合开始前
+
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)// 某一方回合开始前
+    {
+        var choiceContext = new BlockingPlayerChoiceContext();
+
         if (side == CombatSide.Enemy)// 敌人回合开始时
         {
             if (StoredMonsterId.Entry.Equals("HUNTER_KILLER"))
             {
                 Flash();
-                await PowerCmd.Apply<StrengthPower>(combatState.HittableEnemies, -1m, base.Owner.Creature, null);
-                await PowerCmd.Apply<DexterityPower>(combatState.HittableEnemies, -1m, base.Owner.Creature, null);
+                await PowerCmd.Apply<StrengthPower>(choiceContext, combatState.HittableEnemies, -1m, base.Owner.Creature, null);
+                await PowerCmd.Apply<DexterityPower>(choiceContext, combatState.HittableEnemies, -1m, base.Owner.Creature, null);
             }
 
             if (StoredMonsterId.Entry.Equals("KNOWLEDGE_DEMON"))
@@ -541,30 +592,29 @@ public class ObscuraLumis : RoverRelic
                 {
                     // 随机选择 0、1、2 对应三种减益
                     int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 4); // 0，1，2，3
-                    PowerModel? debuff = null;
                     decimal amount;
 
                     switch (roll)
                     {
                         case 0:
-                            debuff = ModelDb.Power<WeakPower>(); // 虚弱
-                            amount = 1m;
-                            await PowerCmd.Apply(debuff.ToMutable(), enemy, amount, Owner.Creature, null);
+                            // 虚弱
+                            amount = 2m;
+                            await PowerCmd.Apply<WeakPower>(choiceContext, enemy, amount, Owner.Creature, null);
                             break;
                         case 1:
-                            debuff = ModelDb.Power<DemisePower>(); // 消亡
+                            // 消亡
                             amount = 6m;
-                            await PowerCmd.Apply(debuff.ToMutable(), enemy, amount, Owner.Creature, null);
+                            await PowerCmd.Apply<DemisePower>(choiceContext, enemy, amount, Owner.Creature, null);
                             break;
                         case 2:
-                            debuff = ModelDb.Power<FrailPower>(); // 脆弱
-                            amount = 1m;
-                            await PowerCmd.Apply(debuff.ToMutable(), enemy, amount, Owner.Creature, null);
+                            // 脆弱
+                            amount = 2m;
+                            await PowerCmd.Apply<FrailPower>(choiceContext, enemy, amount, Owner.Creature, null);
                             break;
                         case 3:
-                            debuff = ModelDb.Power<StrengthPower>(); // 力量-1
-                            amount = -1m;
-                            await PowerCmd.Apply(debuff.ToMutable(), enemy, amount, Owner.Creature, null);
+                            // 力量-2
+                            amount = -2m;
+                            await PowerCmd.Apply<StrengthPower>(choiceContext, enemy, amount, Owner.Creature, null);
                             break;
                     }
                 }
@@ -587,141 +637,140 @@ public class ObscuraLumis : RoverRelic
             }
         }
 
-        if (side != CombatSide.Player) return; // 玩家回合开始时
-        if (CombatSide.Player != base.Owner.Creature.Side) return; // 只处理遗物持有者的回合
-
-        if (StoredMonsterId.Entry.Equals("LIVING_FOG"))
+        if (side == base.Owner.Creature.Side)// 自己回合开始时
         {
-            foreach (var enemy in combatState.HittableEnemies)
+            if (StoredMonsterId.Entry.Equals("LIVING_FOG"))
             {
-                if (_intentChangeCount >= 1) break;
-
-                var monster = enemy.Monster;
-                if (monster == null) continue;
-
-                // 检查当前意图是否为技能
-                bool hasSkill = monster.NextMove.Intents.Any(i => i is DefendIntent || i is DebuffIntent 
-                || i is StatusIntent || i is HealIntent || i is SummonIntent || i is EscapeIntent);
-                if (!hasSkill) continue;
-
-                // 修复 FollowUpStateId，确保下一回合能恢复
-                string? followUpStateId = monster.NextMove.FollowUpStateId;
-                if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.NextMove.Id;
-                if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.MoveStateMachine?.States.Keys.FirstOrDefault();
-
-                int damage = 6; // 可自定义伤害
-                var attackIntent = new SingleAttackIntent(damage);
-
-                async Task PerformAttack(IReadOnlyList<Creature> _)
+                foreach (var enemy in combatState.HittableEnemies)
                 {
-                    var combatState = enemy.CombatState;
-                    if (combatState == null) return;
+                    if (_intentChangeCount >= 1) break;
 
-                    foreach (var player in combatState.Players)
+                    var monster = enemy.Monster;
+                    if (monster == null) continue;
+
+                    // 检查当前意图是否为技能
+                    bool hasSkill = monster.NextMove.Intents.Any(i => i is DefendIntent || i is DebuffIntent
+                    || i is StatusIntent || i is HealIntent || i is SummonIntent || i is EscapeIntent);
+                    if (!hasSkill) continue;
+
+                    // 修复 FollowUpStateId，确保下一回合能恢复
+                    string? followUpStateId = monster.NextMove.FollowUpStateId;
+                    if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.NextMove.Id;
+                    if (string.IsNullOrEmpty(followUpStateId)) followUpStateId = monster.MoveStateMachine?.States.Keys.FirstOrDefault();
+
+                    int damage = 6; // 可自定义伤害
+                    var attackIntent = new SingleAttackIntent(damage);
+
+                    async Task PerformAttack(IReadOnlyList<Creature> _)
                     {
-                        if (player.Creature.IsDead) continue;
-                        await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), player.Creature, damage, ValueProp.Move, enemy);
+                        var combatState = enemy.CombatState;
+                        if (combatState == null) return;
+
+                        foreach (var player in combatState.Players)
+                        {
+                            if (player.Creature.IsDead) continue;
+                            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), player.Creature, damage, ValueProp.Move, enemy);
+                        }
                     }
+
+                    var forcedAttack = new MoveState("forced_attack", PerformAttack, attackIntent)
+                    {
+                        FollowUpStateId = followUpStateId
+                    };
+
+                    monster.SetMoveImmediate(forcedAttack, forceTransition: true);
+                    _intentChangeCount++;
+                    Flash();
+                }
+            }
+
+            if (StoredMonsterId.Entry.Equals("KNOWLEDGE_DEMON"))
+            {
+                Flash();
+                // 随机选择 0、1、2 对应三种增益
+                int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 3); // 0,1,2
+
+                switch (roll)
+                {
+                    case 0:
+                        // 力量
+                        await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, 2m, Owner.Creature, null);
+                        break;
+                    case 1:
+                        // 敏捷
+                        await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, 2m, Owner.Creature, null);
+                        break;
+                    case 2:
+                        await CreatureCmd.Heal(base.Owner.Creature, 6m); // 生命恢复
+                        break;
+                }
+            }
+
+            if (StoredMonsterId.Entry.Equals("STABBOT"))
+            {
+                Flash();
+                await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+            }
+
+            if (_turnCounter > 5)
+            {
+                if (StoredMonsterId.Entry.Equals("TEST_SUBJECT"))
+                {
+                    await PowerCmd.Apply<NemesisPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
+                }
+            }
+
+            if (_turnCounter % 2 == 0)
+            {
+                if (StoredMonsterId.Entry.Equals("THE_LOST"))
+                {
+                    Flash();
+                    var enemies = combatState.HittableEnemies;
+                    int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
+                    var target = enemies[index];
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, target, -2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
                 }
 
-                var forcedAttack = new MoveState("forced_attack", PerformAttack, attackIntent)
+                if (StoredMonsterId.Entry.Equals("THE_FORGOTTEN"))
                 {
-                    FollowUpStateId = followUpStateId
-                };
+                    Flash();
+                    var enemies = combatState.HittableEnemies;
+                    int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
+                    var target = enemies[index];
+                    await PowerCmd.Apply<DexterityPower>(choiceContext, target, -2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
+                }
 
-                monster.SetMoveImmediate(forcedAttack, forceTransition: true);
-                _intentChangeCount++;
-                Flash();
             }
-        }
 
-        if (StoredMonsterId.Entry.Equals("KNOWLEDGE_DEMON"))
-        {
-            Flash();
-            // 随机选择 0、1、2 对应三种增益
-            int roll = base.Owner.RunState.Rng.CombatTargets.NextInt(0, 3); // 0,1,2
-            PowerModel? debuff = null;
-
-            switch (roll)
+            if (_turnCounter % 3 == 0)
             {
-                case 0:
-                    debuff = ModelDb.Power<StrengthPower>(); // 力量
-                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, 1m, Owner.Creature, null);
-                    break;
-                case 1:
-                    debuff = ModelDb.Power<DexterityPower>(); // 敏捷
-                    await PowerCmd.Apply(debuff.ToMutable(), base.Owner.Creature, 1m, Owner.Creature, null);
-                    break;
-                case 2:
-                    await CreatureCmd.Heal(base.Owner.Creature, 3m); // 生命恢复
-                    break;
+                if (StoredMonsterId.Entry.Equals("VINE_SHAMBLER"))
+                {
+                    Flash();
+                    await PowerCmd.Apply<ShacklingPotionPower>(choiceContext, combatState.HittableEnemies, 3m, Owner.Creature, null);
+                }
+
+                if (StoredMonsterId.Entry.Equals("KIN_PRIEST"))
+                {
+                    Flash();
+                    await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<WeakPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                }
+
             }
-        }
-
-        if (StoredMonsterId.Entry.Equals("STABBOT"))
-        {
-            Flash();
-            await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
-        }
-
-        if (_turnCounter > 5)
-        {
-            if (StoredMonsterId.Entry.Equals("TEST_SUBJECT"))
-            {
-                await PowerCmd.Apply<NemesisPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
-            }
-        }
-
-        if (_turnCounter % 2 == 0)
-        {
-            if (StoredMonsterId.Entry.Equals("THE_LOST"))
-            {
-                Flash();
-                var enemies = combatState.HittableEnemies;
-                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-                var target = enemies[index];
-                await PowerCmd.Apply<StrengthPower>(target, -2m, base.Owner.Creature, null);
-                await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
-            }
-
-            if (StoredMonsterId.Entry.Equals("THE_FORGOTTEN"))
-            {
-                Flash();
-                var enemies = combatState.HittableEnemies;
-                int index = base.Owner.RunState.Rng.CombatTargets.NextInt(0, enemies.Count);
-                var target = enemies[index];
-                await PowerCmd.Apply<DexterityPower>(target, -2m, base.Owner.Creature, null);
-                await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
-            }
-
-        }
-
-        if (_turnCounter % 3 == 0)
-        {
-            if (StoredMonsterId.Entry.Equals("VINE_SHAMBLER"))
-            {
-                Flash();
-                await PowerCmd.Apply<ShacklingPotionPower>(combatState.HittableEnemies, 3m, Owner.Creature, null);
-            }
-
-            if (StoredMonsterId.Entry.Equals("KIN_PRIEST"))
-            {
-                Flash();
-                await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
-                await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
-                await PowerCmd.Apply<WeakPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
-            }
-
         }
     }
 
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
-    {// 回合结束后
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)// 某一方回合结束后
+    {
 
     }
 
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
-    {// 某回合开始前事件
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    {// 某一方回合开始前事件
         // 只在第一回合开始时触发怪物能力(一次性怪物能力)
         if (side == base.Owner.Creature.Side && combatState.RoundNumber <= 1 && CombatSide.Player == base.Owner.Creature.Side)
         {
@@ -744,57 +793,57 @@ public class ObscuraLumis : RoverRelic
             switch (StoredMonsterId.Entry)
             {
                 case "SHRINKER_BEETLE":
-                    await PowerCmd.Apply<ShrinkPower>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ShrinkPower>(choiceContext, combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "TWIG_SLIME_M":
-                    await PowerCmd.Apply<SlimedPower>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlimedPower>(choiceContext, combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "LEAF_SLIME_M":
-                    await PowerCmd.Apply<SlimedPower>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlimedPower>(choiceContext, combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "TWIG_SLIME_S":
-                    await PowerCmd.Apply<SlimedPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlimedPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
                     break;
                 case "LEAF_SLIME_S":
-                    await PowerCmd.Apply<SlimedPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlimedPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
                     break;
                 case "INKLET":
-                    await PowerCmd.Apply<SlipperyPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlipperyPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "SLITHERING_STRANGLER":
-                    await PowerCmd.Apply<ConstrictPowerCopy>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ConstrictPowerCopy>(choiceContext,combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "FLYCONID":
-                    await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 2m, base.Owner.Creature, null);
-                    await PowerCmd.Apply<VulnerablePower>(combatState.HittableEnemies, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, combatState.HittableEnemies, 2m, base.Owner.Creature, null);
                     break;
                 case "TRACKER_RUBY_RAIDER":
-                    await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 2m, base.Owner.Creature, null);
                     break;
                 case "CUBEX_CONSTRUCT":
-                    await PowerCmd.Apply<ArtifactPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ArtifactPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "BYRDONIS":
-                    await PowerCmd.Apply<TerritorialPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<TerritorialPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "BYGONE_EFFIGY":
-                    await PowerCmd.Apply<SlowPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlowPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
                     break;
                 case "VANTOM":
-                    await PowerCmd.Apply<SlipperyPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlipperyPower>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null);
                     break;
                 case "TOADPOLE":
-                    await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ThornsPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
                     break;
                 case "CEREMONIAL_BEAST":
                     int threshold = (int)(Owner.Creature.MaxHp * 0.6);
-                    await PowerCmd.Apply<PlowPowerCopy>(base.Owner.Creature, threshold, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PlowPowerCopy>(choiceContext, base.Owner.Creature, threshold, base.Owner.Creature, null);
                     break;
                 case "CALCIFIED_CULTIST":
-                    await PowerCmd.Apply<RitualPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<RitualPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "DAMP_CULTIST":
-                    await PowerCmd.Apply<RitualPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<RitualPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
                     break;
                 case "CORPSE_SLUG":
                     List<CardModel> cardsToExhaust = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner, new CardSelectorPrefs(new LocString("relics", "ROVER_CORPSE_SLUG"), 0, 10), null, this)).ToList();
@@ -803,99 +852,99 @@ public class ObscuraLumis : RoverRelic
                         foreach (var card in cardsToExhaust)
                         {
                             await CardCmd.Exhaust(choiceContext, card, causedByEthereal: false, skipVisuals: false);
-                            await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, 1m, Owner.Creature, null);
+                            await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, 1m, Owner.Creature, null);
                         }
                     }
                     break;
                 case "GAS_BOMB":
-                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 1m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["BombDamage"].BaseValue);
+                    (await PowerCmd.Apply<TheBombPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["BombDamage"].BaseValue);
                     break;
                 case "FOSSIL_STALKER":
-                    await PowerCmd.Apply<SuckPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SuckPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "TWO_TAILED_RAT":
                     await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["DefaultPowerDamage"], base.Owner.Creature);
                     await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["DefaultPowerDamage"], base.Owner.Creature);
-                    await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
                     break;
                 case "SEWER_CLAM":
-                    await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, 8m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, 8m, base.Owner.Creature, null);
                     break;
                 case "HAUNTED_SHIP":
-                    await PowerCmd.Apply<WeakPower>(combatState.HittableEnemies, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<WeakPower>(choiceContext, combatState.HittableEnemies, 1m, base.Owner.Creature, null);
                     break;
                 case "SKULKING_COLONY":
-                    await PowerCmd.Apply<HardenedShellPower>(base.Owner.Creature, 20m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<HardenedShellPower>(choiceContext, base.Owner.Creature, 20m, base.Owner.Creature, null);
                     break;
                 case "PHANTASMAL_GARDENER":
-                    await PowerCmd.Apply<SkittishPower>(base.Owner.Creature, 8m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SkittishPower>(choiceContext, base.Owner.Creature, 8m, base.Owner.Creature, null);
                     break;
                 case "LAGAVULIN_MATRIARCH":
-                    await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, 4m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, 4m, base.Owner.Creature, null);
                     await CreatureCmd.Heal(base.Owner.Creature, base.DynamicVars["Sleep"].IntValue); 
                     break;
                 case "EXOSKELETON":
-                    await PowerCmd.Apply<HardToKillPowerCopy>(base.Owner.Creature, 15m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<HardToKillPowerCopy>(choiceContext, base.Owner.Creature, 15m, base.Owner.Creature, null);
                     break;
                 case "TUNNELER":
-                    await PowerCmd.Apply<BurrowedPowerCopy>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<BurrowedPowerCopy>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "THIEVING_HOPPER":
-                    await PowerCmd.Apply<FlutterPowerCopy>(base.Owner.Creature, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FlutterPowerCopy>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null);
                     break;
                 case "LOUSE_PROGENITOR":
-                    await PowerCmd.Apply<CurlUpPower>(base.Owner.Creature, 12m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<CurlUpPower>(choiceContext, base.Owner.Creature, 12m, base.Owner.Creature, null);
                     break;
                 case "MYTE":
-                    await PowerCmd.Apply<PoisonPower>(combatState.HittableEnemies, 5m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PoisonPower>(choiceContext, combatState.HittableEnemies, 5m, base.Owner.Creature, null);
                     break;
                 case "CHOMPER":
-                    await PowerCmd.Apply<ArtifactPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ArtifactPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
                     break;
                 case "SLUMBERING_BEETLE":
-                    await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, 4m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, 4m, base.Owner.Creature, null);
                     await CreatureCmd.Heal(base.Owner.Creature, base.DynamicVars["Sleep"].IntValue);
                     break;
                 case "SPINY_TOAD":
-                    await PowerCmd.Apply<ThornsPower>(base.Owner.Creature, 5m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ThornsPower>(choiceContext, base.Owner.Creature, 5m, base.Owner.Creature, null);
                     break;
                 case "THE_INSATIABLE":
-                    await PowerCmd.Apply<SandpitPowerCopy>(base.Owner.Creature, 5m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SandpitPowerCopy>(choiceContext, base.Owner.Creature, 5m, base.Owner.Creature, null);
                     break;
                 case "ROCKET":
-                    (await PowerCmd.Apply<TheBombPower>(base.Owner.Creature, 3m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["RocketDamage"].BaseValue);
+                    (await PowerCmd.Apply<TheBombPower>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null))?.SetDamage(base.DynamicVars["RocketDamage"].BaseValue);
                     break;
                 case "DEVOTED_SCULPTOR":
-                    await PowerCmd.Apply<RitualPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<RitualPower>(choiceContext, base.Owner.Creature, 3m, base.Owner.Creature, null);
                     break;
                 case "LIVING_SHIELD":
-                    await PowerCmd.Apply<BeaconOfHopePower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<BeaconOfHopePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "AXEBOT":
-                    await PowerCmd.Apply<StockPowerCopy>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<StockPowerCopy>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "FROG_KNIGHT":
-                    await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, 8m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PlatingPower>(choiceContext, base.Owner.Creature, 8m, base.Owner.Creature, null);
                     break;
                 case "SLIMED_BERSERKER":
-                    await PowerCmd.Apply<SlimedPower>(combatState.HittableEnemies, 8m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SlimedPower>(choiceContext, combatState.HittableEnemies, 8m, base.Owner.Creature, null);
                     break;
                 case "OWL_MAGISTRATE":
-                    await PowerCmd.Apply<SoarPowerCopy>(base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<SoarPowerCopy>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
                     break;
                 case "SCROLL_OF_BITING":
-                    await PowerCmd.Apply<PaperCutsPowerCopy>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<PaperCutsPowerCopy>(choiceContext, combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "ZAPBOT":
-                    await PowerCmd.Apply<HighVoltagePower>(combatState.HittableEnemies, 3m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<HighVoltagePower>(choiceContext, combatState.HittableEnemies, 3m, base.Owner.Creature, null);
                     break;
                 case "PUNCH_CONSTRUCT":
                     await CreatureCmd.GainBlock(base.Owner.Creature, 10m, ValueProp.Unpowered, null);
-                    await PowerCmd.Apply<ArtifactPower>(base.Owner.Creature, 1m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ArtifactPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, null);
                     break;
                 case "MECHA_KNIGHT":
-                    await PowerCmd.Apply<ArtifactPower>(base.Owner.Creature, 2m, base.Owner.Creature, null);
-                    await PowerCmd.Apply<BurnPower>(combatState.HittableEnemies, 8m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<ArtifactPower>(choiceContext, base.Owner.Creature, 2m, base.Owner.Creature, null);
+                    await PowerCmd.Apply<BurnPower>(choiceContext, combatState.HittableEnemies, 8m, base.Owner.Creature, null);
                     break;
                 case "SPECTRAL_KNIGHT":
                     var drawPileCards = PileType.Draw.GetPile(Owner).Cards;
@@ -945,9 +994,9 @@ public class ObscuraLumis : RoverRelic
                     }
                     break;
                 case "QUEEN":
-                    await PowerCmd.Apply<VulnerablePower>(combatState.HittableEnemies, 99, base.Owner.Creature, null);
-                    await PowerCmd.Apply<WeakPower>(combatState.HittableEnemies, 99, base.Owner.Creature, null);
-                    await PowerCmd.Apply<FrailPower>(combatState.HittableEnemies, 99, base.Owner.Creature, null);
+                    await PowerCmd.Apply<VulnerablePower>(choiceContext, combatState.HittableEnemies, 99, base.Owner.Creature, null);
+                    await PowerCmd.Apply<WeakPower>(choiceContext, combatState.HittableEnemies, 99, base.Owner.Creature, null);
+                    await PowerCmd.Apply<FrailPower>(choiceContext, combatState.HittableEnemies, 99, base.Owner.Creature, null);
                     break;
                 default:
                     await CreatureCmd.Damage(choiceContext, combatState.HittableEnemies, (DamageVar)base.DynamicVars["DefaultPowerDamage"], base.Owner.Creature);

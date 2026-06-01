@@ -27,7 +27,7 @@ public class ReserveWeapons() : RoverCard(1,
         if (cardModel != null)
         {
             cardModel.SetToFreeThisTurn();
-            await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
         }
     }
 

@@ -67,12 +67,12 @@
   "ROVER-CONFRONTATION.title": "Confrontation",
   "ROVER-CHARGE_ATTACK.description": "Gain {RoverNum:diff()} [gold]Charge[/gold].\nDeal {Damage:diff()} damage.",
   "ROVER-CHARGE_ATTACK.title": "Charged Attack",
-  "ROVER-SWORD_COMBO.description": "Deal {Damage:diff()} damage.\nWhenever you switch to a different Aspect, return this card to your [gold]Hand[/gold].",
+  "ROVER-SWORD_COMBO.description": "Deal {Damage:diff()} damage.\n Whenever you switch Aspect, return this card to your [gold]Hand[/gold].",
   "ROVER-SWORD_COMBO.title": "Sword Combo",
 
 
 
-  "ROVER-THE_END.description": "Deal {Damage:diff()} damage to ALL enemies.\nThis card costs 2 less Energy.",
+  "ROVER-THE_END.description": "Deal {Damage:diff()} damage to ALL enemies.{IfUpgraded:show:Deal additional damage equal to 5% of the enemy's max HP.|}\nThis card costs 2 less Energy.",
   "ROVER-THE_END.title": "THE END",
   "ROVER-AWAKENING_GALE.description": "Deal damage equal to the sum of the target's [gold]Vulnerable[/gold] and [gold]Weak[/gold] stacks.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold] and {WeakPower:diff()} [gold]Weak[/gold].{InCombat:\n(Deal {CalculatedDamage:diff()} damage)|}",
   "ROVER-AWAKENING_GALE.title": "Awakening Gale",

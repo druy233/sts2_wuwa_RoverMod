@@ -25,7 +25,7 @@ public class UnboundFlow() : RoverCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("RoverNum", 2m)];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<UnboundFlowPower>(Owner.Creature, DynamicVars["RoverNum"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<UnboundFlowPower>(choiceContext, base.Owner.Creature, base.DynamicVars["RoverNum"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

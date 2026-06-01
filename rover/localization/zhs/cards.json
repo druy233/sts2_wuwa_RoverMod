@@ -67,12 +67,12 @@
   "ROVER-CONFRONTATION.title": "对抗",
   "ROVER-CHARGE_ATTACK.description": "[gold]充能[/gold]{RoverNum:diff()}点。\n造成{Damage:diff()}点伤害。",
   "ROVER-CHARGE_ATTACK.title": "蓄力攻击",
-  "ROVER-SWORD_COMBO.description": "造成{Damage:diff()}点伤害。\n每当切换至不同的属性时，将这张牌放回你的手牌。",
+  "ROVER-SWORD_COMBO.description": "造成{Damage:diff()}点伤害。\n每当你切换属性时，将这张牌放回你的手牌。",
   "ROVER-SWORD_COMBO.title": "剑刃连击",
 
 
 
-  "ROVER-THE_END.description": "对全体敌人造成{Damage:diff()}点伤害。\n这张牌的耗能减少2。",
+  "ROVER-THE_END.description": "对全体敌人造成{Damage:diff()}点伤害。{IfUpgraded:show:额外造成敌人最大生命值5%的伤害。|}\n这张牌的耗能减少2。",
   "ROVER-THE_END.title": "终局",
   "ROVER-AWAKENING_GALE.description": "造成等同于目标[gold]易伤[/gold]和[gold]虚弱[/gold]层数相加的伤害。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]，{WeakPower:diff()}层[gold]虚弱[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
   "ROVER-AWAKENING_GALE.title": "苍息破象",

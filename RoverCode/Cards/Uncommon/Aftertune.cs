@@ -24,7 +24,7 @@ public class Aftertune() : RoverCard(1,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<AftertunePower>(Owner.Creature, DynamicVars["RoverNum"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<AftertunePower>(choiceContext, base.Owner.Creature, DynamicVars["RoverNum"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

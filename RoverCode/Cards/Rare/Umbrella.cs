@@ -17,8 +17,8 @@ public class Umbrella() : RoverCard(1,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await PowerCmd.Apply<BeProtected>(cardPlay.Target, 1m, base.Owner.Creature, this);
-        await PowerCmd.Apply<RoverGuardedPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<BeProtected>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<RoverGuardedPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

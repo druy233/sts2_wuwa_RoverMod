@@ -31,6 +31,6 @@ public class CompleteNutritionSqueezyJelly : RoverPotion
         PotionModel.AssertValidForTargetedPotion(target);
         NCombatRoom.Instance?.PlaySplashVfx(target, Colors.Yellow);
         await CreatureCmd.GainBlock(target, 10m, ValueProp.Unpowered, null);
-        await PowerCmd.Apply<DexterityPower>(target, 2m, base.Owner.Creature, null);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, target, 2m, base.Owner.Creature, null);
     }
 }

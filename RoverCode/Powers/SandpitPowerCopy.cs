@@ -17,8 +17,6 @@ public class SandpitPowerCopy : RoverPower
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override bool IsInstanced => true;
-
     public override int DisplayAmount => base.Amount;
 
     private bool _hasIncreasedThisTurn = false;
@@ -30,7 +28,7 @@ public class SandpitPowerCopy : RoverPower
         {
             _hasIncreasedThisTurn = false;
             // 减少 1 层
-            await PowerCmd.ModifyAmount(this, -1m, null, null);
+            await PowerCmd.ModifyAmount(choiceContext, this, -1m, null, null);
 
             InvokeDisplayAmountChanged();
             // 层数归零强制杀死随机敌人，然后移除自身
@@ -50,7 +48,7 @@ public class SandpitPowerCopy : RoverPower
 
         _hasIncreasedThisTurn = true;
 
-        await PowerCmd.ModifyAmount(this, 1m, null, null);
+        await PowerCmd.ModifyAmount(choiceContext, this, 1m, null, null);
         InvokeDisplayAmountChanged();
     }
 

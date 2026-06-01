@@ -25,7 +25,7 @@ public class WordInAGrainOfSand() : RoverCard(0,
         int gain = enemyStrength;
         if (base.IsUpgraded) gain += 2;
 
-        await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, gain, base.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, gain, base.Owner.Creature, this);
     }
     protected override void OnUpgrade()
     {

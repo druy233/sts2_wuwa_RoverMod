@@ -96,7 +96,7 @@
   "ROVER-SWORD_COMBO.description": "피해를 {Damage:diff()} 줍니다.\n속성을 전환할 때마다, 이 카드를 [gold]손[/gold]으로 가져옵니다.",
   "ROVER-SWORD_COMBO.title": "연격",
 
-  "ROVER-THE_END.description": "모든 적에게 피해를 {Damage:diff()} 줍니다.\n이 카드의 비용이 2 감소합니다.",
+  "ROVER-THE_END.description": "모든 적에게 피해를 {Damage:diff()} 줍니다.{IfUpgraded:show:적 최대 체력의 5% 만큼 추가 피해를 줍니다.|}\n이 카드의 비용이 2 감소합니다.",
   "ROVER-THE_END.title": "종언",
 
   "ROVER-AWAKENING_GALE.description": "대상의 [gold]취약[/gold]과 [gold]약화[/gold] 수치의 합계만큼 피해를 줍니다.\n[gold]취약[/gold]을 {VulnerablePower:diff()}, [gold]약화[/gold]를 {WeakPower:diff()} 부여합니다.{InCombat:\n(피해를 {CalculatedDamage:diff()} 줍니다.)|}",

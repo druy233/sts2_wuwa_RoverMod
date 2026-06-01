@@ -23,18 +23,14 @@ public class WorkForMe() : RoverCard(3,
         ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Target == null)
-        {
-            Log.Error("捕捉怪物出现问题！");
-            return;
-        }
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         bool shouldTriggerFatal = cardPlay.Target.Powers.All((PowerModel p) => p.ShouldOwnerDeathTriggerFatal());
         AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
         .FromCard(this).Targeting(cardPlay.Target)
         .Execute(choiceContext);
         // 检查目标是否死亡，并且是由本次伤害造成的死亡
-        if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))
-        {
+        if (shouldTriggerFatal && attackCommand.Results.SelectMany((List<DamageResult> r) => r).Any((DamageResult r) => r.WasTargetKilled))
+		{
             await HandleKill(choiceContext, cardPlay.Target);
         }
     }
