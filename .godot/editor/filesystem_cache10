@@ -470,7 +470,7 @@ WindCutter.cs::CSharpScript::4359341158810454863::1781957505::0::1::::<><><>0<>0
 Rover.cs::CSharpScript::6607239898859515173::1780281132::0::1::::<><><>0<>0<><>::
 RoverCardPool.cs::CSharpScript::3571201826037247428::1778548094::0::1::::<><><>0<>0<><>::
 RoverPotionPool.cs::CSharpScript::3970100050057987737::1776789205::0::1::::<><><>0<>0<><>::
-RoverRelicPool.cs::CSharpScript::2469652948539404292::1778209031::0::1::::<><><>0<>0<><>::
+::res://RoverCode/Relics/::1780284768
 ::res://RoverCode/Extensions/::1778474090
 StringExtensions.cs::CSharpScript::7561456625590680566::1778474090::0::1::::<><><>0<>0<><>::
 ::res://RoverCode/Potions/::1781944923
@@ -500,7 +500,11 @@ IndelibleMemoryPower.cs::CSharpScript::274314439506683312::1781957432::0::1::::<
 InstantOfAnnihilationPower.cs::CSharpScript::6782463730176217299::1778556842::0::1::::<><><>0<>0<><>::
 LanternLightsGlowWarmPower.cs::CSharpScript::7345804872770159967::1781948731::0::1::::<><><>0<>0<><>::
 MechModePower.cs::CSharpScript::5074713584117697123::1778296810::0::1::::<><><>0<>0<><>::
-MetamorphPower.cs::CSharpScript::3198817635936766631::1777979415::0::1::::<><><>0<>0<><>::
+<<<<<<<<< Temporary merge branch 1
+::res://RoverCode/Relics/::1779003104
+=========
+::res://RoverCode/Relics/::1779205899
+>>>>>>>>> Temporary merge branch 2
 MultiCastExtraPower.cs::CSharpScript::7556695901718480663::1777792100::0::1::::<><><>0<>0<><>::
 OdysseyOfBeginningsPower.cs::CSharpScript::6312694622738326427::1781948945::0::1::::<><><>0<>0<><>::
 PaperCutsPowerCopy.cs::CSharpScript::7296088839868396686::1781952369::0::1::::<><><>0<>0<><>::
@@ -561,7 +565,11 @@ selection_reticle.tscn::PackedScene::1394595487092284129::1776770405::0::1::::<>
 ::res://scenes/ui/character_icons/::1779154289
 rover_icon.tscn::PackedScene::6744021640113793264::1779154289::0::1::::<><><>0<>0<><>::uid://30jwnmajcqti::::res://images/ui/top_panel/character_icon_rover.png
 ::res://scenes/vfx/::1776753416
-card_trail_rover.tscn::PackedScene::5468477831998108232::1776753416::0::1::::<><><>0<>0<><>::uid://bb3fwupsnhf43::::res://src/Core/Nodes/Vfx/NCardTrailVfx.cs<>uid://cbcq8r5cx5yl6::::res://images/packed/vfx/trail.png<>uid://cl44l3vqar6tb::::res://src/Core/Nodes/Vfx/NCardTrail.cs<>uid://cq8xbr754n1eb::::res://images/packed/vfx/trail2.png<>uid://bxqg3wafdbdr5::::res://images/vfx/brush_particle_2.png<>uid://dne5pa5gcftob::::res://images/vfx/vfx_ghostly_power_up/sparkle.png<>uid://caf8qmuvlx34i::::res://images/packed/vfx/small_card_silhouette.png<>uid://c4ycqv0gdxvmr::::res://themes/canvas_item_material_additive_shared.tres
+<<<<<<<<< Temporary merge branch 1
+::res://windows/::1778813123
+=========
+::res://windows/::1779239027
+>>>>>>>>> Temporary merge branch 2
 ::res://scenes/vfx/common/::1776649058
 vfx_common_glow.tscn::PackedScene::5301681905796695053::1776649045::0::1::::<><><>0<>0<><>::uid://cqnw207yfbaua::::res://materials/vfx/common/vfx_glow.tres<>uid://m5mbugl61637::::res://images/vfx/common/common_glow.png
 vfx_common_ring_polar_a.tscn::PackedScene::7126848973980229095::1776649058::0::1::::<><><>0<>0<><>::uid://dbbrx0swmom7::::res://materials/vfx/common/vfx_ring_polar.tres<>uid://dnsaa1os3ii0d::::res://images/vfx/common/common_ring_polar_a.png
